@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 shell.classList.toggle('sidebar-collapsed');
             } else {
                 shell.classList.toggle('sidebar-open');
+                document.body.classList.toggle('menu-open', shell.classList.contains('sidebar-open'));
             }
         });
     }
@@ -39,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mobileMenuToggle) {
         mobileMenuToggle.addEventListener('click', () => {
             shell.classList.toggle('sidebar-open');
+            document.body.classList.toggle('menu-open', shell.classList.contains('sidebar-open'));
         });
     }
 
@@ -51,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 (!sidebarToggle || !sidebarToggle.contains(event.target)) &&
                 (!mobileMenuToggle || !mobileMenuToggle.contains(event.target))) {
                 shell.classList.remove('sidebar-open');
+                document.body.classList.remove('menu-open');
             }
         }
     });

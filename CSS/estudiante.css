@@ -194,6 +194,7 @@ button, input { font: inherit; }
 @media (max-width:900px) {
   html, body { height: auto; overflow: auto; padding: 0; }
   body { display: block; }
+  body.menu-open { overflow: hidden; }
   
   .student-shell { min-height: 100vh; grid-template-columns: 1fr; border-radius: 0; overflow-x: hidden; }
   
@@ -204,6 +205,7 @@ button, input { font: inherit; }
       left: -320px; 
       width: 300px; 
       height: 100vh; 
+      overflow-y: auto;
       z-index: 1000; 
       box-shadow: 4px 0 15px rgba(0,0,0,0.3); 
   }
