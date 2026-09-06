@@ -2,8 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebarToggle = document.getElementById('sidebarToggle');
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const shell = document.querySelector('.student-shell');
+    const sidebar = document.querySelector('.student-sidebar');
     const themeToggle = document.getElementById('themeToggle');
-    
+
     // Theme toggle
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
@@ -11,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const isDark = document.body.classList.contains('dark-theme');
             const icon = themeToggle.querySelector('i:first-child');
             const text = themeToggle.querySelector('span');
-            
+
             if (isDark) {
                 icon.classList.remove('fa-sun', 'fa-regular');
                 icon.classList.add('fa-moon', 'fa-solid');
@@ -24,37 +25,70 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Toggle for desktop/tablet (collapse sidebar)
+    // --- Menú móvil ---
+    // .student-shell es el contenedor que hace scroll en móvil (ver CSS).
+    // En vez de cambiar su "overflow" para bloquear el scroll de fondo
+    // (eso hace aparecer/desaparecer la barra de scroll y provoca un
+    // reacomodo visible del contenido), se bloquea el gesto de scroll
+    // directamente, dejando pasar libremente el que ocurre dentro del menú.
+    function blockBackgroundScroll(event) {
+        if (sidebar && !sidebar.contains(event.target)) {
+            event.preventDefault();
+        }
+    }
+
+    function openMobileMenu() {
+        shell.classList.add('sidebar-open');
+        shell.addEventListener('wheel', blockBackgroundScroll, { passive: false });
+        shell.addEventListener('touchmove', blockBackgroundScroll, { passive: false });
+    }
+
+    function closeMobileMenu() {
+        shell.classList.remove('sidebar-open');
+        shell.removeEventListener('wheel', blockBackgroundScroll);
+        shell.removeEventListener('touchmove', blockBackgroundScroll);
+    }
+
+    function toggleMobileMenu() {
+        if (shell.classList.contains('sidebar-open')) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
+    }
+
+    // Toggle for desktop/tablet (collapse sidebar) or mobile (open drawer)
     if (sidebarToggle) {
         sidebarToggle.addEventListener('click', () => {
             if (window.innerWidth > 900) {
                 shell.classList.toggle('sidebar-collapsed');
             } else {
-                shell.classList.toggle('sidebar-open');
-                document.body.classList.toggle('menu-open', shell.classList.contains('sidebar-open'));
+                toggleMobileMenu();
             }
         });
     }
 
     // Toggle for mobile (open sidebar from topbar)
     if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('click', () => {
-            shell.classList.toggle('sidebar-open');
-            document.body.classList.toggle('menu-open', shell.classList.contains('sidebar-open'));
-        });
+        mobileMenuToggle.addEventListener('click', toggleMobileMenu);
     }
 
     // Close sidebar on mobile when clicking outside
     document.addEventListener('click', (event) => {
         if (window.innerWidth <= 900) {
-            const sidebar = document.querySelector('.student-sidebar');
-            if (shell.classList.contains('sidebar-open') && 
-                !sidebar.contains(event.target) && 
+            if (shell.classList.contains('sidebar-open') &&
+                sidebar && !sidebar.contains(event.target) &&
                 (!sidebarToggle || !sidebarToggle.contains(event.target)) &&
                 (!mobileMenuToggle || !mobileMenuToggle.contains(event.target))) {
-                shell.classList.remove('sidebar-open');
-                document.body.classList.remove('menu-open');
+                closeMobileMenu();
             }
+        }
+    });
+
+    // Si la ventana pasa a tamaño de escritorio con el menú móvil abierto, se limpia
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 900 && shell.classList.contains('sidebar-open')) {
+            closeMobileMenu();
         }
     });
 });
