@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebarToggle = document.getElementById('sidebarToggle');
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const shell = document.querySelector('.student-shell');
+    const sidebar = document.querySelector('.student-sidebar');
     const themeToggle = document.getElementById('themeToggle');
 
     // Theme toggle
@@ -24,26 +25,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Menú móvil: bloqueo real del scroll de fondo (estilo Classroom) ---
-    // Al abrir, se "congela" la página en su posición actual con position:fixed
-    // para que ningún gesto de scroll se escape hacia el contenido principal.
-    // El menú (student-sidebar) sigue haciendo scroll interno normalmente.
-    let lockedScrollY = 0;
+    // --- Menú móvil ---
+    // .student-shell es el contenedor que hace scroll en móvil (ver CSS).
+    // En vez de cambiar su "overflow" para bloquear el scroll de fondo
+    // (eso hace aparecer/desaparecer la barra de scroll y provoca un
+    // reacomodo visible del contenido), se bloquea el gesto de scroll
+    // directamente, dejando pasar libremente el que ocurre dentro del menú.
+    function blockBackgroundScroll(event) {
+        if (sidebar && !sidebar.contains(event.target)) {
+            event.preventDefault();
+        }
+    }
 
     function openMobileMenu() {
-        lockedScrollY = window.scrollY || window.pageYOffset;
-        document.body.style.top = `-${lockedScrollY}px`;
         shell.classList.add('sidebar-open');
-        document.body.classList.add('menu-open');
-        document.documentElement.classList.add('menu-open');
+        shell.addEventListener('wheel', blockBackgroundScroll, { passive: false });
+        shell.addEventListener('touchmove', blockBackgroundScroll, { passive: false });
     }
 
     function closeMobileMenu() {
         shell.classList.remove('sidebar-open');
-        document.body.classList.remove('menu-open');
-        document.documentElement.classList.remove('menu-open');
-        document.body.style.top = '';
-        window.scrollTo(0, lockedScrollY);
+        shell.removeEventListener('wheel', blockBackgroundScroll);
+        shell.removeEventListener('touchmove', blockBackgroundScroll);
     }
 
     function toggleMobileMenu() {
@@ -73,9 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close sidebar on mobile when clicking outside
     document.addEventListener('click', (event) => {
         if (window.innerWidth <= 900) {
-            const sidebar = document.querySelector('.student-sidebar');
             if (shell.classList.contains('sidebar-open') &&
-                !sidebar.contains(event.target) &&
+                sidebar && !sidebar.contains(event.target) &&
                 (!sidebarToggle || !sidebarToggle.contains(event.target)) &&
                 (!mobileMenuToggle || !mobileMenuToggle.contains(event.target))) {
                 closeMobileMenu();
@@ -83,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Si la ventana pasa a tamaño de escritorio con el menú móvil abierto, se limpia el bloqueo
+    // Si la ventana pasa a tamaño de escritorio con el menú móvil abierto, se limpia
     window.addEventListener('resize', () => {
         if (window.innerWidth > 900 && shell.classList.contains('sidebar-open')) {
             closeMobileMenu();

@@ -185,38 +185,53 @@ button:focus-visible { outline: 2px solid var(--clr-accent-gold); outline-offset
 
 /* Tabletas en vertical y drawer móvil */
 @media (max-width:900px) {
-  html, body { height: auto; overflow: auto; padding: 0; overflow-x: hidden; }
+  /* El propio .student-shell pasa a ser el contenedor que hace scroll (como el
+     "app shell" de Classroom). Así html/body nunca se mueven, y la barra
+     superior (position: sticky, definida arriba) queda fija de verdad dentro
+     de .student-shell mientras el contenido de abajo se desplaza. */
+  html, body { height: 100%; overflow: hidden; padding: 0; }
   body { display: block; }
-  body.menu-open {
-      position: fixed;
-      left: 0;
-      right: 0;
-      width: 100%;
-      overflow: hidden;
+
+  .student-shell {
+      height: 100vh;
+      height: 100dvh; /* altura real visible en móvil, sin contar la barra del navegador */
+      overflow-y: auto;
+      overflow-x: hidden;
+      overscroll-behavior: contain;
+      scrollbar-gutter: stable; /* reserva el espacio de la barra de scroll siempre, para que no haya "salto" al mostrarla/ocultarla */
+      -webkit-overflow-scrolling: touch;
+      display: block;
+      border-radius: 0;
   }
-  html.menu-open { overflow: hidden; }
-  
-  .student-shell { min-height: 100vh; display: block; border-radius: 0; overflow-x: hidden; }
-  
-  /* El sidebar se convierte en un menú tipo "drawer" que se superpone al contenido */
+  /* El bloqueo del scroll cuando el menú está abierto se hace por JS
+     (ver script.js), no cambiando "overflow" aquí, para evitar el
+     reacomodo/"salto" que provoca quitar y poner la barra de scroll. */
+
+  /* El sidebar se convierte en un menú tipo "drawer" que se superpone al contenido.
+     Se oculta/muestra con "transform" (no con "left") porque animar "left" obliga
+     al navegador a recalcular el layout en cada fotograma — eso es lo que causaba
+     el salto y el destello de scroll horizontal al abrir/cerrar. "transform" solo
+     mueve la capa ya compuesta, sin recalcular nada. */
   .student-sidebar { 
       position: fixed; 
       top: 0; 
-      left: -320px; 
+      left: 0; 
       width: 300px; 
       height: 100vh;
-      height: 100dvh; /* altura real visible en móvil, sin contar la barra del navegador */
+      height: 100dvh;
       overflow-y: auto;
       overscroll-behavior: contain; /* evita que el scroll del menú se pase al fondo */
       -webkit-overflow-scrolling: touch;
       z-index: 1000; 
       box-shadow: 4px 0 15px rgba(0,0,0,0.3); 
+      transform: translateX(-100%);
+      will-change: transform;
   }
-  .student-shell.sidebar-open .student-sidebar { left: 0; }
+  .student-shell.sidebar-open .student-sidebar { transform: translateX(0); }
   .student-content { margin-left: 0; }
 
   /* El menú se superpone (como en Classroom) en vez de empujar el contenido */
-  body.menu-open::before {
+  .student-shell.sidebar-open::before {
       content: '';
       position: fixed;
       inset: 0;
