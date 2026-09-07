@@ -253,10 +253,10 @@ button:focus-visible { outline: 2px solid var(--clr-accent-gold); outline-offset
   
   .mobile-menu-toggle { display: flex !important; }
   
-  .student-content { min-height: 100vh; width: 100%; }
+  .student-content { min-height: 0; width: 100%; display: block; }
   .student-topbar { padding: 0 20px; justify-content: flex-end; }
   .practice-form { grid-template-columns: repeat(2, 1fr); }
-  .practice-content-wrapper { padding: 20px; }
+  .practice-content-wrapper { padding: 20px; overflow-y: visible; flex: none; }
 }
 
 /* Teléfonos */
