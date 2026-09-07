@@ -26,6 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Menú móvil ---
+    // Debe coincidir exactamente con el media query de estudiante.css:
+    // "@media (max-width:900px), (max-height:500px)". Un celular grande en
+    // horizontal puede tener más de 900px de ancho pero poca altura, y debe
+    // seguir tratándose como celular (drawer), no como escritorio (sidebar fijo).
+    function isMobileLayout() {
+        return window.innerWidth <= 900 || window.innerHeight <= 500;
+    }
+
     // .student-shell es el contenedor que hace scroll en móvil (ver CSS).
     // En vez de cambiar su "overflow" para bloquear el scroll de fondo
     // (eso hace aparecer/desaparecer la barra de scroll y provoca un
@@ -60,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Toggle for desktop/tablet (collapse sidebar) or mobile (open drawer)
     if (sidebarToggle) {
         sidebarToggle.addEventListener('click', () => {
-            if (window.innerWidth > 900) {
+            if (!isMobileLayout()) {
                 shell.classList.toggle('sidebar-collapsed');
             } else {
                 toggleMobileMenu();
@@ -75,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Close sidebar on mobile when clicking outside
     document.addEventListener('click', (event) => {
-        if (window.innerWidth <= 900) {
+        if (isMobileLayout()) {
             if (shell.classList.contains('sidebar-open') &&
                 sidebar && !sidebar.contains(event.target) &&
                 (!sidebarToggle || !sidebarToggle.contains(event.target)) &&
@@ -87,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Si la ventana pasa a tamaño de escritorio con el menú móvil abierto, se limpia
     window.addEventListener('resize', () => {
-        if (window.innerWidth > 900 && shell.classList.contains('sidebar-open')) {
+        if (!isMobileLayout() && shell.classList.contains('sidebar-open')) {
             closeMobileMenu();
         }
     });

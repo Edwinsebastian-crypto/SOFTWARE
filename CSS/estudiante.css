@@ -149,8 +149,10 @@ button:focus-visible { outline: 2px solid var(--clr-accent-gold); outline-offset
   .practice-submit { height: 50px; }
 }
 
-/* Fallback for small height screens like 11-inch laptops (scaling down instead of scrolling) */
-@media (min-width:901px) and (max-height:800px) {
+/* Fallback for small height screens like 11-inch laptops (scaling down instead of scrolling).
+   Se excluyen alturas muy pequeñas (<=500px): esas ya no son un laptop compacto, son un
+   celular en horizontal, y deben usar el menú "drawer" de abajo, no este sidebar angosto fijo. */
+@media (min-width:901px) and (max-height:800px) and (min-height:501px) {
   .student-sidebar { width: 220px; padding: 30px 15px; }
   .student-content { margin-left: 220px; }
   .student-brand { padding-bottom: 24px; }
@@ -190,8 +192,12 @@ button:focus-visible { outline: 2px solid var(--clr-accent-gold); outline-offset
   .practice-submit i { font-size: 20px; }
 }
 
-/* Tabletas en vertical y drawer móvil */
-@media (max-width:900px) {
+/* Tabletas en vertical y drawer móvil.
+   También se activa por altura (max-height:500px) sin importar el ancho: un celular
+   grande en horizontal puede tener más de 900px de ancho, pero sigue siendo un celular
+   (poca altura, se usa con el dedo), así que debe seguir usando el menú tipo drawer y
+   no el sidebar fijo de escritorio. */
+@media (max-width:900px), (max-height:500px) {
   /* El propio .student-shell pasa a ser el contenedor que hace scroll (como el
      "app shell" de Classroom). Así html/body nunca se mueven, y la barra
      superior (position: sticky, definida arriba) queda fija de verdad dentro
