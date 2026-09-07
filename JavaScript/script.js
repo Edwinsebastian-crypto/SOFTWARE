@@ -1,3 +1,22 @@
+// --- Altura real visible en móvil ---
+// En varios navegadores Android, la unidad CSS "dvh" no se recalcula bien apenas
+// carga la página (queda como si la barra de direcciones no existiera), dejando
+// contenido de más abajo (botón "Entrar", "Cerrar Sesión") fuera de la pantalla
+// e inalcanzable por scroll. Esta variable --app-vh usa la altura real que
+// reporta window.visualViewport (o innerHeight si no está disponible) y se
+// actualiza en cada cambio, así el CSS siempre tiene la medida correcta.
+function setAppViewportHeight() {
+    const realHeight = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
+    document.documentElement.style.setProperty('--app-vh', (realHeight * 0.01) + 'px');
+}
+setAppViewportHeight();
+window.addEventListener('resize', setAppViewportHeight);
+window.addEventListener('orientationchange', setAppViewportHeight);
+if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', setAppViewportHeight);
+    window.visualViewport.addEventListener('scroll', setAppViewportHeight);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const sidebarToggle = document.getElementById('sidebarToggle');
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');

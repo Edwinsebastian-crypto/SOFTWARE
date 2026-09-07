@@ -60,7 +60,14 @@ button:focus-visible { outline: 2px solid var(--clr-accent-gold); outline-offset
 .sidebar-toggle .overlay-cap { position: absolute; top: -14px; right: -10px; color: var(--clr-accent-gold); font-size: 26px; background: #113222; border-radius: 50%; padding: 2px; }
 
 .student-navigation { display: grid; gap: 16px; }
-.student-nav-link, .student-logout { display: flex; align-items: center; gap: 20px; color: #fff; text-decoration: none; font-size: 21px; font-weight: 700; white-space: nowrap; overflow: hidden; }
+.student-nav-link, .student-logout { display: flex; align-items: center; gap: 20px; color: #fff; text-decoration: none; font-size: 21px; font-weight: 700; white-space: nowrap; overflow: hidden; flex-shrink: 0; }
+/* flex-shrink:0 evita que, en pantallas de poca altura (celular en horizontal),
+   flexbox encoja este enlace por debajo de lo que su texto necesita: por tener
+   "overflow: hidden", su tamaño mínimo automático pasa a ser 0 (regla del
+   estándar de Flexbox), así que sin "flex-shrink:0" el navegador lo aplasta y
+   el propio "overflow: hidden" recorta el texto ("Cerrar Sesión") a la mitad.
+   Con flex-shrink:0 el enlace conserva su alto real y, si no cabe todo, se
+   puede llegar a él con el scroll que ya tiene el menú (overflow-y: auto). */
 .student-nav-link { min-height: 54px; padding: 10px 16px; border: 1px solid transparent; border-radius: 12px; }
 .student-nav-link i { width: 32px; text-align: center; font-size: 24px; color: #fff; flex-shrink: 0; }
 .student-nav-link--active { border-color: var(--clr-accent-gold); background: transparent; }
@@ -208,6 +215,13 @@ button:focus-visible { outline: 2px solid var(--clr-accent-gold); outline-offset
   .student-shell {
       height: 100vh;
       height: 100dvh; /* altura real visible en móvil, sin contar la barra del navegador */
+      /* Respaldo: en varios Android/Chrome, "dvh" se calcula mal en la primera
+         pintura (usa la altura "grande", como si la barra de direcciones no
+         existiera) y no se corrige hasta un resize. Eso deja contenido de más
+         abajo (el botón "Entrar") fuera de la pantalla sin poder alcanzarlo.
+         --app-vh la calcula JS con la altura real visible (script.js) y se
+         actualiza en tiempo real, así que sobreescribe a dvh cuando está disponible. */
+      height: calc(var(--app-vh, 1vh) * 100);
       overflow-y: auto;
       overflow-x: hidden;
       overscroll-behavior: contain;
@@ -232,6 +246,7 @@ button:focus-visible { outline: 2px solid var(--clr-accent-gold); outline-offset
       width: 300px; 
       height: 100vh;
       height: 100dvh;
+      height: calc(var(--app-vh, 1vh) * 100); /* respaldo robusto, ver nota en .student-shell */
       overflow-y: auto;
       overscroll-behavior: contain; /* evita que el scroll del menú se pase al fondo */
       -webkit-overflow-scrolling: touch;
