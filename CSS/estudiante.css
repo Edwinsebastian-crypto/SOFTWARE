@@ -36,13 +36,14 @@ body.dark-theme {
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { min-height: 100vh; display: block; margin: 0; padding: 0; background: var(--clr-bg-page); color: var(--text-secondary); font-family: var(--font-serif); transition: background 0.3s ease; }
+html { overflow-x: hidden; }
+body { min-height: 100vh; display: block; margin: 0; padding: 0; background: var(--clr-bg-page); color: var(--text-secondary); font-family: var(--font-serif); transition: background 0.3s ease; overflow-x: hidden; }
 .sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
 button, input { font: inherit; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
 button { outline: none; }
 button:focus-visible { outline: 2px solid var(--clr-accent-gold); outline-offset: 2px; }
 
-.student-shell { width: 100%; min-height: 100vh; display: block; background: var(--shell-bg); transition: background 0.3s ease; }
+.student-shell { width: 100%; min-height: 100vh; display: block; background: var(--shell-bg); transition: background 0.3s ease; overflow-x: hidden; }
 
 .student-sidebar { position: fixed; top: 0; left: 0; width: 280px; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; justify-content: space-between; padding: 52px 20px 30px; color: #fff; background: linear-gradient(112deg, #287d5e 0%, #103122 67%, #102e20 100%); transition: all 0.3s ease; z-index: 1000; }
 .student-brand { display: flex; align-items: flex-start; justify-content: space-between; padding: 0 5px 36px; }
@@ -115,8 +116,10 @@ button:focus-visible { outline: 2px solid var(--clr-accent-gold); outline-offset
 .practice-field--date input::-webkit-calendar-picker-indicator { opacity: 0; }
 .practice-field--date i { position: absolute; top: 50%; right: 16px; transform: translateY(-50%); font-size: 24px; pointer-events: none; color: var(--text-primary); }
 
-.practice-submit { display: flex; align-items: center; justify-content: center; gap: 15px; float: right; height: 56px; margin-top: 30px; padding: 0 30px; border: 0; border-radius: 12px; color: #fff; background: linear-gradient(90deg, #1f503c, #2a7253); box-shadow: 0 4px 6px rgba(0,0,0,.2); font-size: 21px; font-weight: 700; cursor: pointer; font-family: var(--font-serif); }
+.practice-submit { display: flex; align-items: center; justify-content: center; gap: 15px; float: right; height: 56px; margin-top: 30px; padding: 0 30px; border: 0; border-radius: 12px; color: #fff; background: linear-gradient(90deg, #1f503c, #2a7253); box-shadow: 0 4px 6px rgba(0,0,0,.2); font-size: 21px; font-weight: 700; cursor: pointer; font-family: var(--font-serif); position: relative; z-index: 1; }
 .practice-submit i { font-size: 24px; color: #fff; }
+/* Clearfix para el float del botón Entrar */
+.practice-content-wrapper::after { content: ''; display: block; clear: both; }
 
 /* -------------------------------------------------------------------------
    RESPONSIVE DESIGN (Matching index / style.css)
@@ -258,7 +261,9 @@ button:focus-visible { outline: 2px solid var(--clr-accent-gold); outline-offset
   .topbar-option { border: none; padding: 0 12px; }
   .student-account { padding-left: 10px; width: 100%; justify-content: center; margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px; }
   .practice-form { grid-template-columns: 1fr; gap: 18px; }
-  .practice-submit { width: 100%; float: none; justify-content: center; }
+  .practice-submit { width: 100%; float: none; justify-content: center; display: flex; }
+  /* Asegurar que el botón Entrar sea visible fuera del panel en móvil */
+  .practice-content-wrapper { overflow: visible; }
 }
 
 /* Teléfonos estrechos */
