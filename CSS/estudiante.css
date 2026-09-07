@@ -254,6 +254,7 @@ button:focus-visible { outline: 2px solid var(--clr-accent-gold); outline-offset
       box-shadow: 4px 0 15px rgba(0,0,0,0.3); 
       transform: translateX(-100%);
       will-change: transform;
+      padding-bottom: calc(30px + env(safe-area-inset-bottom, 0px));
   }
   .student-shell.sidebar-open .student-sidebar { transform: translateX(0); }
   .student-content { margin-left: 0; }
@@ -277,7 +278,11 @@ button:focus-visible { outline: 2px solid var(--clr-accent-gold); outline-offset
   .student-content { min-height: 0; width: 100%; display: block; }
   .student-topbar { padding: 0 20px; justify-content: flex-end; }
   .practice-form { grid-template-columns: repeat(2, 1fr); }
-  .practice-content-wrapper { padding: 20px; overflow-y: visible; flex: none; }
+  /* padding-bottom extra + safe-area-inset-bottom: en celulares con barra de
+     gestos (navegación) del sistema, esa barra puede tapar visualmente los
+     últimos píxeles de la página aunque el scroll ya llegó al final. Este
+     colchón asegura que el botón "Entrar" quede siempre por encima de ella. */
+  .practice-content-wrapper { padding: 20px 20px calc(20px + env(safe-area-inset-bottom, 0px) + 40px); overflow-y: visible; flex: none; }
 }
 
 /* Teléfonos */
