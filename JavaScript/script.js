@@ -19,7 +19,7 @@ if (window.visualViewport) {
 
 document.addEventListener('DOMContentLoaded', () => {
     const sidebarToggle = document.getElementById('sidebarToggle');
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileMenuToggles = document.querySelectorAll('.mobile-menu-toggle');
     const shell = document.querySelector('.student-shell');
     const sidebar = document.querySelector('.student-sidebar');
     const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
@@ -134,17 +134,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Toggle for mobile (open sidebar from topbar)
-    if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('click', toggleMobileMenu);
-    }
+    mobileMenuToggles.forEach(toggle => {
+        toggle.addEventListener('click', toggleMobileMenu);
+    });
 
     // Close sidebar on mobile when clicking outside
     document.addEventListener('click', (event) => {
         if (isMobileLayout()) {
+            let clickedOnMobileToggle = false;
+            mobileMenuToggles.forEach(toggle => {
+                if (toggle.contains(event.target)) {
+                    clickedOnMobileToggle = true;
+                }
+            });
+
             if (shell.classList.contains('sidebar-open') &&
                 sidebar && !sidebar.contains(event.target) &&
                 (!sidebarToggle || !sidebarToggle.contains(event.target)) &&
-                (!mobileMenuToggle || !mobileMenuToggle.contains(event.target))) {
+                !clickedOnMobileToggle) {
                 closeMobileMenu();
             }
         }
