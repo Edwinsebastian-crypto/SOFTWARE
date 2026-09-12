@@ -1,8 +1,12 @@
 /* =========================================================================
-   estudiante.css — Solo lo propio del panel de Estudiante (formulario de
-   práctica, perfil). El sidebar/topbar/menú móvil vive en shell.css y se
-   comparte con los demás roles; no lo dupliques aquí.
-   Debe cargarse DESPUÉS de variables.css y shell.css.
+   tutor.css — Solo lo propio del panel de Tutor. El sidebar/topbar/menú
+   móvil vive en shell.css y se comparte con los demás roles; no lo
+   dupliques aquí. Debe cargarse DESPUÉS de variables.css y shell.css.
+
+   Por ahora es una copia de estudiante.css porque tutor.html todavía usa el
+   mismo formulario de práctica como punto de partida. A medida que el panel
+   de tutor tenga su propio contenido, estas reglas deberían reemplazarse
+   por las que ese panel realmente necesite (puedes borrar lo que no uses).
    ========================================================================= */
 
 .practice-content-wrapper { padding: 36px 40px; flex: 1; overflow-y: auto; }

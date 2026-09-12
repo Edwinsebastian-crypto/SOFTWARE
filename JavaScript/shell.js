@@ -1,3 +1,10 @@
+/* =========================================================================
+   shell.js — Carcasa compartida (sidebar, topbar, menú móvil, tema).
+   La usan TODOS los paneles con sesión iniciada (estudiante, tutor, etc).
+   No pongas aquí nada específico de un panel; si un panel necesita su
+   propio JS (por ejemplo tutor.js), cárgalo APARTE, después de este archivo.
+   ========================================================================= */
+
 // --- Altura real visible en móvil ---
 // En varios navegadores Android, la unidad CSS "dvh" no se recalcula bien apenas
 // carga la página (queda como si la barra de direcciones no existiera), dejando
@@ -20,8 +27,8 @@ if (window.visualViewport) {
 document.addEventListener('DOMContentLoaded', () => {
     const sidebarToggle = document.getElementById('sidebarToggle');
     const mobileMenuToggles = document.querySelectorAll('.mobile-menu-toggle');
-    const shell = document.querySelector('.student-shell');
-    const sidebar = document.querySelector('.student-sidebar');
+    const shell = document.querySelector('.app-shell');
+    const sidebar = document.querySelector('.app-sidebar');
     const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
 
     // Theme toggle
@@ -50,8 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Tab Navigation
-    const navLinks = document.querySelectorAll('.student-nav-link');
-    const sections = document.querySelectorAll('.student-content');
+    const navLinks = document.querySelectorAll('.app-nav-link');
+    const sections = document.querySelectorAll('.app-content');
 
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
@@ -60,10 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Actualizar enlaces
             navLinks.forEach(nav => {
-                nav.classList.remove('student-nav-link--active');
+                nav.classList.remove('app-nav-link--active');
                 nav.removeAttribute('aria-current');
             });
-            link.classList.add('student-nav-link--active');
+            link.classList.add('app-nav-link--active');
             link.setAttribute('aria-current', 'page');
             
             // Mostrar sección correspondiente
@@ -83,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Menú móvil ---
-    // Debe coincidir exactamente con el media query de estudiante.css:
+    // Debe coincidir exactamente con el media query de shell.css:
     // "@media (max-width:900px), (max-height:500px)". Un celular grande en
     // horizontal puede tener más de 900px de ancho pero poca altura, y debe
     // seguir tratándose como celular (drawer), no como escritorio (sidebar fijo).
@@ -91,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return window.innerWidth <= 900 || window.innerHeight <= 500;
     }
 
-    // .student-shell es el contenedor que hace scroll en móvil (ver CSS).
+    // .app-shell es el contenedor que hace scroll en móvil (ver CSS).
     // En vez de cambiar su "overflow" para bloquear el scroll de fondo
     // (eso hace aparecer/desaparecer la barra de scroll y provoca un
     // reacomodo visible del contenido), se bloquea el gesto de scroll
@@ -140,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Close sidebar on mobile when clicking outside
     document.addEventListener('click', (event) => {
+        if (!shell) return;
         if (isMobileLayout()) {
             let clickedOnMobileToggle = false;
             mobileMenuToggles.forEach(toggle => {
@@ -159,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Si la ventana pasa a tamaño de escritorio con el menú móvil abierto, se limpia
     window.addEventListener('resize', () => {
-        if (!isMobileLayout() && shell.classList.contains('sidebar-open')) {
+        if (!isMobileLayout() && shell?.classList.contains('sidebar-open')) {
             closeMobileMenu();
         }
     });
