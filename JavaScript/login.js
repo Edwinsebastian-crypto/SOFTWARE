@@ -5,6 +5,26 @@
    ========================================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Toggle de la visibilidad de contraseña en el Login
+    const togglePassword = document.querySelector('.btn-visibility');
+    const passwordInput = document.getElementById('password');
+
+    if (togglePassword && passwordInput) {
+        togglePassword.addEventListener('click', function () {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            const icon = this.querySelector('i');
+            if (type === 'password') {
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    }
+
     // Login form logic (redirect based on selected role)
     const loginForm = document.querySelector('.login-form');
     if (loginForm) {
