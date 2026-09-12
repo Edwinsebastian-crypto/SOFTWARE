@@ -132,6 +132,26 @@ button:focus-visible { outline: 2px solid var(--clr-accent-gold); outline-offset
 .practice-submit { display: flex; align-items: center; justify-content: center; gap: 15px; width: fit-content; margin-left: auto; margin-top: 30px; height: 56px; padding: 0 30px; border: 0; border-radius: 12px; color: #fff; background: linear-gradient(90deg, #1f503c, #2a7253); box-shadow: 0 4px 6px rgba(0,0,0,.2); font-size: 21px; font-weight: 700; cursor: pointer; font-family: var(--font-serif); }
 .practice-submit i { font-size: 24px; color: #fff; }
 
+/* --- Perfil --- */
+.profile-title { font-size: 24px; color: var(--text-primary); font-family: var(--font-serif); margin-bottom: 20px; margin-top: 10px; }
+.profile-panel { padding: 35px 40px; border-radius: 20px; background: var(--panel-bg); box-shadow: 0 4px 10px rgba(0,0,0,.05); transition: background 0.3s ease; }
+.profile-layout { display: flex; gap: 40px; }
+.profile-column { flex: 1; min-width: 0; }
+.profile-column:first-child { border-right: 1px solid rgba(0, 0, 0, 0.1); padding-right: 40px; }
+body.dark-theme .profile-column:first-child { border-right-color: rgba(0, 0, 0, 0.1); }
+.profile-info-list { display: flex; flex-direction: column; gap: 24px; }
+.profile-info-item { display: flex; align-items: flex-start; gap: 16px; }
+.profile-info-item i { font-size: 20px; color: var(--text-primary); margin-top: 4px; width: 24px; text-align: center; }
+.profile-info-text { display: flex; flex-direction: column; gap: 4px; }
+.profile-info-label { font-size: 16px; font-weight: 700; color: var(--text-primary); font-family: var(--font-serif); }
+.profile-info-value { font-size: 16px; color: var(--text-muted); font-family: var(--font-serif); }
+
+/* Colorimetría Modo Oscuro para Perfil */
+body.dark-theme .profile-panel { background: #bbd6c4; }
+body.dark-theme .profile-info-label,
+body.dark-theme .profile-info-item i { color: #1a1a1a; }
+body.dark-theme .profile-info-value { color: #4a544d; }
+
 /* -------------------------------------------------------------------------
    RESPONSIVE DESIGN (Matching index / style.css)
    ------------------------------------------------------------------------- */
@@ -151,6 +171,7 @@ button:focus-visible { outline: 2px solid var(--clr-accent-gold); outline-offset
   .student-topbar { padding: 0 30px; height: 75px; }
   .practice-content-wrapper { padding: 30px 30px; }
   .practice-panel { padding: 20px 20px 30px; }
+  .profile-panel { padding: 25px 30px; }
   .practice-header h2 { font-size: 22px; }
   .practice-field input { height: 50px; }
   .practice-submit { height: 50px; }
@@ -186,6 +207,10 @@ button:focus-visible { outline: 2px solid var(--clr-accent-gold); outline-offset
   
   .practice-content-wrapper { padding: 20px 24px; overflow-y: auto; }
   .practice-panel { padding: 15px 15px 20px; }
+  .profile-panel { padding: 20px 24px; }
+  .profile-title { font-size: 20px; margin-bottom: 20px; }
+  .profile-layout { gap: 30px; }
+  .profile-column:first-child { padding-right: 30px; }
   .practice-header { margin-bottom: 18px; }
   .practice-header h2 { font-size: 20px; }
   .practice-status { font-size: 15px; }
@@ -283,6 +308,11 @@ button:focus-visible { outline: 2px solid var(--clr-accent-gold); outline-offset
      últimos píxeles de la página aunque el scroll ya llegó al final. Este
      colchón asegura que el botón "Entrar" quede siempre por encima de ella. */
   .practice-content-wrapper { padding: 20px 20px calc(20px + env(safe-area-inset-bottom, 0px) + 40px); overflow-y: visible; flex: none; }
+  
+  .profile-layout { flex-direction: column; gap: 30px; }
+  .profile-column:first-child { border-right: none; padding-right: 0; border-bottom: 1px solid rgba(0, 0, 0, 0.1); padding-bottom: 30px; }
+  body.dark-theme .profile-column:first-child { border-bottom-color: rgba(255, 255, 255, 0.1); }
+  .profile-panel { padding: 25px; }
 }
 
 /* Teléfonos */
@@ -300,4 +330,8 @@ button:focus-visible { outline: 2px solid var(--clr-accent-gold); outline-offset
   .practice-header { flex-direction: column; align-items: flex-start; gap: 15px; }
   .practice-field input { height: 46px; }
   .practice-submit { height: 46px; font-size: 18px; }
+  .profile-panel { padding: 20px; }
+  .profile-title { font-size: 20px; margin-bottom: 20px; }
+  .profile-info-label, .profile-info-value { font-size: 14px; }
+  .profile-info-item i { font-size: 18px; }
 }

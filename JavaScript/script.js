@@ -22,27 +22,65 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const shell = document.querySelector('.student-shell');
     const sidebar = document.querySelector('.student-sidebar');
-    const themeToggle = document.getElementById('themeToggle');
+    const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
 
     // Theme toggle
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-theme');
-            const isDark = document.body.classList.contains('dark-theme');
-            const icon = themeToggle.querySelector('i:first-child');
-            const text = themeToggle.querySelector('span');
+    if (themeToggleBtns.length > 0) {
+        themeToggleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.body.classList.toggle('dark-theme');
+                const isDark = document.body.classList.contains('dark-theme');
+                
+                themeToggleBtns.forEach(toggleBtn => {
+                    const icon = toggleBtn.querySelector('i:first-child');
+                    const text = toggleBtn.querySelector('span');
 
-            if (isDark) {
-                icon.classList.remove('fa-sun', 'fa-regular');
-                icon.classList.add('fa-moon', 'fa-solid');
-                text.textContent = 'Oscuro';
-            } else {
-                icon.classList.remove('fa-moon', 'fa-solid');
-                icon.classList.add('fa-sun', 'fa-regular');
-                text.textContent = 'Claro';
-            }
+                    if (isDark) {
+                        icon.classList.remove('fa-sun', 'fa-regular');
+                        icon.classList.add('fa-moon', 'fa-solid');
+                        text.textContent = 'Oscuro';
+                    } else {
+                        icon.classList.remove('fa-moon', 'fa-solid');
+                        icon.classList.add('fa-sun', 'fa-regular');
+                        text.textContent = 'Claro';
+                    }
+                });
+            });
         });
     }
+
+    // Tab Navigation
+    const navLinks = document.querySelectorAll('.student-nav-link');
+    const sections = document.querySelectorAll('.student-content');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            
+            // Actualizar enlaces
+            navLinks.forEach(nav => {
+                nav.classList.remove('student-nav-link--active');
+                nav.removeAttribute('aria-current');
+            });
+            link.classList.add('student-nav-link--active');
+            link.setAttribute('aria-current', 'page');
+            
+            // Mostrar sección correspondiente
+            sections.forEach(section => {
+                if (section.id === targetId) {
+                    section.style.display = 'flex'; // Usamos flex porque las secciones tienen display: flex en desktop
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+
+            // En móvil, cerrar el menú al seleccionar una opción
+            if (isMobileLayout() && shell.classList.contains('sidebar-open')) {
+                closeMobileMenu();
+            }
+        });
+    });
 
     // --- Menú móvil ---
     // Debe coincidir exactamente con el media query de estudiante.css:
