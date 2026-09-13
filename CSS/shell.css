@@ -603,6 +603,11 @@ input:-webkit-autofill:active {
       -webkit-overflow-scrolling: touch;
       display: block;
       border-radius: 0;
+      scrollbar-width: none;
+   }
+
+   .app-shell::-webkit-scrollbar {
+      display: none;
    }
 
    /* El bloqueo del scroll cuando el menú está abierto se hace por JS
