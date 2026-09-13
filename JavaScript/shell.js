@@ -89,6 +89,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Al cargar: ocultar todas las secciones y quitar cualquier link activo del HTML.
+    // El usuario debe elegir una opción del menú para ver contenido.
+    navLinks.forEach(nav => {
+        nav.classList.remove('app-nav-link--active');
+        nav.removeAttribute('aria-current');
+    });
+    sections.forEach(section => {
+        section.style.display = 'none';
+    });
+
     // --- Menú móvil ---
     // Debe coincidir exactamente con el media query de shell.css:
     // "@media (max-width:900px), (max-height:500px)". Un celular grande en

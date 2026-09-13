@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-	<title>SPP-Práctica</title>
+	<title>SPP-Director</title>
 	<link rel="stylesheet" href="../CSS/variables.css">
 	<link rel="stylesheet" href="../CSS/shell.css?v=1">
 	<link rel="stylesheet" href="../CSS/director.css?v=1">
@@ -24,14 +24,20 @@
 					</button>
 				</header>
 				<nav class="app-navigation" aria-label="Navegación principal">
-					  <a class="app-nav-link app-nav-link--active" href="#practica" aria-current="page"><i class="fa-solid fa-book-open" aria-hidden="true"></i><span>Prácticas</span></a>
+					<a class="app-nav-link app-nav-link--active" href="#practica" aria-current="page"><i class="fa-solid fa-book-open" aria-hidden="true"></i><span>Prácticas</span></a>
+					<a class="app-nav-link" href="#crear-practica"><i class="fa-solid fa-circle-plus" aria-hidden="true"></i><span>Crear Práctica</span></a>
+					<a class="app-nav-link" href="#gestionar-usuarios"><i class="fa-solid fa-user-group" aria-hidden="true"></i><span>Gestionar Usuarios</span></a>
+					<a class="app-nav-link" href="#gestionar-practicas"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i><span>Gestión Tipo Práctica</span></a>
+					<a class="app-nav-link" href="#gestionar-instituciones"><i class="fa-solid fa-building" aria-hidden="true"></i><span>Instituciones</span></a>
+					<a class="app-nav-link" href="#informes"><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span>Informes</span></a>
 					<a class="app-nav-link" href="#perfil"><i class="fa-solid fa-user" aria-hidden="true"></i><span>Perfil</span></a>
 				</nav>
 			</div>
 			<a class="app-logout" href="../index.html"><i class="fa-solid fa-door-open" aria-hidden="true"></i><span>Cerrar Sesión</span></a>
 		</aside>
 
-		<section class="app-content" id="practica">
+
+		<section class="app-content" id="crear-practica">
 			<header class="app-topbar">
 				<button class="sidebar-toggle mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menú">
 					<i class="fa-solid fa-bars hamburger-icon"></i>
@@ -42,12 +48,26 @@
 				<button class="app-account" type="button" aria-label="Abrir menú de director"><i class="fa-solid fa-circle-user" aria-hidden="true"></i><span><strong>Nombre Director</strong><small>Director</small></span></button>
 			</header>
 
+			
+		</section>
+		
+		<section class="app-content" id="practica">
+			<header class="app-topbar">
+				<button class="sidebar-toggle mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menú">
+					<i class="fa-solid fa-bars hamburger-icon"></i>
+					<i class="fa-solid fa-graduation-cap overlay-cap"></i>
+				</button>
+				<button class="topbar-icon" type="button" aria-label="Notificaciones"><i class="fa-regular fa-bell" aria-hidden="true"></i></button>
+				<button class="topbar-option theme-toggle-btn" type="button" aria-label="Cambiar tema"><i class="fa-regular fa-sun" aria-hidden="true"></i><span>Claro</span></button>
+				<button class="app-account" type="button" aria-label="Abrir menú de director"><i class="fa-solid fa-circle-user" aria-hidden="true"></i><span><strong>Nombre Director</strong><small>Director</small></span></button>
+			</header>
+			
 			<div class="practice-content-wrapper">
 				<section class="practice-panel" aria-labelledby="practice-title">
-				<div class="practice-header">
-					<h2 id="practice-title">Información de Práctica</h2>
-					<div class="practice-status">
-						<span>Estado</span>
+					<div class="practice-header">
+						<h2 id="practice-title">Información de Práctica</h2>
+						<div class="practice-status">
+							<span>Estado</span>
 						<div class="status-badge"></div>
 					</div>
 				</div>
@@ -58,15 +78,70 @@
 					<div class="practice-field"><label for="institucion">Institución</label><input id="institucion" name="institucion" type="text" placeholder="....."></div>
 					<div class="practice-field"><label for="asesor">Asesor</label><input id="asesor" name="asesor" type="text" placeholder="....."></div>
 					<div class="practice-field"><label for="semestre">Semestre</label><input id="semestre" name="semestre" type="text" placeholder="....."></div>
-					  <div class="practice-field practice-field--date"><label for="fecha-inicio">Fecha Inicio</label><div><input id="fecha-inicio" name="fecha-inicio" type="text" placeholder="....."><i class="fa-regular fa-calendar" aria-hidden="true"></i></div></div>
-					  <div class="practice-field practice-field--date"><label for="fecha-final">Fecha Final</label><div><input id="fecha-final" name="fecha-final" type="text" placeholder="....."><i class="fa-regular fa-calendar" aria-hidden="true"></i></div></div>
+					<div class="practice-field practice-field--date"><label for="fecha-inicio">Fecha Inicio</label><div><input id="fecha-inicio" name="fecha-inicio" type="text" placeholder="....."><i class="fa-regular fa-calendar" aria-hidden="true"></i></div></div>
+					<div class="practice-field practice-field--date"><label for="fecha-final">Fecha Final</label><div><input id="fecha-final" name="fecha-final" type="text" placeholder="....."><i class="fa-regular fa-calendar" aria-hidden="true"></i></div></div>
 					<div class="practice-field"><label for="codigo">Código de la practica</label><input id="codigo" name="codigo" type="text" placeholder="....."></div>
 				</form>
-				</section>
-				<button class="practice-submit" type="button"><i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i><span>Entrar</span></button>
-			</div>
+			</section>
+			<button class="practice-submit" type="button"><i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i><span>Entrar</span></button>
+		</div>
+	</section>
+
+		<section class="app-content" id="gestionar-usuarios">
+			<header class="app-topbar">
+				<button class="sidebar-toggle mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menú">
+					<i class="fa-solid fa-bars hamburger-icon"></i>
+					<i class="fa-solid fa-graduation-cap overlay-cap"></i>
+				</button>
+				<button class="topbar-icon" type="button" aria-label="Notificaciones"><i class="fa-regular fa-bell" aria-hidden="true"></i></button>
+				<button class="topbar-option theme-toggle-btn" type="button" aria-label="Cambiar tema"><i class="fa-regular fa-sun" aria-hidden="true"></i><span>Claro</span></button>
+				<button class="app-account" type="button" aria-label="Abrir menú de director"><i class="fa-solid fa-circle-user" aria-hidden="true"></i><span><strong>Nombre Director</strong><small>Director</small></span></button>
+			</header>
+
+			
 		</section>
 
+		<section class="app-content" id="gestionar-practicas">
+			<header class="app-topbar">
+				<button class="sidebar-toggle mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menú">
+					<i class="fa-solid fa-bars hamburger-icon"></i>
+					<i class="fa-solid fa-graduation-cap overlay-cap"></i>
+				</button>
+				<button class="topbar-icon" type="button" aria-label="Notificaciones"><i class="fa-regular fa-bell" aria-hidden="true"></i></button>
+				<button class="topbar-option theme-toggle-btn" type="button" aria-label="Cambiar tema"><i class="fa-regular fa-sun" aria-hidden="true"></i><span>Claro</span></button>
+				<button class="app-account" type="button" aria-label="Abrir menú de director"><i class="fa-solid fa-circle-user" aria-hidden="true"></i><span><strong>Nombre Director</strong><small>Director</small></span></button>
+			</header>
+
+			
+		</section>
+
+		<section class="app-content" id="gestionar-instituciones">
+			<header class="app-topbar">
+				<button class="sidebar-toggle mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menú">
+					<i class="fa-solid fa-bars hamburger-icon"></i>
+					<i class="fa-solid fa-graduation-cap overlay-cap"></i>
+				</button>
+				<button class="topbar-icon" type="button" aria-label="Notificaciones"><i class="fa-regular fa-bell" aria-hidden="true"></i></button>
+				<button class="topbar-option theme-toggle-btn" type="button" aria-label="Cambiar tema"><i class="fa-regular fa-sun" aria-hidden="true"></i><span>Claro</span></button>
+				<button class="app-account" type="button" aria-label="Abrir menú de director"><i class="fa-solid fa-circle-user" aria-hidden="true"></i><span><strong>Nombre Director</strong><small>Director</small></span></button>
+			</header>
+		</section>
+
+
+		<section class="app-content" id="informes">
+			<header class="app-topbar">
+				<button class="sidebar-toggle mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menú">
+					<i class="fa-solid fa-bars hamburger-icon"></i>
+					<i class="fa-solid fa-graduation-cap overlay-cap"></i>
+				</button>
+				<button class="topbar-icon" type="button" aria-label="Notificaciones"><i class="fa-regular fa-bell" aria-hidden="true"></i></button>
+				<button class="topbar-option theme-toggle-btn" type="button" aria-label="Cambiar tema"><i class="fa-regular fa-sun" aria-hidden="true"></i><span>Claro</span></button>
+				<button class="app-account" type="button" aria-label="Abrir menú de director"><i class="fa-solid fa-circle-user" aria-hidden="true"></i><span><strong>Nombre Director</strong><small>Director</small></span></button>
+			</header>
+		</section>
+
+
+		
 		<section class="app-content" id="perfil" style="display: none;">
 			<header class="app-topbar">
 				<button class="sidebar-toggle mobile-menu-toggle" id="mobileMenuToggleProfile" aria-label="Abrir menú">
