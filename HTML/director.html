@@ -138,6 +138,110 @@
 				<button class="topbar-option theme-toggle-btn" type="button" aria-label="Cambiar tema"><i class="fa-regular fa-sun" aria-hidden="true"></i><span>Claro</span></button>
 				<button class="app-account" type="button" aria-label="Abrir menú de director"><i class="fa-solid fa-circle-user" aria-hidden="true"></i><span><strong>Nombre Director</strong><small>Director</small></span></button>
 			</header>
+			<div class="informes-wrapper">
+				<header class="informes-header">
+					<h2>Informes y Estadísticas</h2>
+					<p>Visión general de estado de las prácticas profesionales</p>
+				</header>
+
+				<nav class="informes-tabs" aria-label="Navegación de informes">
+					<button class="informes-tab-btn active"><i class="fa-solid fa-chart-line"></i> General</button>
+					<button class="informes-tab-btn"><i class="fa-solid fa-clipboard-list"></i> Tipos</button>
+					<button class="informes-tab-btn"><i class="fa-regular fa-book"></i> Bitácoras</button>
+					<button class="informes-tab-btn"><i class="fa-regular fa-comment"></i> Retro</button>
+					<button class="informes-tab-btn"><i class="fa-solid fa-building"></i> Entidades</button>
+				</nav>
+
+				<div class="stats-grid">
+					<article class="stat-card">
+						<div class="stat-icon"><i class="fa-solid fa-copy"></i></div>
+						<div class="stat-info">
+							<span class="stat-value">9</span>
+							<span class="stat-label">Total Prácticas</span>
+						</div>
+					</article>
+					<article class="stat-card">
+						<div class="stat-icon"><i class="fa-solid fa-file-circle-check"></i></div>
+						<div class="stat-info">
+							<span class="stat-value">9</span>
+							<span class="stat-label">Activas</span>
+						</div>
+					</article>
+					<article class="stat-card">
+						<div class="stat-icon"><i class="fa-solid fa-flag-checkered"></i></div>
+						<div class="stat-info">
+							<span class="stat-value">0</span>
+							<span class="stat-label">Finalizadas</span>
+						</div>
+					</article>
+				</div>
+
+				<div class="charts-grid">
+					<article class="chart-panel">
+						<h3>Estado de Prácticas</h3>
+						<div class="bar-chart-container">
+							<div class="bar-column">
+								<div class="bar-fill" style="height: 100%;"></div>
+								<span class="bar-label">Activas</span>
+							</div>
+							<div class="bar-column">
+								<div class="bar-fill empty" style="height: 0%;"></div>
+								<span class="bar-label">Finalizada</span>
+								<span class="bar-value-zero">0</span>
+							</div>
+						</div>
+						<div class="chart-footer">Total : 9</div>
+					</article>
+
+					<article class="chart-panel">
+						<h3><i class="fa-solid fa-building"></i> Top Entidades</h3>
+						<ul class="progress-list">
+							<li>
+								<div class="progress-info"><span class="rank">#1</span> <span class="name">Escuela Normal Superior de Bucaramanga</span> <span class="count">3</span></div>
+								<div class="progress-bar"><div class="progress-fill fill-green" style="width: 100%;"></div></div>
+							</li>
+							<li>
+								<div class="progress-info"><span class="rank">#2</span> <span class="name">Colegio san jose</span> <span class="count">1</span></div>
+								<div class="progress-bar"><div class="progress-fill fill-blue" style="width: 33%;"></div></div>
+							</li>
+							<li>
+								<div class="progress-info"><span class="rank">#3</span> <span class="name">Colegio Nuestra Señora del Pilar</span> <span class="count">1</span></div>
+								<div class="progress-bar"><div class="progress-fill fill-purple" style="width: 33%;"></div></div>
+							</li>
+							<li>
+								<div class="progress-info"><span class="rank">#4</span> <span class="name">Colegio Nuestra Señora del Pilar</span> <span class="count">1</span></div>
+								<div class="progress-bar"><div class="progress-fill fill-green" style="width: 33%;"></div></div>
+							</li>
+							<li>
+								<div class="progress-info"><span class="rank">#5</span> <span class="name">Colegio Cooperativo de Bucaramanga</span> <span class="count">1</span></div>
+								<div class="progress-bar"><div class="progress-fill fill-orange" style="width: 33%;"></div></div>
+							</li>
+						</ul>
+					</article>
+
+					<article class="chart-panel">
+						<h3><i class="fa-solid fa-user-group"></i> Top Tutores</h3>
+						<ul class="progress-list">
+							<li>
+								<div class="progress-info"><span class="rank">#1</span> <span class="name">Escuela Normal Superior de Bucaramanga</span> <span class="count">4</span></div>
+								<div class="progress-bar"><div class="progress-fill fill-green" style="width: 100%;"></div></div>
+							</li>
+							<li>
+								<div class="progress-info"><span class="rank">#2</span> <span class="name">Colegio san jose</span> <span class="count">3</span></div>
+								<div class="progress-bar"><div class="progress-fill fill-blue" style="width: 75%;"></div></div>
+							</li>
+							<li>
+								<div class="progress-info"><span class="rank">#3</span> <span class="name">Colegio Nuestra Señora del Pilar</span> <span class="count">1</span></div>
+								<div class="progress-bar"><div class="progress-fill fill-purple" style="width: 25%;"></div></div>
+							</li>
+							<li>
+								<div class="progress-info"><span class="rank">#4</span> <span class="name">Colegio Nuestra Señora del Pilar</span> <span class="count">1</span></div>
+								<div class="progress-bar"><div class="progress-fill fill-magenta" style="width: 25%;"></div></div>
+							</li>
+						</ul>
+					</article>
+				</div>
+			</div>
 		</section>
 
 

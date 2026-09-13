@@ -58,7 +58,12 @@ body.dark-theme {
    animación del sidebar). scrollbar-gutter:stable cumple exactamente esa función. */
 html {
    overflow-x: hidden;
-   scrollbar-gutter: stable;
+   scrollbar-width: none;
+   -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+   display: none;
 }
 
 body {
