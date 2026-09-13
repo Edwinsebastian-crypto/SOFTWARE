@@ -77,6 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
             sections.forEach(section => {
                 if (section.id === targetId) {
                     section.style.display = 'flex'; // Usamos flex porque las secciones tienen display: flex en desktop
+                    const wrapper = section.querySelector('.practice-content-wrapper');
+                    if (wrapper) wrapper.style.display = ''; // restaurar visibilidad
                 } else {
                     section.style.display = 'none';
                 }
@@ -89,14 +91,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Al cargar: ocultar todas las secciones y quitar cualquier link activo del HTML.
-    // El usuario debe elegir una opción del menú para ver contenido.
+    // Al cargar: no dejar ninguna opción seleccionada en el menú.
+    // Para que no desaparezca la barra superior (topbar) en móvil,
+    // dejamos visible la primera sección pero ocultamos su contenido.
     navLinks.forEach(nav => {
         nav.classList.remove('app-nav-link--active');
         nav.removeAttribute('aria-current');
     });
-    sections.forEach(section => {
-        section.style.display = 'none';
+    sections.forEach((section, index) => {
+        if (index === 0) {
+            section.style.display = 'flex';
+            const wrapper = section.querySelector('.practice-content-wrapper');
+            if (wrapper) wrapper.style.display = 'none';
+        } else {
+            section.style.display = 'none';
+        }
     });
 
     // --- Menú móvil ---
