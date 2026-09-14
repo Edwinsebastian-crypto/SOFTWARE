@@ -152,86 +152,328 @@
 					<button class="informes-tab-btn"><i class="fa-solid fa-building"></i> Entidades</button>
 				</nav>
 
-				<div class="stats-grid">
-					<article class="stat-card">
-						<div class="stat-icon"><i class="fa-solid fa-copy"></i></div>
-						<div class="stat-info">
-							<span class="stat-value">9</span>
-							<span class="stat-label">Total Prácticas</span>
+				<!-- ===== TAB: GENERAL ===== -->
+				<div class="informe-panel" id="tab-general">
+					<div class="stats-grid">
+						<article class="stat-card">
+							<div class="stat-icon"><i class="fa-solid fa-copy"></i></div>
+							<div class="stat-info">
+								<span class="stat-value">9</span>
+								<span class="stat-label">Total Prácticas</span>
+							</div>
+						</article>
+						<article class="stat-card">
+							<div class="stat-icon"><i class="fa-solid fa-file-circle-check"></i></div>
+							<div class="stat-info">
+								<span class="stat-value">9</span>
+								<span class="stat-label">Activas</span>
+							</div>
+						</article>
+						<article class="stat-card">
+							<div class="stat-icon"><i class="fa-solid fa-flag-checkered"></i></div>
+							<div class="stat-info">
+								<span class="stat-value">0</span>
+								<span class="stat-label">Finalizadas</span>
+							</div>
+						</article>
+					</div>
+
+					<div class="charts-grid">
+						<article class="chart-panel">
+							<h3><i class="fa-solid fa-building"></i> Top Entidades</h3>
+							<ul class="progress-list">
+								<li>
+									<div class="progress-info"><span class="rank">#1</span> <span class="name">Escuela Normal Superior de Bucaramanga</span> <span class="count">3</span></div>
+									<div class="progress-bar"><div class="progress-fill fill-green" style="width: 100%;"></div></div>
+								</li>
+								<li>
+									<div class="progress-info"><span class="rank">#2</span> <span class="name">Colegio san jose</span> <span class="count">1</span></div>
+									<div class="progress-bar"><div class="progress-fill fill-blue" style="width: 33%;"></div></div>
+								</li>
+								<li>
+									<div class="progress-info"><span class="rank">#3</span> <span class="name">Colegio Nuestra Señora del Pilar</span> <span class="count">1</span></div>
+									<div class="progress-bar"><div class="progress-fill fill-purple" style="width: 33%;"></div></div>
+								</li>
+								<li>
+									<div class="progress-info"><span class="rank">#4</span> <span class="name">Colegio Nuestra Señora del Pilar</span> <span class="count">1</span></div>
+									<div class="progress-bar"><div class="progress-fill fill-green" style="width: 33%;"></div></div>
+								</li>
+								<li>
+									<div class="progress-info"><span class="rank">#5</span> <span class="name">Colegio Cooperativo de Bucaramanga</span> <span class="count">1</span></div>
+									<div class="progress-bar"><div class="progress-fill fill-orange" style="width: 33%;"></div></div>
+								</li>
+							</ul>
+						</article>
+
+						<article class="chart-panel">
+							<h3><i class="fa-solid fa-user-group"></i> Top Tutores</h3>
+							<ul class="progress-list">
+								<li>
+									<div class="progress-info"><span class="rank">#1</span> <span class="name">Ramiro Jesus Urtado Bueno</span> <span class="count">4</span></div>
+									<div class="progress-bar"><div class="progress-fill fill-green" style="width: 100%;"></div></div>
+								</li>
+								<li>
+									<div class="progress-info"><span class="rank">#2</span> <span class="name">Juan Carlos Ramirez</span> <span class="count">3</span></div>
+									<div class="progress-bar"><div class="progress-fill fill-blue" style="width: 75%;"></div></div>
+								</li>
+								<li>
+									<div class="progress-info"><span class="rank">#3</span> <span class="name">Luisa Fernanda Rodriguez</span> <span class="count">1</span></div>
+									<div class="progress-bar"><div class="progress-fill fill-purple" style="width: 25%;"></div></div>
+								</li>
+								<li>
+									<div class="progress-info"><span class="rank">#4</span> <span class="name">Ana Maria Rodriguez</span> <span class="count">1</span></div>
+									<div class="progress-bar"><div class="progress-fill fill-magenta" style="width: 25%;"></div></div>
+								</li>
+							</ul>
+						</article>
+					</div>
+				</div>
+
+				<!-- ===== TAB: TIPOS ===== -->
+				<div class="informe-panel" id="tab-tipos" style="display:none;">
+					<article class="tipos-tabla-panel">
+						<h3 class="tipos-tabla-titulo">Tabla Resumen</h3>
+
+						<!-- Vista escritorio: tabla normal con scroll propio -->
+						<div class="tipos-tabla-scroll">
+							<table class="tipos-tabla" id="tipos-tabla-desktop" aria-label="Tabla resumen de tipos de práctica">
+								<thead>
+									<tr>
+										<th scope="col">Tipo de Práctica</th>
+										<th scope="col">Estudiantes</th>
+										<th scope="col">% Participación</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Práctica de Observación Pedagógica</td>
+										<td>4</td>
+										<td>44,4%</td>
+									</tr>
+									<tr>
+										<td>Práctica de Profundización Docente</td>
+										<td>3</td>
+										<td>33,3%</td>
+									</tr>
+									<tr>
+										<td>Práctica de Inmersión o Interfención</td>
+										<td>2</td>
+										<td>22,2%</td>
+									</tr>
+									<tr>
+										<td>Práctica de Inmersión o Interfención</td>
+										<td>2</td>
+										<td>22,2%</td>
+									</tr>
+									<tr>
+										<td>Práctica de Inmersión o Interfención</td>
+										<td>2</td>
+										<td>22,2%</td>
+									</tr>
+									<tr>
+										<td>Práctica de Inmersión o Interfención</td>
+										<td>2</td>
+										<td>22,2%</td>
+									</tr>
+									<tr>
+										<td>Práctica de Inmersión o Interfención</td>
+										<td>2</td>
+										<td>22,2%</td>
+									</tr>
+									<tr>
+										<td>Práctica de Inmersión o Interfención</td>
+										<td>2</td>
+										<td>22,2%</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<!-- Vista móvil: tarjetas -->
+						<div class="tipos-cards" aria-label="Detalles de tipos de práctica (móvil)">
+							<div class="tipos-card">
+								<p><strong>Tipo de Práctica:</strong> Práctica de Observación Pedagógica</p>
+								<p><strong>Estudiantes:</strong> 4</p>
+								<p><strong>% Participación:</strong> 44,4%</p>
+							</div>
+							<div class="tipos-card">
+								<p><strong>Tipo de Práctica:</strong> Práctica de Profundización Docente</p>
+								<p><strong>Estudiantes:</strong> 3</p>
+								<p><strong>% Participación:</strong> 33,3%</p>
+							</div>
+							<div class="tipos-card">
+								<p><strong>Tipo de Práctica:</strong> Práctica de Inmersión o Interfención</p>
+								<p><strong>Estudiantes:</strong> 2</p>
+								<p><strong>% Participación:</strong> 22,2%</p>
+							</div>
+							<div class="tipos-card">
+								<p><strong>Tipo de Práctica:</strong> Práctica de Inmersión o Interfención</p>
+								<p><strong>Estudiantes:</strong> 2</p>
+								<p><strong>% Participación:</strong> 22,2%</p>
+							</div>
+							<div class="tipos-card">
+								<p><strong>Tipo de Práctica:</strong> Práctica de Inmersión o Interfención</p>
+								<p><strong>Estudiantes:</strong> 2</p>
+								<p><strong>% Participación:</strong> 22,2%</p>
+							</div>
+							<div class="tipos-card">
+								<p><strong>Tipo de Práctica:</strong> Práctica de Inmersión o Interfención</p>
+								<p><strong>Estudiantes:</strong> 2</p>
+								<p><strong>% Participación:</strong> 22,2%</p>
+							</div>
+							<div class="tipos-card">
+								<p><strong>Tipo de Práctica:</strong> Práctica de Inmersión o Interfención</p>
+								<p><strong>Estudiantes:</strong> 2</p>
+								<p><strong>% Participación:</strong> 22,2%</p>
+							</div>
+							<div class="tipos-card">
+								<p><strong>Tipo de Práctica:</strong> Práctica de Inmersión o Interfención</p>
+								<p><strong>Estudiantes:</strong> 2</p>
+								<p><strong>% Participación:</strong> 22,2%</p>
+							</div>
+							<div class="tipos-card">
+								<p><strong>Tipo de Práctica:</strong> Práctica de Inmersión o Interfención</p>
+								<p><strong>Estudiantes:</strong> 2</p>
+								<p><strong>% Participación:</strong> 22,2%</p>
+							</div>
+							<div class="tipos-card">
+								<p><strong>Tipo de Práctica:</strong> Práctica de Inmersión o Interfención</p>
+								<p><strong>Estudiantes:</strong> 2</p>
+								<p><strong>% Participación:</strong> 22,2%</p>
+							</div>
 						</div>
 					</article>
-					<article class="stat-card">
-						<div class="stat-icon"><i class="fa-solid fa-file-circle-check"></i></div>
-						<div class="stat-info">
-							<span class="stat-value">9</span>
-							<span class="stat-label">Activas</span>
+				</div>
+			
+		<!-- ======== TAB: Bitacoras =========== -->
+				<div class="informe-panel" id="tab-bitacoras" style="display:none;">
+
+					<div class="stats-grid">
+						<article class="stat-card">
+							<div class="stat-icon"><i class="fa-regular fa-file-lines"></i></div>
+							<div class="stat-info">
+								<span class="stat-value">9</span>
+								<span class="stat-label">Total Bitácoras</span>
+							</div>
+						</article>
+						<article class="stat-card">
+							<div class="stat-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+							<div class="stat-info">
+								<span class="stat-value">9</span>
+								<span class="stat-label">Sin Evidencias</span>
+							</div>
+						</article>
+						<article class="stat-card">
+							<div class="stat-icon"><i class="fa-solid fa-list-check"></i></div>
+							<div class="stat-info">
+								<span class="stat-value">1,3</span>
+								<span class="stat-label">Prom. Evidencias</span>
+							</div>
+						</article>
+					</div>
+
+			<!-- Grafica de bitacoras -->
+				<article class="hdist-panel">
+					<h3 class="hdist-titulo">Estado de Bit&aacute;cora</h3>
+					<div class="hdist-list">
+						<div class="hdist-row">
+							<span class="hdist-label">Activas</span>
+							<div class="hdist-bar-wrap">
+								<div class="hdist-bar-fill hdist-fill-dark" style="width:100%;"></div>
+							</div>
+							<span class="hdist-value">8 (88,9%)</span>
 						</div>
-					</article>
-					<article class="stat-card">
-						<div class="stat-icon"><i class="fa-solid fa-flag-checkered"></i></div>
-						<div class="stat-info">
-							<span class="stat-value">0</span>
-							<span class="stat-label">Finalizadas</span>
+						<div class="hdist-row">
+							<span class="hdist-label">Cerradas</span>
+							<div class="hdist-bar-wrap">
+								<div class="hdist-bar-fill hdist-fill-green" style="width:62.5%;"></div>
+							</div>
+							<span class="hdist-value">5 (55,6%)</span>
+						</div>
+					</div>
+					<p class="hdist-footer">Total&nbsp;:&nbsp;9</p>
+				</article>
+
+					<article class="tipos-tabla-panel">
+						<h3 class="tipos-tabla-titulo">Prácticas sin Evidencias (9)</h3>
+
+						<!-- Vista escritorio: tabla normal con scroll propio -->
+						<div class="tipos-tabla-scroll">
+							<table class="tipos-tabla" id="tipos-tabla-desktop" aria-label="Tabla resumen de tipos de práctica">
+								<thead>
+									<tr>
+										<th scope="col">ID Práctica</th>
+										<th scope="col">Institución</th>
+										<th scope="col">Estudiante</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>PRC-A8812EDC</td>
+										<td>Colegio Distrital Nueva Colombia</td>
+										<td>Edwin Pruebas</td>
+									</tr>
+									<tr>
+										<td>PRC-A8812EDC</td>
+										<td>Colegio Distrital Nueva Colombia</td>
+										<td>Jose David Suarez Olmeda</td>
+									</tr>
+									<tr>
+										<td>PRC-A8812EDC</td>
+										<td>Colegio de Nueva Colombia</td>
+										<td>Monica Diaz</td>
+									</tr>
+									<tr>
+										<td>PRC-A8812EDC</td>
+										<td>Colegio Distrital Nueva Colombia</td>
+										<td>Sandra Jaramillo</td>
+									</tr>
+									<tr>
+										<td>PRC-A8812EDC</td>
+										<td>Colegio Distrital Nueva Colombia</td>
+										<td>Daniel Ramirez</td>
+									</tr>
+									</tbody>
+							</table>
+						</div>
+
+						<!-- Vista móvil: tarjetas -->
+						<div class="tipos-cards" aria-label="Detalles de tipos de práctica (móvil)">
+							<div class="tipos-card">
+								<p><strong>ID Práctica:</strong> PRC-A8812EDC</p>
+								<p><strong>Institución:</strong> Colegio Distrital Nueva Colombia</p>
+								<p><strong>Estudiante:</strong> Edwin Pruebas</p>
+							</div>
+							<div class="tipos-card">
+								<p><strong>ID Práctica:</strong> PRC-A8812EDC</p>
+								<p><strong>Institución:</strong> Colegio Distrital Nueva Colombia</p>
+								<p><strong>Estudiante:</strong> Jose David Suarez Olmeda</p>
+							</div>
+							<div class="tipos-card">
+								<p><strong>ID Práctica:</strong> PRC-A8812EDC</p>
+								<p><strong>Institución:</strong> Colegio de Nueva Colombia</p>
+								<p><strong>Estudiante:</strong> Monica Diaz</p>
+							</div>
+							<div class="tipos-card">
+								<p><strong>ID Práctica:</strong> PRC-A8812EDC</p>
+								<p><strong>Institución:</strong> Colegio Distrital Nueva Colombia</p>
+								<p><strong>Estudiante:</strong> Sandra Jaramillo</p>
+							</div>
+							<div class="tipos-card">
+								<p><strong>ID Práctica:</strong> PRC-A8812EDC</p>
+								<p><strong>Institución:</strong> Colegio Distrital Nueva Colombia</p>
+								<p><strong>Estudiante:</strong> Daniel Ramirez</p>
+							</div>
 						</div>
 					</article>
 				</div>
 
-				<div class="charts-grid">
-					
-
-					<article class="chart-panel">
-						<h3><i class="fa-solid fa-building"></i> Top Entidades</h3>
-						<ul class="progress-list">
-							<li>
-								<div class="progress-info"><span class="rank">#1</span> <span class="name">Escuela Normal Superior de Bucaramanga</span> <span class="count">3</span></div>
-								<div class="progress-bar"><div class="progress-fill fill-green" style="width: 100%;"></div></div>
-							</li>
-							<li>
-								<div class="progress-info"><span class="rank">#2</span> <span class="name">Colegio san jose</span> <span class="count">1</span></div>
-								<div class="progress-bar"><div class="progress-fill fill-blue" style="width: 33%;"></div></div>
-							</li>
-							<li>
-								<div class="progress-info"><span class="rank">#3</span> <span class="name">Colegio Nuestra Señora del Pilar</span> <span class="count">1</span></div>
-								<div class="progress-bar"><div class="progress-fill fill-purple" style="width: 33%;"></div></div>
-							</li>
-							<li>
-								<div class="progress-info"><span class="rank">#4</span> <span class="name">Colegio Nuestra Señora del Pilar</span> <span class="count">1</span></div>
-								<div class="progress-bar"><div class="progress-fill fill-green" style="width: 33%;"></div></div>
-							</li>
-							<li>
-								<div class="progress-info"><span class="rank">#5</span> <span class="name">Colegio Cooperativo de Bucaramanga</span> <span class="count">1</span></div>
-								<div class="progress-bar"><div class="progress-fill fill-orange" style="width: 33%;"></div></div>
-							</li>
-						</ul>
-					</article>
-
-					<article class="chart-panel">
-						<h3><i class="fa-solid fa-user-group"></i> Top Tutores</h3>
-						<ul class="progress-list">
-							<li>
-								<div class="progress-info"><span class="rank">#1</span> <span class="name">Ramiro Jesus Urtado Bueno</span> <span class="count">4</span></div>
-								<div class="progress-bar"><div class="progress-fill fill-green" style="width: 100%;"></div></div>
-							</li>
-							<li>
-								<div class="progress-info"><span class="rank">#2</span> <span class="name">Juan Carlos Ramirez</span> <span class="count">3</span></div>
-								<div class="progress-bar"><div class="progress-fill fill-blue" style="width: 75%;"></div></div>
-							</li>
-							<li>
-								<div class="progress-info"><span class="rank">#3</span> <span class="name">Luisa Fernanda Rodriguez</span> <span class="count">1</span></div>
-								<div class="progress-bar"><div class="progress-fill fill-purple" style="width: 25%;"></div></div>
-							</li>
-							<li>
-								<div class="progress-info"><span class="rank">#4</span> <span class="name">Ana Maria Rodriguez</span> <span class="count">1</span></div>
-								<div class="progress-bar"><div class="progress-fill fill-magenta" style="width: 25%;"></div></div>
-							</li>
-						</ul>
-					</article>
-				</div>
-			</div>
 		</section>
-
-
 		
+
+
+
+		<!-- ========== TAB: PERFIL ==========-->
 		<section class="app-content" id="perfil" style="display: none;">
 			<header class="app-topbar">
 				<button class="sidebar-toggle mobile-menu-toggle" id="mobileMenuToggleProfile" aria-label="Abrir menú">

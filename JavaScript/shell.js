@@ -222,4 +222,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // --- Tabs de Informes (General, Tipos, Bitacoras, Retro, Entidades) ---
+    // Mapea cada boton (por orden) con su panel id
+    const informesTabIds = ['tab-general', 'tab-tipos', 'tab-bitacoras', 'tab-retro', 'tab-entidades'];
+    const informesTabBtns = document.querySelectorAll('.informes-tab-btn');
+
+    if (informesTabBtns.length > 0) {
+        informesTabBtns.forEach((btn, idx) => {
+            btn.addEventListener('click', () => {
+                // Activar boton
+                informesTabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Mostrar panel correspondiente
+                informesTabIds.forEach((panelId, panelIdx) => {
+                    const panel = document.getElementById(panelId);
+                    if (!panel) return;
+                    panel.style.display = panelIdx === idx ? '' : 'none';
+                });
+            });
+        });
+    }
 });
