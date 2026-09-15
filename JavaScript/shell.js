@@ -223,9 +223,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Tabs de Informes (General, Tipos, Bitacoras, Retro, Entidades) ---
+    // --- Tabs de Informes (General, Tipos, Bitacoras, Retro, Instituciones) ---
     // Mapea cada boton (por orden) con su panel id
-    const informesTabIds = ['tab-general', 'tab-tipos', 'tab-bitacoras', 'tab-retro', 'tab-entidades'];
+    const informesTabIds = ['tab-general', 'tab-tipos', 'tab-bitacoras', 'tab-retro', 'tab-instituciones'];
     const informesTabBtns = document.querySelectorAll('.informes-tab-btn');
 
     if (informesTabBtns.length > 0) {
