@@ -185,7 +185,7 @@ input:-webkit-autofill:active {
 #spp-splash img {
   position: relative;
   z-index: 1;
-  width: clamp(250px, 40vw, 750px);
+  width: clamp(350px, 40vw, 750px);
   height: auto;
   display: block;
   opacity: 0;
