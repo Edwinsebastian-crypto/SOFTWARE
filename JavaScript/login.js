@@ -37,3 +37,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+/* ── Splash screen ── */
+(function () {
+    const splash = document.getElementById('spp-splash');
+    if (!splash) return;
+
+    let shouldShow = false;
+    try {
+        if (!sessionStorage.getItem('spp-intro-shown')) {
+            sessionStorage.setItem('spp-intro-shown', '1');
+            shouldShow = true;
+        }
+    } catch (e) {
+        shouldShow = true; // Fallback
+    }
+
+    if (shouldShow) {
+        splash.classList.remove('is-hidden');
+        setTimeout(function () {
+            splash.classList.add('splash-out');
+            splash.addEventListener('animationend', function () {
+                splash.remove();
+            }, { once: true });
+        }, 1700);
+    } else {
+        splash.remove();
+    }
+})();

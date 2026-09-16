@@ -12,6 +12,18 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+
+  <!-- Splash: solo aparece la primera vez que se entra por el link en esta
+       sesión del navegador. El script de abajo decide si se muestra ANTES
+       de pintar la página (evita el parpadeo de "aparece y luego se oculta"
+       si el usuario vuelve aquí tras cerrar sesión). -->
+  <div id="spp-splash" class="is-hidden" role="img" aria-label="SPP — Software de Prácticas Pedagógicas">
+    <div class="splash-halo" aria-hidden="true"></div>
+    <img src="img/inicio.jpeg" alt="Bienvenido a SPP">
+    <div class="splash-bar" aria-hidden="true"><span></span></div>
+  </div>
+
+
   <main class="login-container">
     <section class="login-hero" aria-label="Software de Prácticas Pedagógicas">
       <div class="hero-header">

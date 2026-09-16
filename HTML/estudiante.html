@@ -64,9 +64,51 @@
 				</form>
 				<button class="practice-submit" type="button"><i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i><span>Entrar</span></button>
 				</section>
+				
+				<!-- PANEL DE BITÁCORA (Se muestra después de Entrar) -->
+				<section class="bitacora-panel" id="bitacora-panel" aria-labelledby="bitacora-title" style="display: none;">
+					<button type="button" class="bitacora-back-btn" id="bitacoraBack" aria-label="Volver a Información de Práctica">
+						<i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+					</button>
+					<h2 id="bitacora-title" class="bitacora-title">Bitacora</h2>
+					<div class="bitacora-info-card">
+						<div class="bitacora-info-item">
+							<span class="b-info-label">Fecha de creación</span>
+							<span class="b-info-value">18/04/2026</span>
+						</div>
+						<div class="bitacora-info-item">
+							<span class="b-info-label">Nota Final</span>
+							<span class="b-info-value">Nota</span>
+						</div>
+						<div class="bitacora-info-item">
+							<span class="b-info-label">Observación General</span>
+							<span class="b-info-value">Observación</span>
+						</div>
+						<div class="bitacora-info-item">
+							<span class="b-info-label">Estado Bitácora</span>
+							<span class="b-info-value">Activa</span>
+						</div>
+					</div>
+
+					<div class="bitacora-action-card">
+						<span class="b-action-label">Actividades</span>
+						<button type="button" class="b-action-btn" id="actividades-btn">Entrar</button>
+					</div>
+
+					<div class="bitacora-action-card">
+						<span class="b-action-label">Sección de Preguntas</span>
+						<button type="button" class="b-action-btn" id="preguntas-btn">Entrar</button>
+					</div>
+				</section>
 			</div>
+
+
+
 		</section>
 
+
+
+		<!-- TAB - PERFIL-->
 		<section class="app-content" id="perfil" style="display: none;">
 			<header class="app-topbar">
 				<button class="sidebar-toggle mobile-menu-toggle" id="mobileMenuToggleProfile" aria-label="Abrir menú">
@@ -131,5 +173,21 @@
 		</section>
 	</main>
 	<script src="../JavaScript/shell.js?v=1"></script>
+	<script>
+		// Lógica específica para la vista de Estudiante
+		document.addEventListener('DOMContentLoaded', () => {
+			const btnEntrar = document.querySelector('.practice-submit');
+			const practicePanel = document.querySelector('.practice-panel');
+			const bitacoraPanel = document.getElementById('bitacora-panel');
+			
+			if (btnEntrar && practicePanel && bitacoraPanel) {
+				btnEntrar.addEventListener('click', () => {
+					// Ocultar formulario de práctica y mostrar la bitácora
+					practicePanel.style.display = 'none';
+					bitacoraPanel.style.display = 'flex';
+				});
+			}
+		});
+	</script>
 </body>
 </html>

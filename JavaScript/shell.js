@@ -245,3 +245,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+
+// Lógica específica para la vista de Estudiante
+document.addEventListener('DOMContentLoaded', () => {
+    const btnEntrar = document.querySelector('.practice-submit');
+    const practicePanel = document.querySelector('.practice-panel');
+    const bitacoraPanel = document.getElementById('bitacora-panel');
+    
+    if (btnEntrar && practicePanel && bitacoraPanel) {
+        btnEntrar.addEventListener('click', () => {
+            // Ocultar formulario de práctica y mostrar la bitácora
+            practicePanel.style.display = 'none';
+            bitacoraPanel.style.display = 'flex';
+        });
+    }
+
+    const btnBitacoraVolver = document.getElementById('bitacoraBack');
+    if (btnBitacoraVolver && practicePanel && bitacoraPanel) {
+        btnBitacoraVolver.addEventListener('click', () => {
+            // Volver a mostrar la información de práctica
+            bitacoraPanel.style.display = 'none';
+            practicePanel.style.display = '';
+        });
+    }
+});
