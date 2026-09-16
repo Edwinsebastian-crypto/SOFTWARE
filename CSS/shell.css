@@ -67,7 +67,7 @@ html::-webkit-scrollbar {
 }
 
 body {
-   min-height: 100vh;
+   height: 100vh;
    display: block;
    margin: 0;
    padding: 0;
@@ -75,7 +75,7 @@ body {
    color: var(--text-secondary);
    font-family: var(--font-serif);
    transition: background 0.3s ease;
-   overflow-x: hidden;
+   overflow: hidden;
 }
 
 .sr-only {
@@ -320,7 +320,7 @@ input:-webkit-autofill:active {
 
 .app-content {
    margin-left: 280px;
-   min-height: 100vh;
+   height: 100vh;
    position: relative;
    min-width: 0;
    display: flex;

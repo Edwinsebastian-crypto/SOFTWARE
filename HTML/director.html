@@ -37,9 +37,9 @@
 		</aside>
 
 		<!-- Crear práctica-->
-		<section class="app-content" id="crear-practica">
+		<section class="app-content" id="crear-practica" style="display: none;">
 			<header class="app-topbar">
-				<button class="sidebar-toggle mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menú">
+				<button class="sidebar-toggle mobile-menu-toggle" id="mobileMenuToggleCrear" aria-label="Abrir menú">
 					<i class="fa-solid fa-bars hamburger-icon"></i>
 					<i class="fa-solid fa-graduation-cap overlay-cap"></i>
 				</button>
@@ -47,6 +47,98 @@
 				<button class="topbar-option theme-toggle-btn" type="button" aria-label="Cambiar tema"><i class="fa-regular fa-sun" aria-hidden="true"></i><span>Claro</span></button>
 				<button class="app-account" type="button" aria-label="Abrir menú de director"><i class="fa-solid fa-circle-user" aria-hidden="true"></i><span><strong>Nombre Director</strong><small>Director</small></span></button>
 			</header>	
+
+			<div class="practice-content-wrapper">
+				<h2 class="cp-main-title">Gestión de Práctica</h2>
+				
+				<div class="cp-layout">
+					<!-- Columna Izquierda -->
+					<div class="cp-card">
+						<div class="cp-field">
+							<label>Tipo de Práctica</label>
+							<div class="cp-input-wrap">
+								<select>
+									<option value="" disabled selected>Selecciona Tipo de Práctica</option>
+									<option value="1">Práctica de Observación Pedagógica</option>
+									<option value="2">Práctica de Profundización Docente</option>
+									<option value="3">Práctica de Inmersión o Intervención</option>
+								</select>
+								<i class="fa-solid fa-chevron-down right-icon"></i>
+							</div>
+						</div>
+						
+						<div class="cp-field">
+							<label>Entidad / Institución</label>
+							<div class="cp-input-wrap">
+								<select>
+									<option value="" disabled selected>Selecciona la Institución</option>
+									<option value="1">Escuela Normal Superior de Bucaramanga</option>
+									<option value="2">Colegio San Jose</option>
+								</select>
+								<i class="fa-solid fa-chevron-down right-icon"></i>
+							</div>
+						</div>
+						
+						<div class="cp-field">
+							<label>Fecha Inicio</label>
+							<div class="cp-input-wrap">
+								<input type="date" required>
+							</div>
+						</div>
+						
+						<div class="cp-field">
+							<label>Fecha Final</label>
+							<div class="cp-input-wrap">
+								<input type="date" required>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Columna Derecha -->
+					<div class="cp-card">
+						<div class="cp-field">
+							<label>Estudiante Asignado</label>
+							<div class="cp-input-wrap">
+								<select>
+									<option value="" disabled selected>Selecciona al Estudiante</option>
+									<option value="1">Edwin Pruebas</option>
+									<option value="2">Jose David Suarez</option>
+								</select>
+								<i class="fa-solid fa-chevron-down right-icon"></i>
+							</div>
+						</div>
+						
+						<div class="cp-field">
+							<label>Tutor Asignado</label>
+							<div class="cp-input-wrap">
+								<select>
+									<option value="" disabled selected>Selecciona al Tutor</option>
+									<option value="1">Ramiro Jesus Urtado Bueno</option>
+									<option value="2">Juan Carlos Ramirez</option>
+								</select>
+								<i class="fa-solid fa-chevron-down right-icon"></i>
+							</div>
+						</div>
+						
+						<div class="cp-field">
+							<label>Asesor Asignado</label>
+							<div class="cp-input-wrap">
+								<select>
+									<option value="" disabled selected>Selecciona al Asesor</option>
+									<option value="1">Claudia Patricia Rueda Pardo</option>
+									<option value="2">Luisa Fernanda Rodriguez</option>
+								</select>
+								<i class="fa-solid fa-chevron-down right-icon"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="cp-actions">
+					<button type="button" class="cp-btn cp-btn-save">Guardar</button>
+					<button type="button" class="cp-btn cp-btn-cancel">Cancelar</button>
+				</div>
+			</div>
 		</section>
 
 		<!-- Práctica-->
@@ -737,7 +829,7 @@
 			</header>
 
 			<div class="practice-content-wrapper">
-				<h2 class="profile-title" id="profile-title">Perfil</h2>
+				<h2 class="cp-main-title" id="profile-title">Perfil</h2>
 				<section class="profile-panel" aria-labelledby="profile-title">
 					<div class="profile-layout">
 						<div class="profile-column">
