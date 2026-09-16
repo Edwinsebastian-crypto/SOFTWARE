@@ -264,6 +264,8 @@ document.addEventListener('DOMContentLoaded', () => {
             window.scrollTo(0, 0);
             const wrapper = document.querySelector('.practice-content-wrapper');
             if (wrapper) wrapper.scrollTop = 0;
+            const appShell = document.querySelector('.app-shell');
+            if (appShell) appShell.scrollTop = 0;
         });
     }
     
@@ -276,6 +278,8 @@ document.addEventListener('DOMContentLoaded', () => {
             window.scrollTo(0, 0);
             const wrapper = document.querySelector('.practice-content-wrapper');
             if (wrapper) wrapper.scrollTop = 0;
+            const appShell = document.querySelector('.app-shell');
+            if (appShell) appShell.scrollTop = 0;
         });
     }
 });
