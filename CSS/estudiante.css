@@ -57,12 +57,11 @@ body.dark-theme .profile-info-value { color: #4a544d; }
   display: flex;
   flex-direction: column;
 }
-.bitacora-title {
-  font-size: 24px;
-  color: var(--text-primary);
-  font-family: var(--font-serif);
-  margin-bottom: 20px;
-  font-weight: 700;
+.bitacora-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .bitacora-back-btn {
@@ -71,24 +70,25 @@ body.dark-theme .profile-info-value { color: #4a544d; }
   justify-content: center;
   width: 40px;
   height: 40px;
-  margin-bottom: 14px;
   border: 2px solid var(--clr-accent-gold);
   border-radius: 10px;
   background: transparent;
   color: var(--text-primary);
   font-size: 18px;
   cursor: pointer;
+  flex-shrink: 0;
   transition: background 0.2s ease, transform 0.2s ease;
 }
 .bitacora-back-btn:hover { background: rgba(221,163,38,.14); transform: translateX(-3px); }
 .bitacora-back-btn:active { transform: translateX(-5px); }
 .bitacora-back-btn:focus-visible { outline: 2px solid var(--clr-accent-gold); outline-offset: 2px; }
+
 .bitacora-title {
   font-size: 24px;
   color: var(--text-primary);
   font-family: var(--font-serif);
-  margin-bottom: 20px;
   font-weight: 700;
+  margin: 0;
 }
 
 .bitacora-info-card {

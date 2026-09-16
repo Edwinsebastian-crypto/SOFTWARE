@@ -252,21 +252,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnEntrar = document.querySelector('.practice-submit');
     const practicePanel = document.querySelector('.practice-panel');
     const bitacoraPanel = document.getElementById('bitacora-panel');
+    const bitacoraBackBtn = document.getElementById('bitacoraBack');
     
     if (btnEntrar && practicePanel && bitacoraPanel) {
         btnEntrar.addEventListener('click', () => {
             // Ocultar formulario de práctica y mostrar la bitácora
             practicePanel.style.display = 'none';
             bitacoraPanel.style.display = 'flex';
+            
+            // Restablecer el scroll al inicio para que el usuario no quede a mitad de página
+            window.scrollTo(0, 0);
+            const wrapper = document.querySelector('.practice-content-wrapper');
+            if (wrapper) wrapper.scrollTop = 0;
         });
     }
-
-    const btnBitacoraVolver = document.getElementById('bitacoraBack');
-    if (btnBitacoraVolver && practicePanel && bitacoraPanel) {
-        btnBitacoraVolver.addEventListener('click', () => {
-            // Volver a mostrar la información de práctica
+    
+    // Añadido para el botón de volver (simulación)
+    if (bitacoraBackBtn && practicePanel && bitacoraPanel) {
+        bitacoraBackBtn.addEventListener('click', () => {
             bitacoraPanel.style.display = 'none';
-            practicePanel.style.display = '';
+            practicePanel.style.display = 'block';
+            
+            window.scrollTo(0, 0);
+            const wrapper = document.querySelector('.practice-content-wrapper');
+            if (wrapper) wrapper.scrollTop = 0;
         });
     }
 });
