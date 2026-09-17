@@ -1,7 +1,7 @@
- /* =========================================================================
-   director.css — Solo lo propio del panel de Director. El sidebar/topbar/menú
-   móvil vive en shell.css y se comparte con los demás roles; no lo
-   dupliques aquí. Debe cargarse DESPUÉS de variables.css y shell.css.
+﻿ /* =========================================================================
+   director.css â€” Solo lo propio del panel de Director. El sidebar/topbar/menÃº
+   mÃ³vil vive en shell.css y se comparte con los demÃ¡s roles; no lo
+   dupliques aquÃ­. Debe cargarse DESPUÃ‰S de variables.css y shell.css.
    ========================================================================= */
 
 .practice-content-wrapper { padding: 36px 40px; flex: 1; overflow-y: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
@@ -25,9 +25,9 @@
 .practice-field--date input::-webkit-calendar-picker-indicator { opacity: 0; }
 .practice-field--date i { position: absolute; top: 50%; right: 16px; transform: translateY(-50%); font-size: 24px; pointer-events: none; color: var(--text-primary); }
 
-/* El botón está FUERA de .practice-panel (ver HTML).
+/* El botÃ³n estÃ¡ FUERA de .practice-panel (ver HTML).
    width:fit-content + margin-left:auto lo alinea a la derecha sin float,
-   manteniéndolo en el flujo normal para que siempre sea visible. */
+   manteniÃ©ndolo en el flujo normal para que siempre sea visible. */
 .practice-submit { display: flex; align-items: center; justify-content: center; gap: 15px; width: fit-content; margin-left: auto; margin-top: 30px; height: 56px; padding: 0 30px; border: 0; border-radius: 12px; color: #fff; background: linear-gradient(90deg, #1f503c, #2a7253); box-shadow: 0 4px 6px rgba(0,0,0,.2); font-size: 21px; font-weight: 700; cursor: pointer; font-family: var(--font-serif); }
 .practice-submit i { font-size: 24px; color: #fff; }
 
@@ -46,13 +46,13 @@
 .profile-info-label { font-size: 14px; font-weight: 700; color: var(--text-primary); font-family: var(--font-serif); }
 .profile-info-value { font-size: 15px; color: var(--text-muted); font-family: var(--font-serif); }
 
-/* Colorimetría Modo Oscuro para Perfil */
+/* ColorimetrÃ­a Modo Oscuro para Perfil */
 body.dark-theme .profile-panel { background: #D1E5DE; }
 body.dark-theme .profile-info-item { background: #9ec0b4; box-shadow: 0 4px 8px rgba(0,0,0,0.06); }
 body.dark-theme .profile-info-label { color: #1a1a1a; }
 body.dark-theme .profile-info-value { color: #4a544d; }
 
-/* Colorimetría Modo Oscuro para Informes y Estadísticas */
+/* ColorimetrÃ­a Modo Oscuro para Informes y EstadÃ­sticas */
 body.dark-theme .informes-header h2 { color: #fff; }
 body.dark-theme .informes-header p { color: #cdd9d4; }
 
@@ -79,7 +79,7 @@ body.dark-theme .progress-info .count { color: #1a1a1a; }
 body.dark-theme .progress-bar { background: #9ec0b4; }
 
 /* -------------------------------------------------------------------------
-   INFORMES Y ESTADÍSTICAS
+   INFORMES Y ESTADÃSTICAS
    ------------------------------------------------------------------------- */
 .informes-wrapper { padding: 36px 40px; flex: 1; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch; }
 .informes-wrapper::-webkit-scrollbar { display: none; }
@@ -132,8 +132,8 @@ body.dark-theme .progress-bar { background: #9ec0b4; }
 .fill-orange { background: #f97316; }
 
 /* -------------------------------------------------------------------------
-   GRAFICA BARRAS HORIZONTALES — hdist (Bitácoras y similares)
-   Diseño: etiqueta | barra | valor  (igual que imagen de referencia)
+   GRAFICA BARRAS HORIZONTALES â€” hdist (BitÃ¡coras y similares)
+   DiseÃ±o: etiqueta | barra | valor  (igual que imagen de referencia)
    ------------------------------------------------------------------------- */
 .hdist-panel {
   background: #fff;
@@ -151,9 +151,9 @@ body.dark-theme .progress-bar { background: #9ec0b4; }
   margin-bottom: 20px;
 }
 .hdist-list { display: flex; flex-direction: column; gap: 18px; }
-/* Grid en vez de flex: así el ancho de cada columna (nombre | barra | número)
-   se define UNA sola vez para toda la lista, no fila por fila según el largo
-   del texto — por eso antes las barras no arrancaban todas en el mismo punto. */
+/* Grid en vez de flex: asÃ­ el ancho de cada columna (nombre | barra | nÃºmero)
+   se define UNA sola vez para toda la lista, no fila por fila segÃºn el largo
+   del texto â€” por eso antes las barras no arrancaban todas en el mismo punto. */
 .hdist-row {
   display: grid;
   grid-template-columns: 280px 1fr 50px;  /*barra de progreso, separacion del nombre 280px*/
@@ -212,9 +212,9 @@ body.dark-theme .hdist-value { color: #1a1a1a; }
 body.dark-theme .hdist-bar-wrap { background: #9ec0b4; }
 body.dark-theme .hdist-footer { color: #3a4e44; }
 
-/* ── Modo móvil: nombre arriba (ancho completo, sin cortar),
-   barra de color + número debajo — para que no se corte el nombre
-   ni la información con pantallas angostas ── */
+/* â”€â”€ Modo mÃ³vil: nombre arriba (ancho completo, sin cortar),
+   barra de color + nÃºmero debajo â€” para que no se corte el nombre
+   ni la informaciÃ³n con pantallas angostas â”€â”€ */
 @media (max-width: 600px) {
   .hdist-row {
     grid-template-columns: 1fr 60px;
@@ -222,7 +222,7 @@ body.dark-theme .hdist-footer { color: #3a4e44; }
     gap: 8px;
   }
   .hdist-label {
-    grid-column: 1 / -1; /* ocupa todo el ancho de la fila, en su propia línea */
+    grid-column: 1 / -1; /* ocupa todo el ancho de la fila, en su propia lÃ­nea */
     white-space: normal;
     overflow: visible;
     text-overflow: unset;
@@ -241,7 +241,7 @@ body.dark-theme .hdist-footer { color: #3a4e44; }
 }
 
 /* -------------------------------------------------------------------------
-   TAB TIPOS — Tabla Resumen con scroll propio
+   TAB TIPOS â€” Tabla Resumen con scroll propio
    ------------------------------------------------------------------------- */
 .tipos-tabla-panel {
   background: #fff;
@@ -323,7 +323,7 @@ body.dark-theme .tipos-card { background: #9ec0b4; border-color: rgba(0,0,0,0.1)
 body.dark-theme .tipos-card p { color: #1a1a1a; }
 
 /* -------------------------------------------------------------------------
-   CREAR PRÁCTICA (Gestión de Práctica)
+   CREAR PRÃCTICA (GestiÃ³n de PrÃ¡ctica)
    ------------------------------------------------------------------------- */
 .cp-main-title {
     font-size: 28px;
@@ -373,9 +373,10 @@ body.dark-theme .tipos-card p { color: #1a1a1a; }
     font-size: 16px;
     color: #1a4231;
     margin-left: auto;
-    pointer-events: none;
+    pointer-events: auto;
     position: absolute;
     right: 16px;
+    -webkit-tap-highlight-color: transparent;
 }
 .cp-input-wrap input,
 .cp-input-wrap select {
@@ -391,13 +392,30 @@ body.dark-theme .tipos-card p { color: #1a1a1a; }
 }
 .cp-input-wrap select {
     appearance: none;
+    -webkit-tap-highlight-color: transparent;
 }
-/* Estilo especial para input date que ocupa su propio icono nativo en algunos navegadores */
+/* Estilo especial para input date */
 .cp-input-wrap input[type="date"] {
     color: #1a4231;
-    appearance: auto;
+    appearance: none;
+    -webkit-appearance: none;
     width: 100%;
+    min-width: 0;
     display: block;
+    padding-right: 8px;
+    -webkit-tap-highlight-color: transparent;
+}
+/* Icono nativo de fecha visible en todos los navegadores */
+.cp-input-wrap input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 1;
+    cursor: pointer;
+    filter: invert(20%) sepia(50%) saturate(600%) hue-rotate(100deg);
+}
+/* Quitar highlight azul en custom select trigger */
+.custom-select-trigger,
+.custom-select-container {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 }
 
 .cp-actions {
@@ -492,7 +510,7 @@ body.dark-theme .tipos-card p { color: #1a1a1a; }
     color: #fff;
 }
 
-/* Modo oscuro Crear Práctica */
+/* Modo oscuro Crear PrÃ¡ctica */
 body.dark-theme .cp-card { background: #D1E5DE; }
 body.dark-theme .cp-main-title { color: #fff; }
 body.dark-theme .cp-field label { color: #1a1a1a; }
@@ -501,9 +519,9 @@ body.dark-theme .cp-input-wrap input, body.dark-theme .cp-input-wrap select { co
 body.dark-theme .cp-btn-cancel { background: #9ec0b4; border-color: #7b9f91; }
 
 /* -------------------------------------------------------------------------
-   RESPONSIVE — solo lo propio de este panel. Los mismos breakpoints existen
-   también en shell.css para el sidebar/topbar; cada archivo trae solo lo
-   suyo a propósito.
+   RESPONSIVE â€” solo lo propio de este panel. Los mismos breakpoints existen
+   tambiÃ©n en shell.css para el sidebar/topbar; cada archivo trae solo lo
+   suyo a propÃ³sito.
    ------------------------------------------------------------------------- */
 
 /* Laptops Compactos y Tabletas Horizontales (<= 1120px) */
@@ -537,15 +555,15 @@ body.dark-theme .cp-btn-cancel { background: #9ec0b4; border-color: #7b9f91; }
   .practice-submit i { font-size: 20px; }
 }
 
-/* Tabletas en vertical y drawer móvil (ver nota de altura en shell.css) */
+/* Tabletas en vertical y drawer mÃ³vil (ver nota de altura en shell.css) */
 @media (max-width:900px), (max-height:500px) {
   .cp-layout { flex-direction: column; }
   
   .practice-form { grid-template-columns: repeat(2, 1fr); }
   /* padding-bottom extra + safe-area-inset-bottom: en celulares con barra de
-     gestos (navegación) del sistema, esa barra puede tapar visualmente los
-     últimos píxeles de la página aunque el scroll ya llegó al final. Este
-     colchón asegura que el botón "Entrar" quede siempre por encima de ella. */
+     gestos (navegaciÃ³n) del sistema, esa barra puede tapar visualmente los
+     Ãºltimos pÃ­xeles de la pÃ¡gina aunque el scroll ya llegÃ³ al final. Este
+     colchÃ³n asegura que el botÃ³n "Entrar" quede siempre por encima de ella. */
   .practice-content-wrapper { padding: 20px 20px calc(20px + env(safe-area-inset-bottom, 0px) + 40px); overflow-y: visible; flex: none; }
   
   .profile-layout { flex-direction: column; gap: 30px; }
@@ -554,19 +572,19 @@ body.dark-theme .cp-btn-cancel { background: #9ec0b4; border-color: #7b9f91; }
   .profile-panel { padding: 25px; }
   .profile-info-list { flex-direction: column; }
 
-  /* Informes — mismo tratamiento que practice-content-wrapper:
+  /* Informes â€” mismo tratamiento que practice-content-wrapper:
      overflow-y: visible + flex: none para que el scroll lo gestione
      .app-shell; padding-bottom con safe-area-inset-bottom evita que
-     la barra de gestos del sistema tape el último recuadro. */
+     la barra de gestos del sistema tape el Ãºltimo recuadro. */
   .charts-grid { grid-template-columns: 1fr; }
   .informes-wrapper { padding: 20px 20px calc(20px + env(safe-area-inset-bottom, 0px) + 40px); overflow-y: visible; flex: none; }
 }
 
-/* Pantallas divididas y teléfonos — se activa en ventanas < 768 px
-   (p.ej. laptop de 11" dividida en dos mitades ≈ 683 px de ancho) */
+/* Pantallas divididas y telÃ©fonos â€” se activa en ventanas < 768 px
+   (p.ej. laptop de 11" dividida en dos mitades â‰ˆ 683 px de ancho) */
 @media (max-width:768px) {
   .practice-form { grid-template-columns: 1fr; gap: 18px; }
-  /* El botón ocupa todo el ancho */
+  /* El botÃ³n ocupa todo el ancho */
   .practice-submit { width: 100%; margin-left: 0; }
   
   /* Pestanas de informes en dos filas */
@@ -598,7 +616,7 @@ body.dark-theme .cp-btn-cancel { background: #9ec0b4; border-color: #7b9f91; }
   .tipos-card { padding: 14px 16px; }
 }
 
-/* Modal de Éxito para Crear Práctica */
+/* Modal de Ã‰xito para Crear PrÃ¡ctica */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000; }
 .modal-content { background: #fff; border-radius: 6px; width: 350px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
 .modal-header { background: #1a4231; padding: 12px 15px; }
@@ -607,3 +625,5 @@ body.dark-theme .cp-btn-cancel { background: #9ec0b4; border-color: #7b9f91; }
 .modal-body i { font-size: 60px; color: #1a4231; }
 .modal-body p { font-size: 17px; font-weight: 700; font-family: var(--font-serif); color: #000; margin: 0; }
 .modal-btn { margin-top: 10px; background: linear-gradient(180deg, #8ad7b8, #45a47e); border: none; padding: 10px 30px; border-radius: 8px; font-weight: bold; font-family: var(--font-serif); color: #000; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 16px; }
+
+
