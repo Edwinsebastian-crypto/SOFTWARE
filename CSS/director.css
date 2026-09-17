@@ -645,4 +645,32 @@ body.dark-theme .cp-btn-cancel { background: #9ec0b4; border-color: #7b9f91; }
     z-index: 1;
 }
 
+/* ── Placeholder "dd/mm/aaaa" en móvil para input[type=date] vacío ──
+   En Android/iOS el browser no muestra el texto dd/mm/aaaa nativo.
+   Usamos un ::before en el wrapper + color transparent en el input vacío
+   para simular el placeholder visualmente. */
+@media (max-width: 900px) {
+    .cp-input-wrap:has(.cp-date-input:not(:valid)) .cp-date-input,
+    .cp-input-wrap:has(.cp-date-input[value=""]) .cp-date-input {
+        color: transparent;
+    }
+    .cp-input-wrap:has(.cp-date-input:not(:valid))::before,
+    .cp-input-wrap:has(.cp-date-input[value=""])::before {
+        content: 'dd/mm/aaaa';
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #1a4231;
+        opacity: 0.8;
+        font-family: var(--font-serif);
+        font-size: 16px;
+        pointer-events: none;
+        z-index: 1;
+    }
+    /* Asegura que el wrapper tenga posición relativa para el ::before */
+    .cp-input-wrap {
+        position: relative;
+    }
+}
 
