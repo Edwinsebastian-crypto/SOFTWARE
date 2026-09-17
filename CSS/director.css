@@ -394,25 +394,30 @@ body.dark-theme .tipos-card p { color: #1a1a1a; }
     appearance: none;
     -webkit-tap-highlight-color: transparent;
 }
-/* Estilos para que el input fecha use placeholder en texto y se oculte su icono nativo */
-.cp-input-wrap input[type="date"] {
+/* Fecha — siempre type=date; picker abre al primer clic via JS */
+.cp-input-wrap input[type="date"],
+.cp-input-wrap .cp-date-input {
     color: #1a4231;
     width: 100%;
     min-width: 0;
     display: block;
-    padding-right: 8px;
+    padding-right: 36px;
     -webkit-tap-highlight-color: transparent;
     font-family: var(--font-serif);
+    cursor: pointer;
 }
 .cp-input-wrap input::placeholder {
     color: #1a4231;
     opacity: 0.8;
 }
-.cp-input-wrap input[type="date"]::-webkit-calendar-picker-indicator {
+/* El picker indicator cubre todo el campo — primer clic dispara el calendario */
+.cp-input-wrap input[type="date"]::-webkit-calendar-picker-indicator,
+.cp-input-wrap .cp-date-input::-webkit-calendar-picker-indicator {
     opacity: 0;
     position: absolute;
-    right: 16px;
-    width: 24px;
+    left: 0;
+    top: 0;
+    width: 100%;
     height: 100%;
     cursor: pointer;
     z-index: 2;

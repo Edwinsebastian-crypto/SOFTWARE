@@ -12,7 +12,6 @@
                     input.selectedIndex = 0;
                 } else {
                     input.value = '';
-                    if(input.hasAttribute('onfocus')) input.type = 'text';
                 }
             });
         });
@@ -30,6 +29,16 @@
             if(btnCancel) btnCancel.click(); // Limpia el formulario
         });
     }
+
+
+    // --- Abrir calendar picker en el primer clic (móvil y escritorio) ---
+    document.querySelectorAll('.cp-date-input').forEach(input => {
+        input.addEventListener('click', function() {
+            if (typeof this.showPicker === 'function') {
+                try { this.showPicker(); } catch(e) {}
+            }
+        });
+    });
 
     // Initialize Custom Selects for Crear Práctica
     function initCustomSelects() {
