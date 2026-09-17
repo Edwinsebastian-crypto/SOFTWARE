@@ -678,6 +678,7 @@ input:-webkit-autofill:active {
 
    .app-content {
       min-height: 0;
+      height: auto;
       width: 100%;
       display: block;
    }

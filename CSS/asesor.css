@@ -35,10 +35,9 @@
 .profile-panel { padding: 35px 40px; border-radius: 20px; background: var(--panel-bg); box-shadow: 0 4px 10px rgba(0,0,0,.05); transition: background 0.3s ease; }
 .profile-layout { display: flex; gap: 40px; }
 .profile-column { flex: 1; min-width: 0; }
-.profile-column:first-child { border-right: 1px solid rgba(0, 0, 0, 0.1); padding-right: 40px; }
-body.dark-theme .profile-column:first-child { border-right-color: rgba(0, 0, 0, 0.1); }
-.profile-info-list { display: flex; flex-direction: column; gap: 16px; }
-.profile-info-item { display: flex; align-items: center; gap: 16px; background: #e3efe5; padding: 16px 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.03); }
+
+.profile-info-list { display: flex; flex-direction: row; gap: 16px; }
+.profile-info-item { display: flex; align-items: center; gap: 16px; background: #e3efe5; padding: 16px 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.03); flex: 1; min-width: 0; }
 .profile-info-icon { display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; background: #b3cbbc; border-radius: 50%; flex-shrink: 0; }
 .profile-info-icon i { font-size: 18px; color: #1a4231; }
 .profile-info-text { display: flex; flex-direction: column; gap: 4px; flex: 1; }
@@ -74,7 +73,7 @@ body.dark-theme .profile-info-value { color: #4a544d; }
   .profile-panel { padding: 20px 24px; }
   .profile-title { font-size: 20px; margin-bottom: 20px; }
   .profile-layout { gap: 30px; }
-  .profile-column:first-child { padding-right: 30px; }
+
   .practice-header { margin-bottom: 18px; }
   .practice-header h2 { font-size: 20px; }
   .practice-status { font-size: 15px; }
@@ -98,9 +97,9 @@ body.dark-theme .profile-info-value { color: #4a544d; }
   .practice-content-wrapper { padding: 20px 20px calc(20px + env(safe-area-inset-bottom, 0px) + 40px); overflow-y: visible; flex: none; }
   
   .profile-layout { flex-direction: column; gap: 30px; }
-  .profile-column:first-child { border-right: none; padding-right: 0; border-bottom: 1px solid rgba(0, 0, 0, 0.1); padding-bottom: 30px; }
-  body.dark-theme .profile-column:first-child { border-bottom-color: rgba(255, 255, 255, 0.1); }
+
   .profile-panel { padding: 25px; }
+  .profile-info-list { flex-direction: column; }
 }
 
 /* Teléfonos */
