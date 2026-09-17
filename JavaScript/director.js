@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+﻿document.addEventListener('DOMContentLoaded', () => {
     const btnCancel = document.querySelector('.cp-btn-cancel');
     const btnSave = document.querySelector('.cp-btn-save');
     const formInputs = document.querySelectorAll('#crear-practica input, #crear-practica select');
@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     input.selectedIndex = 0;
                 } else {
                     input.value = '';
+                    if(input.hasAttribute('onfocus')) input.type = 'text';
                 }
             });
         });

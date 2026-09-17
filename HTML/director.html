@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
@@ -82,14 +82,16 @@
 						<div class="cp-field">
 							<label>Fecha Inicio</label>
 							<div class="cp-input-wrap">
-								<input type="date" required>
+								<input type="text" placeholder="dd/mm/aaaa" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'" required>
+								<i class="fa-regular fa-calendar right-icon"></i>
 							</div>
 						</div>
 						
 						<div class="cp-field">
 							<label>Fecha Final</label>
 							<div class="cp-input-wrap">
-								<input type="date" required>
+								<input type="text" placeholder="dd/mm/aaaa" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'" required>
+								<i class="fa-regular fa-calendar right-icon"></i>
 							</div>
 						</div>
 					</div>
