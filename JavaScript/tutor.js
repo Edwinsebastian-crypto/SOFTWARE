@@ -1,4 +1,4 @@
-// Lógica específica para la vista de Estudiante
+// Lógica específica para la vista de Tutor
 document.addEventListener('DOMContentLoaded', () => {
     const btnEntrar = document.querySelector('.practice-submit');
     const practicePanel = document.querySelector('.practice-panel');
@@ -12,18 +12,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const preguntasPanel = document.getElementById('preguntas-panel');
     const preguntasBackBtn = document.getElementById('preguntasBack');
-    const preguntasBtn = document.getElementById('preguntas-btn');
 
     const evidenciasPanel = document.getElementById('evidencias-panel');
     const evidenciasBackBtn = document.getElementById('evidenciasBack');
     const evidenciasTitleEl = document.getElementById('evidencias-title');
 
+    // Botones de acción de la bitácora identificados por contexto (no por ID duplicado)
+    // El bitacora-panel tiene exactamente dos .b-action-btn: Actividades y Preguntas
+    const bitacoraActionBtns = bitacoraPanel
+        ? bitacoraPanel.querySelectorAll('.b-action-btn')
+        : [];
+    const actividadesEntrarBitacora = bitacoraActionBtns[0] || null; // primer btn = Actividades
+    const preguntasBtn             = bitacoraActionBtns[1] || null; // segundo btn = Preguntas
+
     function resetScroll() {
         window.scrollTo(0, 0);
-        const wrapper = document.querySelector('.practice-content-wrapper');
-        if (wrapper) wrapper.scrollTop = 0;
+        // En móvil el scroll está en .app-shell
         const appShell = document.querySelector('.app-shell');
         if (appShell) appShell.scrollTop = 0;
+        const wrapper = document.querySelector('.practice-content-wrapper');
+        if (wrapper) wrapper.scrollTop = 0;
     }
 
     // ── Entrar a Bitácora desde Práctica ──────────────────────────────────
@@ -45,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ── Entrar a Actividades desde Bitácora ───────────────────────────────
-    const actividadesEntrarBitacora = document.getElementById('actividades-btn');
     if (actividadesEntrarBitacora && bitacoraPanel && actividadesPanel) {
         actividadesEntrarBitacora.addEventListener('click', () => {
             bitacoraPanel.style.display = 'none';
@@ -66,7 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── Entrar a Evidencias desde cualquier botón de Actividad (#1 al #6) ─
     if (actividadesBtns.length > 0 && actividadesPanel && evidenciasPanel) {
         actividadesBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
                 const numActividad = btn.getAttribute('data-actividad');
                 // Actualiza el título para mostrar a qué actividad pertenecen las evidencias
                 if (evidenciasTitleEl) {
@@ -135,7 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Cerrar dropdown al hacer clic fuera
     document.addEventListener('click', () => closeAllEvDropdowns(null));
-
 
     // ── Abrir modal de "Ver evidencia" ──────────────────────────────────
     document.querySelectorAll('.ev-item--ver').forEach(btn => {

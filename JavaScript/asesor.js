@@ -1,27 +1,33 @@
-// Lógica específica para la vista de Estudiante
+// Lógica específica para la vista de Asesor
 document.addEventListener('DOMContentLoaded', () => {
     const btnEntrar = document.querySelector('.practice-submit');
     const practicePanel = document.querySelector('.practice-panel');
     const bitacoraPanel = document.getElementById('bitacora-panel');
     const bitacoraBackBtn = document.getElementById('bitacoraBack');
-    
+
     const actividadesPanel = document.getElementById('actividades-panel');
     const actividadesBackBtn = document.getElementById('actividadesBack');
     // querySelectorAll captura los 6 botones "Entrar" (uno por actividad)
     const actividadesBtns = document.querySelectorAll('.actividad-entrar-btn');
-    
+
     const evidenciasPanel = document.getElementById('evidencias-panel');
     const evidenciasBackBtn = document.getElementById('evidenciasBack');
     const evidenciasTitleEl = document.getElementById('evidencias-title');
 
+    // El bitacora-panel del asesor tiene UN solo .b-action-btn: Actividades
+    const actividadesEntrarBitacora = bitacoraPanel
+        ? bitacoraPanel.querySelector('.b-action-btn')
+        : null;
+
     function resetScroll() {
         window.scrollTo(0, 0);
-        const wrapper = document.querySelector('.practice-content-wrapper');
-        if (wrapper) wrapper.scrollTop = 0;
+        // En móvil el scroll está en .app-shell
         const appShell = document.querySelector('.app-shell');
         if (appShell) appShell.scrollTop = 0;
+        const wrapper = document.querySelector('.practice-content-wrapper');
+        if (wrapper) wrapper.scrollTop = 0;
     }
-    
+
     // Entrar a Bitácora desde Práctica
     if (btnEntrar && practicePanel && bitacoraPanel) {
         btnEntrar.addEventListener('click', () => {
@@ -30,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             resetScroll();
         });
     }
-    
+
     // Volver a Práctica desde Bitácora
     if (bitacoraBackBtn && practicePanel && bitacoraPanel) {
         bitacoraBackBtn.addEventListener('click', () => {
@@ -41,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Entrar a Actividades desde Bitácora
-    const actividadesEntrarBitacora = document.getElementById('actividades-btn');
     if (actividadesEntrarBitacora && bitacoraPanel && actividadesPanel) {
         actividadesEntrarBitacora.addEventListener('click', () => {
             bitacoraPanel.style.display = 'none';
@@ -59,11 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    
-     // ── Entrar a Evidencias desde cualquier botón de Actividad (#1 al #6) ─
+    // ── Entrar a Evidencias desde cualquier botón de Actividad (#1 al #6) ─
     if (actividadesBtns.length > 0 && actividadesPanel && evidenciasPanel) {
         actividadesBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
                 const numActividad = btn.getAttribute('data-actividad');
                 // Actualiza el título para mostrar a qué actividad pertenecen las evidencias
                 if (evidenciasTitleEl) {
@@ -85,7 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    
     // ── Menú de tres puntos en tarjetas de Evidencias ─────────────────────
     function closeAllEvDropdowns(exceptBtn) {
         document.querySelectorAll('.ev-menu-btn').forEach(btn => {
@@ -113,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-  // Cerrar dropdown al hacer clic fuera
+    // Cerrar dropdown al hacer clic fuera
     document.addEventListener('click', () => closeAllEvDropdowns(null));
 
     // ── Abrir modal de "Ver evidencia" ──────────────────────────────────
@@ -123,6 +127,4 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Abrir evidencia (ver)');
         });
     });
-
-
 });
