@@ -67,11 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
             resetScroll();
         });
     }
-    if (preguntasEntrarActividades && preguntasPanel && actividadesPanel) {
+    if (preguntasEntrarActividades) {
         preguntasEntrarActividades.addEventListener('click', () => {
-            preguntasPanel.style.display = 'none';
-            actividadesPanel.style.display = 'flex';
-            resetScroll();
+            alert('Sección en construcción');
+        });
+    }
+    if (preguntasEntrarPreguntas) {
+        preguntasEntrarPreguntas.addEventListener('click', () => {
+            alert('Sección en construcción');
         });
     }
 
@@ -163,22 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
             // Opcional: aquí puedes abrir un modal con un <iframe> o la imagen
             console.log('Abrir evidencia (ver)');
-        });
-    });
-
-    // ── Abrir modal/área de "Editar evidencia" ───────────────────────────
-    document.querySelectorAll('.ev-item--editar').forEach(btn => {
-        btn.addEventListener('click', () => {
-            console.log('Abrir evidencia (editar)');
-        });
-    });
-
-    // ── Abrir modal de confirmación para "Eliminar evidencia" ─────────────
-    document.querySelectorAll('.ev-item--eliminar').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const evidenciaTitle = btn.closest('.ev-card').querySelector('.ev-card-title').textContent;
-            console.log('Eliminar evidencia:', evidenciaTitle);
-            // Aquí puedes mostrar un modal de confirmación antes de eliminar
         });
     });
 });

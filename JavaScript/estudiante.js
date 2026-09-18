@@ -65,11 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
             resetScroll();
         });
     }
-    if (preguntasEntrarActividades && preguntasPanel && actividadesPanel) {
+    if (preguntasEntrarActividades) {
         preguntasEntrarActividades.addEventListener('click', () => {
-            preguntasPanel.style.display = 'none';
-            actividadesPanel.style.display = 'flex';
-            resetScroll();
+            alert('Sección en construcción');
+        });
+    }
+    if (preguntasEntrarPreguntas) {
+        preguntasEntrarPreguntas.addEventListener('click', () => {
+            alert('Sección en construcción');
         });
     }
 
