@@ -135,4 +135,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Cerrar dropdown al hacer clic fuera
     document.addEventListener('click', () => closeAllEvDropdowns(null));
+
+
+    // ── Abrir modal de "Ver evidencia" ──────────────────────────────────
+    document.querySelectorAll('.ev-item--ver').forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Opcional: aquí puedes abrir un modal con un <iframe> o la imagen
+            console.log('Abrir evidencia (ver)');
+        });
+    });
+
+    // ── Abrir modal/área de "Editar evidencia" ───────────────────────────
+    document.querySelectorAll('.ev-item--editar').forEach(btn => {
+        btn.addEventListener('click', () => {
+            console.log('Abrir evidencia (editar)');
+        });
+    });
+
+    // ── Abrir modal de confirmación para "Eliminar evidencia" ─────────────
+    document.querySelectorAll('.ev-item--eliminar').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const evidenciaTitle = btn.closest('.ev-card').querySelector('.ev-card-title').textContent;
+            console.log('Eliminar evidencia:', evidenciaTitle);
+            // Aquí puedes mostrar un modal de confirmación antes de eliminar
+        });
+    });
 });

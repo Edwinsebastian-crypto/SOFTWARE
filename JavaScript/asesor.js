@@ -7,8 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const actividadesPanel = document.getElementById('actividades-panel');
     const actividadesBackBtn = document.getElementById('actividadesBack');
-    const actividadesBtn = document.getElementById('actividades-btn');
-
+    // querySelectorAll captura los 6 botones "Entrar" (uno por actividad)
+    const actividadesBtns = document.querySelectorAll('.actividad-entrar-btn');
+    
+    const evidenciasPanel = document.getElementById('evidencias-panel');
+    const evidenciasBackBtn = document.getElementById('evidenciasBack');
+    const evidenciasTitleEl = document.getElementById('evidencias-title');
 
     function resetScroll() {
         window.scrollTo(0, 0);
@@ -37,8 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Entrar a Actividades desde Bitácora
-    if (actividadesBtn && bitacoraPanel && actividadesPanel) {
-        actividadesBtn.addEventListener('click', () => {
+    const actividadesEntrarBitacora = document.getElementById('actividades-btn');
+    if (actividadesEntrarBitacora && bitacoraPanel && actividadesPanel) {
+        actividadesEntrarBitacora.addEventListener('click', () => {
             bitacoraPanel.style.display = 'none';
             actividadesPanel.style.display = 'flex';
             resetScroll();
@@ -53,5 +58,69 @@ document.addEventListener('DOMContentLoaded', () => {
             resetScroll();
         });
     }
+
+    
+     // ── Entrar a Evidencias desde cualquier botón de Actividad (#1 al #6) ─
+    if (actividadesBtns.length > 0 && actividadesPanel && evidenciasPanel) {
+        actividadesBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const numActividad = btn.getAttribute('data-actividad');
+                // Actualiza el título para mostrar a qué actividad pertenecen las evidencias
+                if (evidenciasTitleEl) {
+                    evidenciasTitleEl.textContent = `Evidencias — Actividad #${numActividad}`;
+                }
+                actividadesPanel.style.display = 'none';
+                evidenciasPanel.style.display = 'flex';
+                resetScroll();
+            });
+        });
+    }
+
+    // ── Volver a Actividades desde Evidencias ─────────────────────────────
+    if (evidenciasBackBtn && actividadesPanel && evidenciasPanel) {
+        evidenciasBackBtn.addEventListener('click', () => {
+            evidenciasPanel.style.display = 'none';
+            actividadesPanel.style.display = 'flex';
+            resetScroll();
+        });
+    }
+
+    
+    // ── Menú de tres puntos en tarjetas de Evidencias ─────────────────────
+    function closeAllEvDropdowns(exceptBtn) {
+        document.querySelectorAll('.ev-menu-btn').forEach(btn => {
+            if (btn === exceptBtn) return;
+            btn.setAttribute('aria-expanded', 'false');
+            const dd = btn.nextElementSibling;
+            if (dd) dd.classList.remove('is-open');
+        });
+    }
+
+    document.querySelectorAll('.ev-menu-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = btn.getAttribute('aria-expanded') === 'true';
+            closeAllEvDropdowns(btn);
+            if (!isOpen) {
+                btn.setAttribute('aria-expanded', 'true');
+                const dd = btn.nextElementSibling;
+                if (dd) dd.classList.add('is-open');
+            }
+        });
+    });
+
+    // Cerrar menús al hacer clic fuera de ellos
+    document.addEventListener('click', () => {
+        closeAllEvDropdowns();
+    });
+
+    // ── Abrir modal de "Ver evidencia" ──────────────────────────────────
+    document.querySelectorAll('.ev-item--ver').forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Opcional: aquí puedes abrir un modal con un <iframe> o la imagen
+            console.log('Abrir evidencia (ver)');
+        });
+    });
+
 
 });
