@@ -66,11 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Entrar a Evidencias desde cualquier botón de Actividad (#1 al #6) ─
     if (actividadesBtns.length > 0 && actividadesPanel && evidenciasPanel) {
-        actividadesBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const numActividad = btn.getAttribute('data-actividad');
-                // Actualiza el título para mostrar a qué actividad pertenecen las evidencias
+        actividadesBtns.forEach((btn, index) => {
+            btn.addEventListener('click', () => {
+                // Intentamos sacar el número, si no existe usamos el índice + 1
+                const numActividad = btn.getAttribute('data-actividad') || (index + 1);
+                
                 if (evidenciasTitleEl) {
                     evidenciasTitleEl.textContent = `Evidencias — Actividad #${numActividad}`;
                 }
@@ -125,6 +125,22 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
             // Opcional: aquí puedes abrir un modal con un <iframe> o la imagen
             console.log('Abrir evidencia (ver)');
+        });
+    });
+
+    // ── Abrir modal/área de "Editar evidencia" ───────────────────────────
+    document.querySelectorAll('.ev-item--editar').forEach(btn => {
+        btn.addEventListener('click', () => {
+            console.log('Abrir evidencia (editar)');
+        });
+    });
+
+    // ── Abrir modal de confirmación para "Eliminar evidencia" ─────────────
+    document.querySelectorAll('.ev-item--eliminar').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const evidenciaTitle = btn.closest('.ev-card').querySelector('.ev-card-title').textContent;
+            console.log('Eliminar evidencia:', evidenciaTitle);
+            // Aquí puedes mostrar un modal de confirmación antes de eliminar
         });
     });
 });

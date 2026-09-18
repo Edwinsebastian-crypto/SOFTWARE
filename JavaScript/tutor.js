@@ -25,6 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const actividadesEntrarBitacora = bitacoraActionBtns[0] || null; // primer btn = Actividades
     const preguntasBtn             = bitacoraActionBtns[1] || null; // segundo btn = Preguntas
 
+    // Botones de acción del panel de preguntas
+    const preguntasActionBtns = preguntasPanel
+        ? preguntasPanel.querySelectorAll('.b-action-btn')
+        : [];
+    const preguntasEntrarActividades = preguntasActionBtns[0] || null;
+    const preguntasEntrarPreguntas   = preguntasActionBtns[1] || null;
+
     function resetScroll() {
         window.scrollTo(0, 0);
         // En móvil el scroll está en .app-shell
@@ -52,10 +59,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── Entrar a Actividades desde Bitácora ───────────────────────────────
+    // ── Entrar a Actividades desde Bitácora o Preguntas ───────────────────────────────
     if (actividadesEntrarBitacora && bitacoraPanel && actividadesPanel) {
         actividadesEntrarBitacora.addEventListener('click', () => {
             bitacoraPanel.style.display = 'none';
+            actividadesPanel.style.display = 'flex';
+            resetScroll();
+        });
+    }
+    if (preguntasEntrarActividades && preguntasPanel && actividadesPanel) {
+        preguntasEntrarActividades.addEventListener('click', () => {
+            preguntasPanel.style.display = 'none';
             actividadesPanel.style.display = 'flex';
             resetScroll();
         });
@@ -72,11 +86,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Entrar a Evidencias desde cualquier botón de Actividad (#1 al #6) ─
     if (actividadesBtns.length > 0 && actividadesPanel && evidenciasPanel) {
-        actividadesBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const numActividad = btn.getAttribute('data-actividad');
-                // Actualiza el título para mostrar a qué actividad pertenecen las evidencias
+        actividadesBtns.forEach((btn, index) => {
+            btn.addEventListener('click', () => {
+                // Intentamos sacar el número, si no existe usamos el índice + 1
+                const numActividad = btn.getAttribute('data-actividad') || (index + 1);
+                
                 if (evidenciasTitleEl) {
                     evidenciasTitleEl.textContent = `Evidencias — Actividad #${numActividad}`;
                 }
@@ -149,6 +163,22 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
             // Opcional: aquí puedes abrir un modal con un <iframe> o la imagen
             console.log('Abrir evidencia (ver)');
+        });
+    });
+
+    // ── Abrir modal/área de "Editar evidencia" ───────────────────────────
+    document.querySelectorAll('.ev-item--editar').forEach(btn => {
+        btn.addEventListener('click', () => {
+            console.log('Abrir evidencia (editar)');
+        });
+    });
+
+    // ── Abrir modal de confirmación para "Eliminar evidencia" ─────────────
+    document.querySelectorAll('.ev-item--eliminar').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const evidenciaTitle = btn.closest('.ev-card').querySelector('.ev-card-title').textContent;
+            console.log('Eliminar evidencia:', evidenciaTitle);
+            // Aquí puedes mostrar un modal de confirmación antes de eliminar
         });
     });
 });

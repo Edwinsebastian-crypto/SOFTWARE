@@ -12,11 +12,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const preguntasPanel = document.getElementById('preguntas-panel');
     const preguntasBackBtn = document.getElementById('preguntasBack');
-    const preguntasBtn = document.getElementById('preguntas-btn');
 
     const evidenciasPanel = document.getElementById('evidencias-panel');
     const evidenciasBackBtn = document.getElementById('evidenciasBack');
     const evidenciasTitleEl = document.getElementById('evidencias-title');
+
+    // Botones de acción de la bitácora identificados por contexto
+    const bitacoraActionBtns = bitacoraPanel
+        ? bitacoraPanel.querySelectorAll('.b-action-btn')
+        : [];
+    const actividadesEntrarBitacora = bitacoraActionBtns[0] || null;
+    const preguntasBtn             = bitacoraActionBtns[1] || null;
+
+    // Botones de acción del panel de preguntas
+    const preguntasActionBtns = preguntasPanel
+        ? preguntasPanel.querySelectorAll('.b-action-btn')
+        : [];
+    const preguntasEntrarActividades = preguntasActionBtns[0] || null;
+    const preguntasEntrarPreguntas   = preguntasActionBtns[1] || null;
 
     function resetScroll() {
         window.scrollTo(0, 0);
@@ -44,11 +57,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── Entrar a Actividades desde Bitácora ───────────────────────────────
-    const actividadesEntrarBitacora = document.getElementById('actividades-btn');
+    // ── Entrar a Actividades desde Bitácora o Preguntas ───────────────────────────────
     if (actividadesEntrarBitacora && bitacoraPanel && actividadesPanel) {
         actividadesEntrarBitacora.addEventListener('click', () => {
             bitacoraPanel.style.display = 'none';
+            actividadesPanel.style.display = 'flex';
+            resetScroll();
+        });
+    }
+    if (preguntasEntrarActividades && preguntasPanel && actividadesPanel) {
+        preguntasEntrarActividades.addEventListener('click', () => {
+            preguntasPanel.style.display = 'none';
             actividadesPanel.style.display = 'flex';
             resetScroll();
         });
