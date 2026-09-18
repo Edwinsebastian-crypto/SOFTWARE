@@ -637,9 +637,6 @@ body.dark-theme .cp-btn-cancel { background: #9ec0b4; border-color: #7b9f91; }
 .modal-body p { font-size: 17px; font-weight: 700; font-family: var(--font-serif); color: #000; margin: 0; }
 .modal-btn { margin-top: 10px; background: linear-gradient(180deg, #8ad7b8, #45a47e); border: none; padding: 10px 30px; border-radius: 8px; font-weight: bold; font-family: var(--font-serif); color: #000; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 16px; }
 
-
-
-
 .cp-input-wrap i.fa-calendar.right-icon {
     pointer-events: none;
     z-index: 1;

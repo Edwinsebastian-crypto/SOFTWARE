@@ -4,14 +4,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const practicePanel = document.querySelector('.practice-panel');
     const bitacoraPanel = document.getElementById('bitacora-panel');
     const bitacoraBackBtn = document.getElementById('bitacoraBack');
-    
+
     const actividadesPanel = document.getElementById('actividades-panel');
     const actividadesBackBtn = document.getElementById('actividadesBack');
-    const actividadesBtn = document.getElementById('actividades-btn');
-    
+    // querySelectorAll captura los 6 botones "Entrar" (uno por actividad)
+    const actividadesBtns = document.querySelectorAll('.actividad-entrar-btn');
+
     const preguntasPanel = document.getElementById('preguntas-panel');
     const preguntasBackBtn = document.getElementById('preguntasBack');
     const preguntasBtn = document.getElementById('preguntas-btn');
+
+    const evidenciasPanel = document.getElementById('evidencias-panel');
+    const evidenciasBackBtn = document.getElementById('evidenciasBack');
+    const evidenciasTitleEl = document.getElementById('evidencias-title');
 
     function resetScroll() {
         window.scrollTo(0, 0);
@@ -20,8 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const appShell = document.querySelector('.app-shell');
         if (appShell) appShell.scrollTop = 0;
     }
-    
-    // Entrar a Bitácora desde Práctica
+
+    // ── Entrar a Bitácora desde Práctica ──────────────────────────────────
     if (btnEntrar && practicePanel && bitacoraPanel) {
         btnEntrar.addEventListener('click', () => {
             practicePanel.style.display = 'none';
@@ -29,8 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
             resetScroll();
         });
     }
-    
-    // Volver a Práctica desde Bitácora
+
+    // ── Volver a Práctica desde Bitácora ──────────────────────────────────
     if (bitacoraBackBtn && practicePanel && bitacoraPanel) {
         bitacoraBackBtn.addEventListener('click', () => {
             bitacoraPanel.style.display = 'none';
@@ -39,16 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Entrar a Actividades desde Bitácora
-    if (actividadesBtn && bitacoraPanel && actividadesPanel) {
-        actividadesBtn.addEventListener('click', () => {
+    // ── Entrar a Actividades desde Bitácora ───────────────────────────────
+    const actividadesEntrarBitacora = document.getElementById('actividades-btn');
+    if (actividadesEntrarBitacora && bitacoraPanel && actividadesPanel) {
+        actividadesEntrarBitacora.addEventListener('click', () => {
             bitacoraPanel.style.display = 'none';
             actividadesPanel.style.display = 'flex';
             resetScroll();
         });
     }
 
-    // Volver a Bitácora desde Actividades
+    // ── Volver a Bitácora desde Actividades ───────────────────────────────
     if (actividadesBackBtn && bitacoraPanel && actividadesPanel) {
         actividadesBackBtn.addEventListener('click', () => {
             actividadesPanel.style.display = 'none';
@@ -57,7 +63,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Entrar a Preguntas desde Bitácora
+    // ── Entrar a Evidencias desde cualquier botón de Actividad (#1 al #6) ─
+    if (actividadesBtns.length > 0 && actividadesPanel && evidenciasPanel) {
+        actividadesBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const numActividad = btn.getAttribute('data-actividad');
+                // Actualiza el título para mostrar a qué actividad pertenecen las evidencias
+                if (evidenciasTitleEl) {
+                    evidenciasTitleEl.textContent = `Evidencias — Actividad #${numActividad}`;
+                }
+                actividadesPanel.style.display = 'none';
+                evidenciasPanel.style.display = 'flex';
+                resetScroll();
+            });
+        });
+    }
+
+    // ── Volver a Actividades desde Evidencias ─────────────────────────────
+    if (evidenciasBackBtn && actividadesPanel && evidenciasPanel) {
+        evidenciasBackBtn.addEventListener('click', () => {
+            evidenciasPanel.style.display = 'none';
+            actividadesPanel.style.display = 'flex';
+            resetScroll();
+        });
+    }
+
+    // ── Entrar a Preguntas desde Bitácora ─────────────────────────────────
     if (preguntasBtn && bitacoraPanel && preguntasPanel) {
         preguntasBtn.addEventListener('click', () => {
             bitacoraPanel.style.display = 'none';
@@ -66,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Volver a Bitácora desde Preguntas
+    // ── Volver a Bitácora desde Preguntas ─────────────────────────────────
     if (preguntasBackBtn && bitacoraPanel && preguntasPanel) {
         preguntasBackBtn.addEventListener('click', () => {
             preguntasPanel.style.display = 'none';
@@ -74,4 +105,34 @@ document.addEventListener('DOMContentLoaded', () => {
             resetScroll();
         });
     }
+
+    // ── Menú de tres puntos en tarjetas de Evidencias ─────────────────────
+    function closeAllEvDropdowns(exceptBtn) {
+        document.querySelectorAll('.ev-menu-btn').forEach(btn => {
+            if (btn === exceptBtn) return;
+            btn.setAttribute('aria-expanded', 'false');
+            const dd = btn.nextElementSibling;
+            if (dd) dd.classList.remove('is-open');
+        });
+    }
+
+    document.querySelectorAll('.ev-menu-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = btn.getAttribute('aria-expanded') === 'true';
+            closeAllEvDropdowns(btn);
+            if (!isOpen) {
+                btn.setAttribute('aria-expanded', 'true');
+                const dd = btn.nextElementSibling;
+                if (dd) dd.classList.add('is-open');
+            } else {
+                btn.setAttribute('aria-expanded', 'false');
+                const dd = btn.nextElementSibling;
+                if (dd) dd.classList.remove('is-open');
+            }
+        });
+    });
+
+    // Cerrar dropdown al hacer clic fuera
+    document.addEventListener('click', () => closeAllEvDropdowns(null));
 });
