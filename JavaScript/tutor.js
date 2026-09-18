@@ -4,12 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const practicePanel = document.querySelector('.practice-panel');
     const bitacoraPanel = document.getElementById('bitacora-panel');
     const bitacoraBackBtn = document.getElementById('bitacoraBack');
-    
+
     const actividadesPanel = document.getElementById('actividades-panel');
     const actividadesBackBtn = document.getElementById('actividadesBack');
     // querySelectorAll captura los 6 botones "Entrar" (uno por actividad)
     const actividadesBtns = document.querySelectorAll('.actividad-entrar-btn');
-    
+
     const preguntasPanel = document.getElementById('preguntas-panel');
     const preguntasBackBtn = document.getElementById('preguntasBack');
     const preguntasBtn = document.getElementById('preguntas-btn');
@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const appShell = document.querySelector('.app-shell');
         if (appShell) appShell.scrollTop = 0;
     }
-    
-    // Entrar a Bitácora desde Práctica
+
+    // ── Entrar a Bitácora desde Práctica ──────────────────────────────────
     if (btnEntrar && practicePanel && bitacoraPanel) {
         btnEntrar.addEventListener('click', () => {
             practicePanel.style.display = 'none';
@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
             resetScroll();
         });
     }
-    
-    // Volver a Práctica desde Bitácora
+
+    // ── Volver a Práctica desde Bitácora ──────────────────────────────────
     if (bitacoraBackBtn && practicePanel && bitacoraPanel) {
         bitacoraBackBtn.addEventListener('click', () => {
             bitacoraPanel.style.display = 'none';
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Entrar a Actividades desde Bitácora
+    // ── Entrar a Actividades desde Bitácora ───────────────────────────────
     const actividadesEntrarBitacora = document.getElementById('actividades-btn');
     if (actividadesEntrarBitacora && bitacoraPanel && actividadesPanel) {
         actividadesEntrarBitacora.addEventListener('click', () => {
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Volver a Bitácora desde Actividades
+    // ── Volver a Bitácora desde Actividades ───────────────────────────────
     if (actividadesBackBtn && bitacoraPanel && actividadesPanel) {
         actividadesBackBtn.addEventListener('click', () => {
             actividadesPanel.style.display = 'none';
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-     // ── Entrar a Evidencias desde cualquier botón de Actividad (#1 al #6) ─
+    // ── Entrar a Evidencias desde cualquier botón de Actividad (#1 al #6) ─
     if (actividadesBtns.length > 0 && actividadesPanel && evidenciasPanel) {
         actividadesBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -88,8 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
-    // Entrar a Preguntas desde Bitácora
+    // ── Entrar a Preguntas desde Bitácora ─────────────────────────────────
     if (preguntasBtn && bitacoraPanel && preguntasPanel) {
         preguntasBtn.addEventListener('click', () => {
             bitacoraPanel.style.display = 'none';
@@ -98,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Volver a Bitácora desde Preguntas
+    // ── Volver a Bitácora desde Preguntas ─────────────────────────────────
     if (preguntasBackBtn && bitacoraPanel && preguntasPanel) {
         preguntasBackBtn.addEventListener('click', () => {
             preguntasPanel.style.display = 'none';
@@ -126,14 +125,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.setAttribute('aria-expanded', 'true');
                 const dd = btn.nextElementSibling;
                 if (dd) dd.classList.add('is-open');
+            } else {
+                btn.setAttribute('aria-expanded', 'false');
+                const dd = btn.nextElementSibling;
+                if (dd) dd.classList.remove('is-open');
             }
         });
     });
 
-    // Cerrar menús al hacer clic fuera de ellos
-    document.addEventListener('click', () => {
-        closeAllEvDropdowns();
-    });
+    // Cerrar dropdown al hacer clic fuera
+    document.addEventListener('click', () => closeAllEvDropdowns(null));
+
 
     // ── Abrir modal de "Ver evidencia" ──────────────────────────────────
     document.querySelectorAll('.ev-item--ver').forEach(btn => {
@@ -142,5 +144,4 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Abrir evidencia (ver)');
         });
     });
-
 });

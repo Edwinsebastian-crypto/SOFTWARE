@@ -105,14 +105,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.setAttribute('aria-expanded', 'true');
                 const dd = btn.nextElementSibling;
                 if (dd) dd.classList.add('is-open');
+            } else {
+                btn.setAttribute('aria-expanded', 'false');
+                const dd = btn.nextElementSibling;
+                if (dd) dd.classList.remove('is-open');
             }
         });
     });
 
-    // Cerrar menús al hacer clic fuera de ellos
-    document.addEventListener('click', () => {
-        closeAllEvDropdowns();
-    });
+  // Cerrar dropdown al hacer clic fuera
+    document.addEventListener('click', () => closeAllEvDropdowns(null));
 
     // ── Abrir modal de "Ver evidencia" ──────────────────────────────────
     document.querySelectorAll('.ev-item--ver').forEach(btn => {
