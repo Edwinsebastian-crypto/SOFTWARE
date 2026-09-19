@@ -66,6 +66,16 @@
         return window.innerWidth <= 900 || window.innerHeight <= 500;
     }
 
+    /* Escritorio compacto (portátiles < ~15", ventanas reducidas). No incluye celular. */
+    function isCompactComputerSelectLayout() {
+        if (isMobileSelectLayout()) return false;
+        return window.innerWidth <= 1536 || window.innerHeight <= 864;
+    }
+
+    function usesCpSelectOverlaySheet() {
+        return isMobileSelectLayout() || isCompactComputerSelectLayout();
+    }
+
     function blockCpSelectBackgroundScroll(event) {
         if (cpSelectScrollAllowEl && cpSelectScrollAllowEl.contains(event.target)) return;
         event.preventDefault();
@@ -135,6 +145,7 @@
     function closeCpSelectMobileSheet() {
         if (!cpSelectMobileSheet || cpSelectMobileSheet.root.hidden) return;
         cpSelectMobileSheet.root.hidden = true;
+        cpSelectMobileSheet.root.classList.remove('cp-select-sheet-root--center');
         cpSelectMobileSheet.list.replaceChildren();
         if (cpSelectMobileChevron) {
             cpSelectMobileChevron.style.transform = 'rotate(0deg)';
@@ -167,9 +178,12 @@
         closeAllCpSelects();
     }
 
-    function openCpSelectMobileSheet({ select, trigger, chevron, optionsContainer }) {
+    function openCpSelectOverlaySheet({ select, trigger, chevron }) {
         const sheet = ensureCpSelectMobileSheet();
         closeAllCpSelects();
+
+        const centered = isCompactComputerSelectLayout() && !isMobileSelectLayout();
+        sheet.root.classList.toggle('cp-select-sheet-root--center', centered);
 
         sheet.title.textContent = getCpSelectFieldLabel(select);
         sheet.list.replaceChildren();
@@ -249,12 +263,12 @@
             function toggleDropdown(e) {
                 e.stopPropagation();
 
-                if (isMobileSelectLayout()) {
+                if (usesCpSelectOverlaySheet()) {
                     if (cpSelectMobileSheet && !cpSelectMobileSheet.root.hidden && cpSelectMobileChevron === chevron) {
                         closeAllCpSelects();
                         return;
                     }
-                    openCpSelectMobileSheet({ select, trigger, chevron, optionsContainer });
+                    openCpSelectOverlaySheet({ select, trigger, chevron });
                     return;
                 }
 
@@ -297,7 +311,7 @@
             if (e.key === 'Escape') closeAllCpSelects();
         });
         window.addEventListener('resize', () => {
-            if (!isMobileSelectLayout()) closeCpSelectMobileSheet();
+            if (!usesCpSelectOverlaySheet()) closeCpSelectMobileSheet();
         });
     }
 
