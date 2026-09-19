@@ -128,13 +128,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── Menú de tres puntos en tarjetas de Evidencias ─────────────────────
+    // ── Menú "..." en tarjetas de Evidencias y Retroalimentaciones ────────
+    // Panel flotante a la izquierda del botón (estilo director); el botón
+    // permanece fijo al final y pasa a flecha ← al abrir.
+    function setEvMenuState(btn, open) {
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+
+        const dd = btn.nextElementSibling; // .ev-dropdown
+        if (dd) dd.classList.toggle('is-open', open);
+
+        const icon = btn.querySelector('i');
+        if (icon) {
+            icon.classList.toggle('fa-ellipsis', !open);
+            icon.classList.toggle('fa-arrow-left', open);
+        }
+    }
+
     function closeAllEvDropdowns(exceptBtn) {
         document.querySelectorAll('.ev-menu-btn').forEach(btn => {
             if (btn === exceptBtn) return;
-            btn.setAttribute('aria-expanded', 'false');
-            const dd = btn.nextElementSibling;
-            if (dd) dd.classList.remove('is-open');
+            setEvMenuState(btn, false);
         });
     }
 
@@ -143,15 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation();
             const isOpen = btn.getAttribute('aria-expanded') === 'true';
             closeAllEvDropdowns(btn);
-            if (!isOpen) {
-                btn.setAttribute('aria-expanded', 'true');
-                const dd = btn.nextElementSibling;
-                if (dd) dd.classList.add('is-open');
-            } else {
-                btn.setAttribute('aria-expanded', 'false');
-                const dd = btn.nextElementSibling;
-                if (dd) dd.classList.remove('is-open');
-            }
+            setEvMenuState(btn, !isOpen);
         });
     });
 

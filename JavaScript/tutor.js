@@ -131,13 +131,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── Menú de tres puntos en tarjetas de Evidencias ─────────────────────
+    // ── Menú "..." en tarjetas de Evidencias y Retroalimentaciones ────────
+    // Panel flotante a la izquierda del botón (estilo director); el botón
+    // permanece fijo al final y pasa a flecha ← al abrir.
+    function setEvMenuState(btn, open) {
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+
+        const dd = btn.nextElementSibling; // .ev-dropdown
+        if (dd) dd.classList.toggle('is-open', open);
+
+        const icon = btn.querySelector('i');
+        if (icon) {
+            icon.classList.toggle('fa-ellipsis', !open);
+            icon.classList.toggle('fa-arrow-left', open);
+        }
+    }
+
     function closeAllEvDropdowns(exceptBtn) {
         document.querySelectorAll('.ev-menu-btn').forEach(btn => {
             if (btn === exceptBtn) return;
-            btn.setAttribute('aria-expanded', 'false');
-            const dd = btn.nextElementSibling;
-            if (dd) dd.classList.remove('is-open');
+            setEvMenuState(btn, false);
         });
     }
 
@@ -146,15 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.stopPropagation();
             const isOpen = btn.getAttribute('aria-expanded') === 'true';
             closeAllEvDropdowns(btn);
-            if (!isOpen) {
-                btn.setAttribute('aria-expanded', 'true');
-                const dd = btn.nextElementSibling;
-                if (dd) dd.classList.add('is-open');
-            } else {
-                btn.setAttribute('aria-expanded', 'false');
-                const dd = btn.nextElementSibling;
-                if (dd) dd.classList.remove('is-open');
-            }
+            setEvMenuState(btn, !isOpen);
         });
     });
 
@@ -173,19 +178,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const retroBtnSubmit = document.querySelector('.retro-btn-submit');
     const retroBtnCancel = document.querySelector('.retro-btn-cancel');
     const retroTextarea = document.querySelector('.retro-textarea');
-    const scrollContainer = document.querySelector('.practice-content-wrapper');
 
-    // Auto-crecer textarea y mantener el botón cancelar visible
+    // Auto-crecer textarea y mantener visible el botón "Cancelar" mientras se escribe.
+    // Antes se llamaba scrollIntoView({behavior:'smooth'}) en CADA tecla; como cada
+    // llamada dispara su propia animación, escribir rápido apilaba varias animaciones
+    // de scroll pisándose entre sí — eso era el texto "brincando" (y en el fondo, la
+    // misma causa del bug de la barra superior en móvil: el contenedor de scroll
+    // quedaba en un estado intermedio inconsistente hasta salir y volver a entrar).
+    // Ahora: (1) se agrupan los eventos por fotograma con requestAnimationFrame en vez
+    // de reaccionar a cada tecla suelta, (2) solo se mueve el scroll si el botón
+    // realmente ya no es visible, y (3) el scroll es instantáneo (sin "smooth"), para
+    // que nunca haya dos animaciones corriendo a la vez.
     if (retroTextarea) {
+        let retroScrollRaf = null;
         retroTextarea.addEventListener('input', () => {
             retroTextarea.style.height = 'auto';
             retroTextarea.style.height = Math.min(retroTextarea.scrollHeight, 200) + 'px';
-            // Hacer scroll suave para que el botón cancelar siempre sea visible
-            if (retroBtnCancel) {
-                requestAnimationFrame(() => {
-                    retroBtnCancel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                });
-            }
+
+            if (!retroBtnCancel) return;
+            if (retroScrollRaf) cancelAnimationFrame(retroScrollRaf);
+            retroScrollRaf = requestAnimationFrame(() => {
+                const btnRect = retroBtnCancel.getBoundingClientRect();
+                const shell = document.querySelector('.app-shell');
+                const shellRect = shell ? shell.getBoundingClientRect() : { top: 0, bottom: window.innerHeight };
+                const yaVisible = btnRect.bottom <= shellRect.bottom && btnRect.top >= shellRect.top;
+                if (!yaVisible) {
+                    retroBtnCancel.scrollIntoView({ behavior: 'auto', block: 'nearest' });
+                }
+            });
         });
     }
 

@@ -84,6 +84,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
+            // Volver arriba al cambiar de sección. .app-shell es el único
+            // contenedor que realmente hace scroll (todas las secciones viven
+            // apiladas dentro de él, solo se les cambia display); si no se
+            // reinicia aquí, la sección nueva "hereda" el scroll de la que
+            // se estaba viendo antes y puede aparecer ya desplazada hacia el
+            // final en vez de empezar arriba.
+            window.scrollTo(0, 0);
+            if (shell) shell.scrollTop = 0;
+
             // En móvil, cerrar el menú al seleccionar una opción
             if (isMobileLayout() && shell.classList.contains('sidebar-open')) {
                 closeMobileMenu();
