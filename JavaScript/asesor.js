@@ -157,12 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!retroBtnCancel) return;
             if (retroScrollRaf) cancelAnimationFrame(retroScrollRaf);
             retroScrollRaf = requestAnimationFrame(() => {
-                const btnRect = retroBtnCancel.getBoundingClientRect();
-                const shell = document.querySelector('.app-shell');
-                const shellRect = shell ? shell.getBoundingClientRect() : { top: 0, bottom: window.innerHeight };
-                const yaVisible = btnRect.bottom <= shellRect.bottom && btnRect.top >= shellRect.top;
-                if (!yaVisible) {
-                    retroBtnCancel.scrollIntoView({ behavior: 'auto', block: 'nearest' });
+                if (typeof scrollAppShellToReveal === 'function') {
+                    scrollAppShellToReveal(retroBtnCancel);
                 }
             });
         });

@@ -6,23 +6,96 @@
    ========================================================================= */
 
 // --- Altura real visible en móvil ---
-// En varios navegadores Android, la unidad CSS "dvh" no se recalcula bien apenas
-// carga la página (queda como si la barra de direcciones no existiera), dejando
-// contenido de más abajo (botón "Entrar", "Cerrar Sesión") fuera de la pantalla
-// e inalcanzable por scroll. Esta variable --app-vh usa la altura real que
-// reporta window.visualViewport (o innerHeight si no está disponible) y se
-// actualiza en cada cambio, así el CSS siempre tiene la medida correcta.
-function setAppViewportHeight() {
-    const realHeight = (window.visualViewport ? window.visualViewport.height : window.innerHeight);
-    document.documentElement.style.setProperty('--app-vh', (realHeight * 0.01) + 'px');
+// En varios navegadores Android, "dvh" no se recalcula bien al cargar. --app-vh
+// corrige eso con visualViewport. OJO: cuando abre el teclado, visualViewport
+// se encoge; si aplicamos esa altura al .app-shell, la barra superior parece
+// "desaparecer" hasta salir de la pantalla. Por eso, con un campo enfocado y
+// teclado abierto, mantenemos la altura de layout (sin teclado).
+let layoutViewportHeight = window.innerHeight;
+
+function isMobileLayout() {
+    return window.innerWidth <= 900 || window.innerHeight <= 500;
 }
-setAppViewportHeight();
-window.addEventListener('resize', setAppViewportHeight);
-window.addEventListener('orientationchange', setAppViewportHeight);
+
+function isFormField(el) {
+    if (!el || el.nodeType !== 1) return false;
+    const tag = el.tagName;
+    return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' ||
+        el.isContentEditable;
+}
+
+function isLikelyKeyboardOpen(vv) {
+    if (!vv) return false;
+    return vv.height < layoutViewportHeight * 0.72;
+}
+
+function setAppViewportHeight() {
+    const vv = window.visualViewport;
+    const typing = isFormField(document.activeElement);
+    let height = window.innerHeight;
+
+    if (vv) {
+        if (typing && isLikelyKeyboardOpen(vv)) {
+            height = layoutViewportHeight;
+        } else {
+            height = vv.height;
+            if (!isLikelyKeyboardOpen(vv)) {
+                layoutViewportHeight = Math.max(window.innerHeight, vv.height);
+            }
+        }
+    }
+
+    document.documentElement.style.setProperty('--app-vh', (height * 0.01) + 'px');
+}
+
+/** Desplaza solo .app-shell hacia abajo para mostrar un elemento (sin scrollIntoView). */
+function scrollAppShellToReveal(element, margin = 16) {
+    const shell = document.querySelector('.app-shell');
+    if (!shell || !element) return;
+    const shellRect = shell.getBoundingClientRect();
+    const elRect = element.getBoundingClientRect();
+    if (elRect.bottom > shellRect.bottom - margin) {
+        shell.scrollTop += elRect.bottom - shellRect.bottom + margin;
+    }
+}
+
+function updateAppTopbarOffset() {
+    if (!isMobileLayout()) {
+        document.documentElement.style.removeProperty('--app-topbar-offset');
+        return;
+    }
+    let topbar = null;
+    document.querySelectorAll('.app-content').forEach((section) => {
+        if (window.getComputedStyle(section).display === 'none') return;
+        topbar = section.querySelector('.app-topbar');
+    });
+    if (topbar) {
+        document.documentElement.style.setProperty('--app-topbar-offset', topbar.offsetHeight + 'px');
+    }
+}
+
+function refreshMobileChromeMetrics() {
+    setAppViewportHeight();
+    updateAppTopbarOffset();
+}
+
+refreshMobileChromeMetrics();
+window.addEventListener('resize', refreshMobileChromeMetrics);
+window.addEventListener('orientationchange', () => {
+    layoutViewportHeight = window.innerHeight;
+    setTimeout(refreshMobileChromeMetrics, 120);
+});
 if (window.visualViewport) {
     window.visualViewport.addEventListener('resize', setAppViewportHeight);
-    window.visualViewport.addEventListener('scroll', setAppViewportHeight);
 }
+
+document.addEventListener('focusout', (e) => {
+    if (!isFormField(e.target)) return;
+    setTimeout(() => {
+        layoutViewportHeight = window.innerHeight;
+        refreshMobileChromeMetrics();
+    }, 120);
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     const sidebarToggle = document.getElementById('sidebarToggle');
@@ -92,6 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // final en vez de empezar arriba.
             window.scrollTo(0, 0);
             if (shell) shell.scrollTop = 0;
+            updateAppTopbarOffset();
 
             // En móvil, cerrar el menú al seleccionar una opción
             if (isMobileLayout() && shell.classList.contains('sidebar-open')) {
@@ -117,14 +191,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    updateAppTopbarOffset();
+
     // --- Menú móvil ---
-    // Debe coincidir exactamente con el media query de shell.css:
-    // "@media (max-width:900px), (max-height:500px)". Un celular grande en
-    // horizontal puede tener más de 900px de ancho pero poca altura, y debe
-    // seguir tratándose como celular (drawer), no como escritorio (sidebar fijo).
-    function isMobileLayout() {
-        return window.innerWidth <= 900 || window.innerHeight <= 500;
-    }
+    // isMobileLayout() está definida arriba (compartida con métricas de viewport).
 
     // .app-shell es el contenedor que hace scroll en móvil (ver CSS).
     // En vez de cambiar su "overflow" para bloquear el scroll de fondo

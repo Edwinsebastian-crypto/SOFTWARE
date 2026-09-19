@@ -681,11 +681,20 @@ input:-webkit-autofill:active {
       height: auto;
       width: 100%;
       display: block;
+      /* La topbar va fija arriba (no sticky): evita que desaparezca al escribir
+         en textareas largas o cuando el teclado mueve el visualViewport. */
+      padding-top: var(--app-topbar-offset, 85px);
    }
 
    .app-topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
       padding: 0 20px;
       justify-content: flex-end;
+      flex-shrink: 0;
    }
 
    .app-navigation {
@@ -697,8 +706,16 @@ input:-webkit-autofill:active {
 @media (max-width:600px) {
    .app-topbar {
       height: auto;
+      min-height: 52px;
       flex-wrap: wrap;
       padding: 10px;
+      align-content: flex-start;
+   }
+
+   .mobile-menu-toggle,
+   .topbar-icon,
+   .topbar-option {
+      flex-shrink: 0;
    }
 
    .topbar-option {
