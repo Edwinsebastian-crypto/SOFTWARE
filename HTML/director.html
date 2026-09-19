@@ -194,9 +194,9 @@
 		</section>
 
 		<!-- Gestionar tipo de prácticas-->
-		<section class="app-content" id="gestionar-practicas">
+		<section class="app-content" id="gestionar-practicas" style="display: none;">
 			<header class="app-topbar">
-				<button class="sidebar-toggle mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menú">
+				<button class="sidebar-toggle mobile-menu-toggle" id="mobileMenuToggleGtp" aria-label="Abrir menú">
 					<i class="fa-solid fa-bars hamburger-icon"></i>
 					<i class="fa-solid fa-graduation-cap overlay-cap"></i>
 				</button>
@@ -204,12 +204,144 @@
 				<button class="topbar-option theme-toggle-btn" type="button" aria-label="Cambiar tema"><i class="fa-regular fa-sun" aria-hidden="true"></i><span>Claro</span></button>
 				<button class="app-account" type="button" aria-label="Abrir menú de director"><i class="fa-solid fa-circle-user" aria-hidden="true"></i><span><strong>Nombre Director</strong><small>Director</small></span></button>
 			</header>
+
+			<div class="practice-content-wrapper">
+				<nav class="informes-tabs gtp-tabs" aria-label="Gestión tipo práctica">
+					<button type="button" class="informes-tab-btn gtp-tab-btn active" data-gtp-panel="gtp-panel-registrar">
+						<i class="fa-solid fa-circle-plus" aria-hidden="true"></i> Registrar Tipo Práctica
+					</button>
+					<button type="button" class="informes-tab-btn gtp-tab-btn" data-gtp-panel="gtp-panel-listar">
+						<i class="fa-solid fa-list" aria-hidden="true"></i> Listar tipos
+					</button>
+				</nav>
+
+				<div id="gtp-panel-registrar" class="gtp-panel">
+					<form class="gtp-form gtp-form-centered" id="gtp-form-registrar" action="#" method="post" novalidate>
+						<div class="cp-card gtp-card">
+							<div class="cp-field">
+								<label for="gtp-nombre">Nombre de la Práctica</label>
+								<div class="cp-input-wrap">
+									<input id="gtp-nombre" name="nombre" type="text" placeholder="Nombre de la práctica" autocomplete="off">
+								</div>
+							</div>
+
+							<div class="gtp-form-row">
+								<div class="cp-field">
+									<label for="gtp-semestre">N° Semestre</label>
+									<div class="cp-input-wrap">
+										<select id="gtp-semestre" name="semestre">
+											<option value="" disabled selected>Seleccione Semestre</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+										</select>
+										<i class="fa-solid fa-chevron-down right-icon" aria-hidden="true"></i>
+									</div>
+								</div>
+
+								<div class="cp-field">
+									<label for="gtp-horas">Horas Requeridas</label>
+									<div class="cp-input-wrap">
+										<input id="gtp-horas" name="horas" type="text" class="gtp-horas-input" placeholder="Horas" inputmode="numeric" pattern="[0-9]*" autocomplete="off" aria-describedby="gtp-horas-hint">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="cp-actions gtp-actions">
+							<button type="submit" class="cp-btn cp-btn-save">Registrar Tipo</button>
+							<button type="button" class="cp-btn cp-btn-cancel" id="gtp-btn-cancel">Cancelar</button>
+						</div>
+					</form>
+				</div>
+
+				<div id="gtp-panel-listar" class="gtp-panel" style="display: none;">
+					<div class="gtp-type-list" id="gtp-type-list" aria-label="Listado de tipos de práctica">
+						<article class="ev-card gtp-type-card" data-codigo="TIP-001">
+							<div class="ev-card-body gtp-type-card-body">
+								<p class="gtp-type-label">Tipo de práctica</p>
+								<p class="ev-card-title gtp-type-name">Práctica de Observación Pedagógica</p>
+								<p class="gtp-type-meta">
+									<span class="gtp-meta-item"><span class="gtp-meta-key">Código de Práctica</span> TIP-001</span>
+									<span class="gtp-meta-sep" aria-hidden="true">|</span>
+									<span class="gtp-meta-item"><span class="gtp-meta-key">Semestre</span> 5</span>
+									<span class="gtp-meta-sep" aria-hidden="true">|</span>
+									<span class="gtp-meta-item"><span class="gtp-meta-key">Horas</span> 120</span>
+								</p>
+							</div>
+							<div class="ev-menu-wrapper">
+								<button type="button" class="ev-menu-btn" aria-label="Opciones del tipo de práctica" aria-expanded="false">
+									<i class="fa-solid fa-ellipsis" aria-hidden="true"></i>
+								</button>
+								<div class="ev-dropdown" role="menu">
+									<button type="button" class="ev-dropdown-item ev-item--ver" role="menuitem"><i class="fa-solid fa-eye" aria-hidden="true"></i> Ver</button>
+									<button type="button" class="ev-dropdown-item ev-item--editar" role="menuitem"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Editar</button>
+									<button type="button" class="ev-dropdown-item ev-item--eliminar" role="menuitem"><i class="fa-solid fa-trash" aria-hidden="true"></i> Eliminar</button>
+								</div>
+							</div>
+						</article>
+
+						<article class="ev-card gtp-type-card" data-codigo="TIP-002">
+							<div class="ev-card-body gtp-type-card-body">
+								<p class="gtp-type-label">Tipo de práctica</p>
+								<p class="ev-card-title gtp-type-name">Práctica de Profundización Docente</p>
+								<p class="gtp-type-meta">
+									<span class="gtp-meta-item"><span class="gtp-meta-key">Código de Práctica</span> TIP-002</span>
+									<span class="gtp-meta-sep" aria-hidden="true">|</span>
+									<span class="gtp-meta-item"><span class="gtp-meta-key">Semestre</span> 7</span>
+									<span class="gtp-meta-sep" aria-hidden="true">|</span>
+									<span class="gtp-meta-item"><span class="gtp-meta-key">Horas</span> 160</span>
+								</p>
+							</div>
+							<div class="ev-menu-wrapper">
+								<button type="button" class="ev-menu-btn" aria-label="Opciones del tipo de práctica" aria-expanded="false">
+									<i class="fa-solid fa-ellipsis" aria-hidden="true"></i>
+								</button>
+								<div class="ev-dropdown" role="menu">
+									<button type="button" class="ev-dropdown-item ev-item--ver" role="menuitem"><i class="fa-solid fa-eye" aria-hidden="true"></i> Ver</button>
+									<button type="button" class="ev-dropdown-item ev-item--editar" role="menuitem"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Editar</button>
+									<button type="button" class="ev-dropdown-item ev-item--eliminar" role="menuitem"><i class="fa-solid fa-trash" aria-hidden="true"></i> Eliminar</button>
+								</div>
+							</div>
+						</article>
+
+						<article class="ev-card gtp-type-card" data-codigo="TIP-003">
+							<div class="ev-card-body gtp-type-card-body">
+								<p class="gtp-type-label">Tipo de práctica</p>
+								<p class="ev-card-title gtp-type-name">Práctica de Inmersión o Intervención</p>
+								<p class="gtp-type-meta">
+									<span class="gtp-meta-item"><span class="gtp-meta-key">Código de Práctica</span> TIP-003</span>
+									<span class="gtp-meta-sep" aria-hidden="true">|</span>
+									<span class="gtp-meta-item"><span class="gtp-meta-key">Semestre</span> 9</span>
+									<span class="gtp-meta-sep" aria-hidden="true">|</span>
+									<span class="gtp-meta-item"><span class="gtp-meta-key">Horas</span> 200</span>
+								</p>
+							</div>
+							<div class="ev-menu-wrapper">
+								<button type="button" class="ev-menu-btn" aria-label="Opciones del tipo de práctica" aria-expanded="false">
+									<i class="fa-solid fa-ellipsis" aria-hidden="true"></i>
+								</button>
+								<div class="ev-dropdown" role="menu">
+									<button type="button" class="ev-dropdown-item ev-item--ver" role="menuitem"><i class="fa-solid fa-eye" aria-hidden="true"></i> Ver</button>
+									<button type="button" class="ev-dropdown-item ev-item--editar" role="menuitem"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Editar</button>
+									<button type="button" class="ev-dropdown-item ev-item--eliminar" role="menuitem"><i class="fa-solid fa-trash" aria-hidden="true"></i> Eliminar</button>
+								</div>
+							</div>
+						</article>
+					</div>
+				</div>
+			</div>
 		</section>
 
 		<!-- Gestionar instituciones-->
-		<section class="app-content" id="gestionar-instituciones">
+		<section class="app-content" id="gestionar-instituciones" style="display: none;">
 			<header class="app-topbar">
-				<button class="sidebar-toggle mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menú">
+				<button class="sidebar-toggle mobile-menu-toggle" id="mobileMenuToggleInst" aria-label="Abrir menú">
 					<i class="fa-solid fa-bars hamburger-icon"></i>
 					<i class="fa-solid fa-graduation-cap overlay-cap"></i>
 				</button>
@@ -217,6 +349,118 @@
 				<button class="topbar-option theme-toggle-btn" type="button" aria-label="Cambiar tema"><i class="fa-regular fa-sun" aria-hidden="true"></i><span>Claro</span></button>
 				<button class="app-account" type="button" aria-label="Abrir menú de director"><i class="fa-solid fa-circle-user" aria-hidden="true"></i><span><strong>Nombre Director</strong><small>Director</small></span></button>
 			</header>
+
+			<div class="practice-content-wrapper">
+				<nav class="informes-tabs inst-tabs" aria-label="Gestión de instituciones">
+					<button type="button" class="informes-tab-btn inst-tab-btn active" data-inst-panel="inst-panel-registrar">
+						<i class="fa-solid fa-circle-plus" aria-hidden="true"></i> Registrar Institución
+					</button>
+					<button type="button" class="informes-tab-btn inst-tab-btn" data-inst-panel="inst-panel-listar">
+						<i class="fa-solid fa-list" aria-hidden="true"></i> Listar instituciones
+					</button>
+				</nav>
+
+				<div id="inst-panel-registrar" class="inst-panel">
+					<form id="inst-form-registrar" class="inst-form" action="#" method="post" novalidate>
+						<div class="cp-layout inst-layout">
+							<div class="cp-card">
+								<div class="cp-field">
+									<label for="inst-nit">NIT de la Institución</label>
+									<div class="cp-input-wrap">
+										<input id="inst-nit" name="nit" type="text" placeholder="NIT" inputmode="numeric" pattern="[0-9]*" autocomplete="off">
+									</div>
+								</div>
+								<div class="cp-field">
+									<label for="inst-encargado">Encargado</label>
+									<div class="cp-input-wrap">
+										<input id="inst-encargado" name="encargado" type="text" placeholder="Nombre del encargado" autocomplete="name">
+									</div>
+								</div>
+								<div class="cp-field">
+									<label for="inst-direccion">Dirección</label>
+									<div class="cp-input-wrap">
+										<input id="inst-direccion" name="direccion" type="text" placeholder="Dirección de la institución" autocomplete="street-address">
+									</div>
+								</div>
+							</div>
+
+							<div class="cp-card">
+								<div class="cp-field">
+									<label for="inst-nombre">Nombre de la Institución</label>
+									<div class="cp-input-wrap">
+										<input id="inst-nombre" name="nombre" type="text" placeholder="Nombre de la institución" autocomplete="organization">
+									</div>
+								</div>
+								<div class="cp-field">
+									<label for="inst-correo">Correo Electrónico</label>
+									<div class="cp-input-wrap">
+										<input id="inst-correo" name="correo" type="email" placeholder="correo@institucion.edu.co" autocomplete="email">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="cp-actions inst-actions">
+							<button type="submit" class="cp-btn cp-btn-save">Registrar Institución</button>
+							<button type="button" class="cp-btn cp-btn-cancel" id="inst-btn-cancel">Cancelar</button>
+						</div>
+					</form>
+				</div>
+
+				<div id="inst-panel-listar" class="inst-panel" style="display: none;">
+					<div class="entity-list inst-entity-list" id="inst-entity-list" aria-label="Listado de instituciones">
+						<article class="ev-card inst-entity-card" data-nit="900123456-7">
+							<div class="ev-card-body">
+								<p class="entity-card-label">Institución</p>
+								<p class="ev-card-title">Escuela Normal Superior de Bucaramanga</p>
+								<p class="entity-card-meta">
+									<span class="entity-meta-item"><span class="entity-meta-key">NIT</span> 900123456-7</span>
+									<span class="entity-meta-sep" aria-hidden="true">|</span>
+									<span class="entity-meta-item"><span class="entity-meta-key">Encargado</span> María Fernanda Prieto</span>
+									<span class="entity-meta-sep" aria-hidden="true">|</span>
+									<span class="entity-meta-item"><span class="entity-meta-key">Correo</span> contacto@ensb.edu.co</span>
+								</p>
+								<p class="entity-card-desc">Calle 45 #18-22, Bucaramanga</p>
+							</div>
+							<div class="ev-menu-wrapper">
+								<button type="button" class="ev-menu-btn" aria-label="Opciones de la institución" aria-expanded="false">
+									<i class="fa-solid fa-ellipsis" aria-hidden="true"></i>
+								</button>
+								<div class="ev-dropdown" role="menu">
+									<button type="button" class="ev-dropdown-item ev-item--ver" role="menuitem"><i class="fa-solid fa-eye" aria-hidden="true"></i> Ver</button>
+									<button type="button" class="ev-dropdown-item ev-item--editar" role="menuitem"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Editar</button>
+									<button type="button" class="ev-dropdown-item ev-item--eliminar" role="menuitem"><i class="fa-solid fa-trash" aria-hidden="true"></i> Eliminar</button>
+								</div>
+							</div>
+						</article>
+
+						<article class="ev-card inst-entity-card" data-nit="890456789-1">
+							<div class="ev-card-body">
+								<p class="entity-card-label">Institución</p>
+								<p class="ev-card-title">Colegio San Jose</p>
+								<p class="entity-card-meta">
+									<span class="entity-meta-item"><span class="entity-meta-key">NIT</span> 890456789-1</span>
+									<span class="entity-meta-sep" aria-hidden="true">|</span>
+									<span class="entity-meta-item"><span class="entity-meta-key">Encargado</span> Juan Carlos Ramirez</span>
+									<span class="entity-meta-sep" aria-hidden="true">|</span>
+									<span class="entity-meta-item"><span class="entity-meta-key">Correo</span> info@colegiosanjose.edu.co</span>
+								</p>
+								<p class="entity-card-desc">Av. González Valencia # 55-119, Bucaramanga</p>
+							</div>
+							<div class="ev-menu-wrapper">
+								<button type="button" class="ev-menu-btn" aria-label="Opciones de la institución" aria-expanded="false">
+									<i class="fa-solid fa-ellipsis" aria-hidden="true"></i>
+								</button>
+								<div class="ev-dropdown" role="menu">
+									<button type="button" class="ev-dropdown-item ev-item--ver" role="menuitem"><i class="fa-solid fa-eye" aria-hidden="true"></i> Ver</button>
+									<button type="button" class="ev-dropdown-item ev-item--editar" role="menuitem"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Editar</button>
+									<button type="button" class="ev-dropdown-item ev-item--eliminar" role="menuitem"><i class="fa-solid fa-trash" aria-hidden="true"></i> Eliminar</button>
+								</div>
+							</div>
+						</article>
+					</div>
+				</div>
+			</div>
 		</section>
 
 		<!-- Informes-->

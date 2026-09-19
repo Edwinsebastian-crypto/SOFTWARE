@@ -642,6 +642,250 @@ body.dark-theme .cp-btn-cancel { background: #9ec0b4; border-color: #7b9f91; }
     z-index: 1;
 }
 
+/* -------------------------------------------------------------------------
+   GESTIÓN TIPO PRÁCTICA
+   ------------------------------------------------------------------------- */
+.gtp-tabs,
+.inst-tabs { margin-bottom: 40px; display: flex; justify-content: center; }
+#gestionar-practicas .gtp-panel,
+#gestionar-instituciones .inst-panel { display: flex; flex-direction: column; gap: 24px; }
+
+.gtp-form-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 40px;
+}
+.gtp-card {
+    width: 100%;
+    max-width: 720px;
+    margin-bottom: 30px;
+}
+.gtp-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+.gtp-actions {
+    width: 100%;
+    max-width: 720px;
+    margin-top: 0;
+}
+
+.gtp-horas-input {
+    -moz-appearance: textfield;
+}
+
+/* Listado — tarjetas estilo evidencias (estudiante) */
+#gestionar-practicas .gtp-type-list,
+#gestionar-instituciones .entity-list {
+    width: 100%;
+    max-width: 100%;
+    margin: 40px auto 0;
+}
+
+#gestionar-practicas .ev-card,
+#gestionar-instituciones .ev-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: var(--panel-bg);
+    border-radius: 16px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: background 0.3s ease, box-shadow 0.2s ease;
+    overflow: visible;
+}
+#gestionar-practicas .ev-card:hover,
+#gestionar-instituciones .ev-card:hover {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+#gestionar-practicas .ev-card-body,
+#gestionar-instituciones .ev-card-body {
+    flex: 1;
+    min-width: 0;
+}
+#gestionar-practicas .gtp-type-label,
+#gestionar-instituciones .entity-card-label {
+    margin: 0 0 4px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-family: var(--font-sans, 'Inter', sans-serif);
+}
+#gestionar-practicas .ev-card-title,
+#gestionar-instituciones .ev-card-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: var(--font-serif);
+    margin: 0 0 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#gestionar-instituciones .entity-card-desc {
+    margin: 6px 0 0;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-family: var(--font-sans, 'Inter', sans-serif);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#gestionar-practicas .gtp-type-meta,
+#gestionar-instituciones .entity-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 10px;
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-family: var(--font-sans, 'Inter', sans-serif);
+    line-height: 1.4;
+}
+#gestionar-practicas .gtp-meta-key,
+#gestionar-instituciones .entity-meta-key {
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-right: 4px;
+}
+#gestionar-practicas .gtp-meta-sep,
+#gestionar-instituciones .entity-meta-sep {
+    color: rgba(0,0,0,0.25);
+    user-select: none;
+}
+#gestionar-practicas .ev-menu-wrapper,
+#gestionar-instituciones .ev-menu-wrapper { position: relative; flex-shrink: 0; }
+#gestionar-practicas .ev-menu-btn,
+#gestionar-instituciones .ev-menu-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    background: #6b8f7e;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+#gestionar-practicas .ev-menu-btn:hover,
+#gestionar-instituciones .ev-menu-btn:hover {
+    background: #4a7262;
+    transform: scale(1.08);
+}
+#gestionar-practicas .ev-dropdown,
+#gestionar-instituciones .ev-dropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    min-width: 150px;
+    background: var(--panel-bg);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    padding: 6px;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+}
+#gestionar-practicas .ev-dropdown.is-open,
+#gestionar-instituciones .ev-dropdown.is-open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+#gestionar-practicas .ev-dropdown-item,
+#gestionar-instituciones .ev-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: var(--font-serif);
+    cursor: pointer;
+    background: transparent;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.12s ease;
+}
+#gestionar-practicas .ev-item--ver,
+#gestionar-instituciones .ev-item--ver { color: #1a6b50; }
+#gestionar-practicas .ev-item--ver:hover,
+#gestionar-instituciones .ev-item--ver:hover { background: rgba(26,107,80,0.1); color: #14503b; transform: translateX(3px); }
+#gestionar-practicas .ev-item--editar,
+#gestionar-instituciones .ev-item--editar { color: #a0620a; }
+#gestionar-practicas .ev-item--editar:hover,
+#gestionar-instituciones .ev-item--editar:hover { background: rgba(221,163,38,0.12); color: #7a4a08; transform: translateX(3px); }
+#gestionar-practicas .ev-item--eliminar,
+#gestionar-instituciones .ev-item--eliminar { color: #b93232; }
+#gestionar-practicas .ev-item--eliminar:hover,
+#gestionar-instituciones .ev-item--eliminar:hover { background: rgba(185,50,50,0.1); color: #8b2424; transform: translateX(3px); }
+
+body.dark-theme #gestionar-practicas .ev-card,
+body.dark-theme #gestionar-instituciones .ev-card { background: #D1E5DE; }
+body.dark-theme #gestionar-practicas .ev-card-title,
+body.dark-theme #gestionar-instituciones .ev-card-title { color: #1a1a1a; }
+body.dark-theme #gestionar-practicas .gtp-type-meta,
+body.dark-theme #gestionar-instituciones .entity-card-meta { color: #4a544d; }
+body.dark-theme #gestionar-instituciones .entity-card-desc { color: #4a544d; }
+body.dark-theme #gestionar-practicas .ev-dropdown,
+body.dark-theme #gestionar-instituciones .ev-dropdown { background: #c4dbd3; box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+
+/* -------------------------------------------------------------------------
+   GESTIÓN INSTITUCIONES
+   ------------------------------------------------------------------------- */
+#gestionar-instituciones .inst-form { margin-top: 40px; }
+#gestionar-instituciones .inst-layout { margin-bottom: 30px; }
+
+@media (max-width: 768px) {
+    #gestionar-practicas .ev-card,
+    #gestionar-instituciones .ev-card { padding: 14px 16px; gap: 12px; }
+    #gestionar-practicas .ev-card-title,
+    #gestionar-instituciones .ev-card-title { font-size: 15px; white-space: normal; }
+    #gestionar-practicas .gtp-type-meta,
+    #gestionar-instituciones .entity-card-meta { font-size: 12px; gap: 6px 8px; }
+    #gestionar-instituciones .entity-card-desc { white-space: normal; font-size: 12px; }
+}
+
+@media (max-width: 600px) {
+    .gtp-form-row { grid-template-columns: 1fr; }
+    #gestionar-practicas .gtp-meta-sep,
+    #gestionar-instituciones .entity-meta-sep { display: none; }
+    #gestionar-practicas .gtp-meta-item,
+    #gestionar-instituciones .entity-meta-item {
+        flex: 1 1 100%;
+    }
+}
+
+@media (max-width: 430px) {
+    #gestionar-practicas .gtp-actions,
+    #gestionar-instituciones .inst-actions {
+        flex-direction: column;
+    }
+    #gestionar-practicas .gtp-actions .cp-btn,
+    #gestionar-instituciones .inst-actions .cp-btn {
+        width: 100%;
+    }
+    #gestionar-practicas .ev-card,
+    #gestionar-instituciones .ev-card { padding: 12px 14px; border-radius: 12px; }
+    #gestionar-practicas .ev-menu-btn,
+    #gestionar-instituciones .ev-menu-btn { width: 36px; height: 36px; font-size: 15px; }
+}
+
 /* ── Placeholder "dd/mm/aaaa" en móvil para input[type=date] vacío ──
    En Android/iOS el browser no muestra el texto dd/mm/aaaa nativo.
    Usamos un ::before en el wrapper + color transparent en el input vacío
