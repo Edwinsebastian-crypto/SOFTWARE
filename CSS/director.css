@@ -508,6 +508,34 @@ body.dark-theme .tipos-card p { color: #1a1a1a; }
     visibility: visible;
     transform: translateY(0);
 }
+/* Escritorio: hasta 5 filas visibles; el resto desplaza solo dentro del menú */
+@media (min-width: 901px) and (min-height: 501px) {
+    .custom-options.open {
+        max-height: calc(var(--cp-select-option-height, 44px) * var(--cp-select-visible-rows, 5));
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(26, 66, 49, 0.4) transparent;
+    }
+    .custom-options.open::-webkit-scrollbar {
+        width: 6px;
+    }
+    .custom-options.open::-webkit-scrollbar-thumb {
+        background: rgba(26, 66, 49, 0.4);
+        border-radius: 999px;
+    }
+    .custom-options.open::-webkit-scrollbar-track {
+        background: transparent;
+    }
+}
+/* Móvil: el listado inline no se usa; la elección va en la pestaña inferior */
+@media (max-width: 900px), (max-height: 500px) {
+    .custom-options {
+        display: none !important;
+    }
+}
 .custom-option {
     padding: 12px 20px;
     font-size: 15px;
@@ -519,6 +547,80 @@ body.dark-theme .tipos-card p { color: #1a1a1a; }
 .custom-option:hover, .custom-option.selected {
     background: #1a4231;
     color: #fff;
+}
+
+/* Pestaña inferior de selección (móvil) */
+.cp-select-sheet-root {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    pointer-events: none;
+}
+.cp-select-sheet-root:not([hidden]) {
+    pointer-events: auto;
+}
+.cp-select-sheet-root[hidden] {
+    display: none !important;
+}
+.cp-select-sheet-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+}
+.cp-select-sheet {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    background: #fff;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.15);
+    padding: 8px 0 calc(10px + env(safe-area-inset-bottom, 0px));
+    max-height: min(72vh, calc(var(--cp-select-option-height, 44px) * var(--cp-select-visible-rows, 5) + 72px));
+    display: flex;
+    flex-direction: column;
+    outline: none;
+}
+.cp-select-sheet-handle {
+    width: 40px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(26, 66, 49, 0.25);
+    margin: 4px auto 10px;
+    flex-shrink: 0;
+}
+.cp-select-sheet-title {
+    margin: 0 20px 8px;
+    font-family: var(--font-serif);
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a4231;
+    flex-shrink: 0;
+}
+.cp-select-sheet-list {
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    min-height: 0;
+    flex: 1 1 auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(26, 66, 49, 0.4) transparent;
+}
+.cp-select-sheet-list::-webkit-scrollbar {
+    width: 6px;
+}
+.cp-select-sheet-list::-webkit-scrollbar-thumb {
+    background: rgba(26, 66, 49, 0.4);
+    border-radius: 999px;
+}
+body.dark-theme .cp-select-sheet {
+    background: #D1E5DE;
+}
+body.dark-theme .cp-select-sheet-title {
+    color: #1a1a1a;
 }
 
 /* Modo oscuro Crear Práctica */

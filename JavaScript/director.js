@@ -56,9 +56,152 @@
         });
     }
 
+    const CP_SELECT_VISIBLE_ROWS = 5;
+    let cpSelectScrollLockHost = null;
+    let cpSelectScrollAllowEl = null;
+    let cpSelectMobileSheet = null;
+    let cpSelectMobileChevron = null;
+
+    function isMobileSelectLayout() {
+        return window.innerWidth <= 900 || window.innerHeight <= 500;
+    }
+
+    function blockCpSelectBackgroundScroll(event) {
+        if (cpSelectScrollAllowEl && cpSelectScrollAllowEl.contains(event.target)) return;
+        event.preventDefault();
+    }
+
+    function lockCpSelectBackgroundScroll(scrollContainer) {
+        unlockCpSelectBackgroundScroll();
+        cpSelectScrollAllowEl = scrollContainer;
+        cpSelectScrollLockHost = document.querySelector('.app-shell') || document;
+        cpSelectScrollLockHost.addEventListener('wheel', blockCpSelectBackgroundScroll, { passive: false });
+        cpSelectScrollLockHost.addEventListener('touchmove', blockCpSelectBackgroundScroll, { passive: false });
+    }
+
+    function unlockCpSelectBackgroundScroll() {
+        if (cpSelectScrollLockHost) {
+            cpSelectScrollLockHost.removeEventListener('wheel', blockCpSelectBackgroundScroll);
+            cpSelectScrollLockHost.removeEventListener('touchmove', blockCpSelectBackgroundScroll);
+        }
+        cpSelectScrollLockHost = null;
+        cpSelectScrollAllowEl = null;
+    }
+
+    function ensureCpSelectOptionHeight() {
+        if (document.documentElement.dataset.cpSelectOptionHeight) return;
+        const probe = document.createElement('div');
+        probe.className = 'custom-option';
+        probe.textContent = 'M';
+        probe.style.visibility = 'hidden';
+        probe.style.position = 'absolute';
+        probe.style.pointerEvents = 'none';
+        document.body.appendChild(probe);
+        const height = Math.ceil(probe.getBoundingClientRect().height) || 44;
+        probe.remove();
+        document.documentElement.dataset.cpSelectOptionHeight = String(height);
+        document.documentElement.style.setProperty('--cp-select-option-height', `${height}px`);
+        document.documentElement.style.setProperty('--cp-select-visible-rows', String(CP_SELECT_VISIBLE_ROWS));
+    }
+
+    function ensureCpSelectMobileSheet() {
+        if (cpSelectMobileSheet) return cpSelectMobileSheet;
+
+        const root = document.createElement('div');
+        root.className = 'cp-select-sheet-root';
+        root.id = 'cpSelectSheetRoot';
+        root.hidden = true;
+        root.innerHTML = `
+            <div class="cp-select-sheet-backdrop" data-cp-select-dismiss tabindex="-1" aria-hidden="true"></div>
+            <div class="cp-select-sheet" role="dialog" aria-modal="true" aria-labelledby="cpSelectSheetTitle" tabindex="-1">
+                <div class="cp-select-sheet-handle" aria-hidden="true"></div>
+                <p class="cp-select-sheet-title" id="cpSelectSheetTitle"></p>
+                <div class="cp-select-sheet-list"></div>
+            </div>`;
+        document.body.appendChild(root);
+
+        root.querySelector('[data-cp-select-dismiss]').addEventListener('click', closeCpSelectMobileSheet);
+        root.querySelector('.cp-select-sheet').addEventListener('click', (e) => e.stopPropagation());
+
+        cpSelectMobileSheet = {
+            root,
+            title: root.querySelector('.cp-select-sheet-title'),
+            list: root.querySelector('.cp-select-sheet-list'),
+            dialog: root.querySelector('.cp-select-sheet'),
+        };
+        return cpSelectMobileSheet;
+    }
+
+    function closeCpSelectMobileSheet() {
+        if (!cpSelectMobileSheet || cpSelectMobileSheet.root.hidden) return;
+        cpSelectMobileSheet.root.hidden = true;
+        cpSelectMobileSheet.list.replaceChildren();
+        if (cpSelectMobileChevron) {
+            cpSelectMobileChevron.style.transform = 'rotate(0deg)';
+            cpSelectMobileChevron = null;
+        }
+        unlockCpSelectBackgroundScroll();
+    }
+
+    function closeAllCpSelects() {
+        document.querySelectorAll('.custom-options').forEach(opt => opt.classList.remove('open'));
+        document.querySelectorAll('.cp-input-wrap .right-icon').forEach(ic => {
+            ic.style.transform = 'rotate(0deg)';
+        });
+        closeCpSelectMobileSheet();
+        unlockCpSelectBackgroundScroll();
+    }
+
+    function getCpSelectFieldLabel(select) {
+        const field = select.closest('.cp-field');
+        const label = field?.querySelector('label');
+        if (label?.textContent) return label.textContent.trim();
+        const first = select.options[0];
+        return first ? first.text.trim() : 'Seleccionar';
+    }
+
+    function applyCpSelectValue(select, trigger, chevron, option) {
+        select.value = option.value;
+        trigger.textContent = option.text;
+        trigger.classList.remove('is-placeholder');
+        closeAllCpSelects();
+    }
+
+    function openCpSelectMobileSheet({ select, trigger, chevron, optionsContainer }) {
+        const sheet = ensureCpSelectMobileSheet();
+        closeAllCpSelects();
+
+        sheet.title.textContent = getCpSelectFieldLabel(select);
+        sheet.list.replaceChildren();
+
+        Array.from(select.options).forEach((option) => {
+            if (option.disabled && option.value === '') return;
+
+            const optionDiv = document.createElement('div');
+            optionDiv.className = 'custom-option';
+            optionDiv.textContent = option.text;
+            optionDiv.dataset.value = option.value;
+            if (select.value === option.value) optionDiv.classList.add('selected');
+
+            optionDiv.addEventListener('click', (e) => {
+                e.stopPropagation();
+                applyCpSelectValue(select, trigger, chevron, option);
+            });
+            sheet.list.appendChild(optionDiv);
+        });
+
+        sheet.root.hidden = false;
+        cpSelectMobileChevron = chevron;
+        if (chevron) chevron.style.transform = 'rotate(180deg)';
+        lockCpSelectBackgroundScroll(sheet.list);
+        sheet.dialog.focus({ preventScroll: true });
+    }
+
     function initCustomSelects(rootSelector) {
         const root = document.querySelector(rootSelector);
         if (!root) return;
+
+        ensureCpSelectOptionHeight();
 
         const selects = root.querySelectorAll('.cp-input-wrap select');
         selects.forEach(select => {
@@ -73,6 +216,9 @@
 
             const trigger = document.createElement('div');
             trigger.className = 'custom-select-trigger';
+            trigger.setAttribute('role', 'button');
+            trigger.setAttribute('tabindex', '0');
+            trigger.setAttribute('aria-haspopup', 'listbox');
 
             const firstOption = select.options[0];
             trigger.textContent = firstOption ? firstOption.text : '';
@@ -82,39 +228,53 @@
 
             const optionsContainer = document.createElement('div');
             optionsContainer.className = 'custom-options';
+            optionsContainer.setAttribute('role', 'listbox');
 
             Array.from(select.options).forEach((option) => {
                 if (option.disabled && option.value === '') return;
 
                 const optionDiv = document.createElement('div');
                 optionDiv.className = 'custom-option';
+                optionDiv.setAttribute('role', 'option');
                 optionDiv.textContent = option.text;
                 optionDiv.dataset.value = option.value;
 
                 optionDiv.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    select.value = option.value;
-                    trigger.textContent = option.text;
-                    trigger.classList.remove('is-placeholder');
-                    optionsContainer.classList.remove('open');
-                    if (chevron) chevron.style.transform = 'rotate(0deg)';
+                    applyCpSelectValue(select, trigger, chevron, option);
                 });
                 optionsContainer.appendChild(optionDiv);
             });
 
             function toggleDropdown(e) {
                 e.stopPropagation();
-                document.querySelectorAll('.custom-options').forEach(opt => {
-                    if (opt !== optionsContainer) opt.classList.remove('open');
-                });
-                document.querySelectorAll('.cp-input-wrap .right-icon').forEach(ic => {
-                    if (ic !== chevron) ic.style.transform = 'rotate(0deg)';
-                });
-                const isOpen = optionsContainer.classList.toggle('open');
-                if (chevron) chevron.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+
+                if (isMobileSelectLayout()) {
+                    if (cpSelectMobileSheet && !cpSelectMobileSheet.root.hidden && cpSelectMobileChevron === chevron) {
+                        closeAllCpSelects();
+                        return;
+                    }
+                    openCpSelectMobileSheet({ select, trigger, chevron, optionsContainer });
+                    return;
+                }
+
+                const wasOpen = optionsContainer.classList.contains('open');
+                closeAllCpSelects();
+
+                if (!wasOpen) {
+                    optionsContainer.classList.add('open');
+                    if (chevron) chevron.style.transform = 'rotate(180deg)';
+                    lockCpSelectBackgroundScroll(optionsContainer);
+                }
             }
 
             trigger.addEventListener('click', toggleDropdown);
+            trigger.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleDropdown(e);
+                }
+            });
 
             if (chevron) {
                 chevron.style.cursor = 'pointer';
@@ -131,15 +291,19 @@
     if (!document.documentElement.dataset.customSelectOutsideBound) {
         document.documentElement.dataset.customSelectOutsideBound = '1';
         document.addEventListener('click', () => {
-            document.querySelectorAll('.custom-options').forEach(opt => opt.classList.remove('open'));
-            document.querySelectorAll('.cp-input-wrap .right-icon').forEach(ic => {
-                ic.style.transform = 'rotate(0deg)';
-            });
+            closeAllCpSelects();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeAllCpSelects();
+        });
+        window.addEventListener('resize', () => {
+            if (!isMobileSelectLayout()) closeCpSelectMobileSheet();
         });
     }
 
     initCustomSelects('#crear-practica');
     initCustomSelects('#gestionar-practicas');
+    initCustomSelects('#gestionar-instituciones');
 
     const informesTabIds = ['tab-general', 'tab-tipos', 'tab-bitacoras', 'tab-retro', 'tab-instituciones'];
     const informesTabBtns = document.querySelectorAll('#informes .informes-tab-btn');
