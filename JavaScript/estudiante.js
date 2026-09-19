@@ -22,14 +22,14 @@ document.addEventListener('DOMContentLoaded', () => {
         ? bitacoraPanel.querySelectorAll('.b-action-btn')
         : [];
     const actividadesEntrarBitacora = bitacoraActionBtns[0] || null;
-    const preguntasBtn             = bitacoraActionBtns[1] || null;
+    const preguntasBtn = bitacoraActionBtns[1] || null;
 
     // Botones de acción del panel de preguntas
     const preguntasActionBtns = preguntasPanel
         ? preguntasPanel.querySelectorAll('.b-action-btn')
         : [];
     const preguntasEntrarActividades = preguntasActionBtns[0] || null;
-    const preguntasEntrarPreguntas   = preguntasActionBtns[1] || null;
+    const preguntasEntrarPreguntas = preguntasActionBtns[1] || null;
 
     function resetScroll() {
         window.scrollTo(0, 0);

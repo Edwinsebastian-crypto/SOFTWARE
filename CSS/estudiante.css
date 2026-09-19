@@ -204,6 +204,7 @@ body.dark-theme .b-info-value {
   margin-bottom: 14px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.06);
   transition: background 0.3s ease, box-shadow 0.2s ease;
+  overflow: visible;
 }
 .ev-card:hover {
   box-shadow: 0 6px 18px rgba(0,0,0,0.1);
@@ -271,7 +272,7 @@ body.dark-theme .b-info-value {
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.15);
   padding: 6px;
-  z-index: 100;
+  z-index: 9999;
   opacity: 0;
   transform: translateY(-8px) scale(0.96);
   pointer-events: none;
@@ -383,6 +384,169 @@ body.dark-theme .ev-dropdown {
   
   .practice-submit { height: 44px; margin-top: 18px; font-size: 16px; padding: 0 20px; gap: 10px; }
   .practice-submit i { font-size: 20px; }
+}
+
+/* --- Retroalimentaciones --- */
+.retro-section {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.retro-title {
+  font-size: 24px;
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+.retro-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--panel-bg);
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: background 0.3s ease, box-shadow 0.2s ease;
+  overflow: visible;
+}
+body.dark-theme .retro-card {
+  background: #D1E5DE;
+}
+.retro-card:hover {
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+.retro-card-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.retro-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-serif);
+}
+.retro-role {
+  font-weight: 700;
+  color: #1a4231;
+  font-size: 15px;
+}
+.retro-date {
+  color: #7b9487;
+  font-size: 13px;
+  font-weight: 600;
+}
+.retro-content {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-family: var(--font-serif);
+  font-weight: normal;
+  margin: 0;
+}
+body.dark-theme .retro-content {
+  color: #4a544d;
+}
+.retro-form-section {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.retro-form-title {
+  font-size: 18px;
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  font-weight: 700;
+  margin: 0;
+}
+.retro-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+}
+.retro-textarea {
+  width: 100%;
+  min-height: 48px;
+  max-height: 200px;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid #c8dcd2;
+  padding: 14px 50px 14px 14px;
+  font-family: var(--font-serif);
+  font-size: 15px;
+  resize: none;
+  overflow-y: hidden;
+  background: white;
+  color: #333;
+  line-height: 1.5;
+}
+.retro-textarea:focus {
+  outline: none;
+  border-color: #1a6b50;
+}
+body.dark-theme .retro-textarea {
+  background: #9ec0b4;
+  border-color: #78a38c;
+  color: #18382b;
+}
+body.dark-theme .retro-textarea::placeholder {
+  color: rgba(26,66,49,0.7);
+}
+.retro-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 4px;
+}
+.retro-btn-submit {
+  position: absolute;
+  right: 8px;
+  bottom: 6px;
+  background: none;
+  border: none;
+  color: #1a6b50;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+.retro-btn-submit:hover {
+  transform: scale(1.1);
+}
+.retro-btn-cancel {
+  background: linear-gradient(90deg, #78a38c, #91c7ab);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.retro-btn-cancel:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+body.dark-theme .retro-btn-cancel {
+  border-color: rgba(255,255,255,0.2);
+  color: #a5c7b6;
+}
+body.dark-theme .retro-btn-cancel:hover {
+  background: rgba(255,255,255,0.1);
 }
 
 /* Tabletas en vertical y drawer móvil (ver nota de altura en shell.css) */

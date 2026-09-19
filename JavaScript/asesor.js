@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', () => {
                 // Intentamos sacar el número, si no existe usamos el índice + 1
                 const numActividad = btn.getAttribute('data-actividad') || (index + 1);
-                
+
                 if (evidenciasTitleEl) {
                     evidenciasTitleEl.textContent = `Evidencias — Actividad #${numActividad}`;
                 }
@@ -127,4 +127,45 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Abrir evidencia (ver)');
         });
     });
+
+    // ── Enviar / Cancelar Retroalimentación ─────────────────────────────
+    const retroBtnSubmit = document.querySelector('.retro-btn-submit');
+    const retroBtnCancel = document.querySelector('.retro-btn-cancel');
+    const retroTextarea = document.querySelector('.retro-textarea');
+
+    // Auto-crecer textarea y mantener el botón cancelar visible
+    if (retroTextarea) {
+        retroTextarea.addEventListener('input', () => {
+            retroTextarea.style.height = 'auto';
+            retroTextarea.style.height = Math.min(retroTextarea.scrollHeight, 200) + 'px';
+            // Hacer scroll suave para que el botón cancelar siempre sea visible
+            if (retroBtnCancel) {
+                requestAnimationFrame(() => {
+                    retroBtnCancel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                });
+            }
+        });
+    }
+
+    if (retroBtnSubmit && retroTextarea) {
+        retroBtnSubmit.addEventListener('click', () => {
+            const text = retroTextarea.value.trim();
+            if (text) {
+                console.log('Enviando retroalimentación:', text);
+                retroTextarea.value = '';
+                retroTextarea.style.height = 'auto';
+                alert('Retroalimentación enviada con éxito');
+            } else {
+                alert('Por favor ingrese un comentario antes de enviar.');
+            }
+        });
+    }
+
+    if (retroBtnCancel && retroTextarea) {
+        retroBtnCancel.addEventListener('click', () => {
+            retroTextarea.value = '';
+            retroTextarea.style.height = 'auto';
+            console.log('Edición de retroalimentación cancelada');
+        });
+    }
 });
