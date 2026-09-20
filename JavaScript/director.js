@@ -1,4 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const btnCancel = document.querySelector('#crear-practica .cp-btn-cancel');
     const btnSave = document.querySelector('#crear-practica .cp-btn-save');
     const formInputs = document.querySelectorAll('#crear-practica input, #crear-practica select');
@@ -174,8 +174,10 @@
     function applyCpSelectValue(select, trigger, chevron, option) {
         select.value = option.value;
         trigger.textContent = option.text;
-        trigger.classList.remove('is-placeholder');
+        if (option.disabled) trigger.classList.add('is-placeholder');
+        else trigger.classList.remove('is-placeholder');
         closeAllCpSelects();
+        select.dispatchEvent(new Event('change', { bubbles: true }));
     }
 
     function openCpSelectOverlaySheet({ select, trigger, chevron }) {
@@ -234,9 +236,9 @@
             trigger.setAttribute('tabindex', '0');
             trigger.setAttribute('aria-haspopup', 'listbox');
 
-            const firstOption = select.options[0];
-            trigger.textContent = firstOption ? firstOption.text : '';
-            if (firstOption && firstOption.disabled) {
+            const selectedOption = select.options[select.selectedIndex] || select.options[0];
+            trigger.textContent = selectedOption ? selectedOption.text : '';
+            if (selectedOption && selectedOption.disabled) {
                 trigger.classList.add('is-placeholder');
             }
 
@@ -318,6 +320,7 @@
     initCustomSelects('#crear-practica');
     initCustomSelects('#gestionar-practicas');
     initCustomSelects('#gestionar-instituciones');
+    initCustomSelects('#gestionar-usuarios');
 
     const informesTabIds = ['tab-general', 'tab-tipos', 'tab-bitacoras', 'tab-retro', 'tab-instituciones'];
     const informesTabBtns = document.querySelectorAll('#informes .informes-tab-btn');
