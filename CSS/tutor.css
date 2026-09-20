@@ -493,11 +493,17 @@ body.dark-theme .retro-content {
   font-family: var(--font-serif);
   font-size: 15px;
   resize: none;
-  overflow-y: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #1a4231 #e3efe5;
   background: white;
   color: #333;
   line-height: 1.5;
 }
+.retro-textarea::-webkit-scrollbar { width: 6px; }
+.retro-textarea::-webkit-scrollbar-track { background: #e3efe5; border-radius: 4px; }
+.retro-textarea::-webkit-scrollbar-thumb { background: #1a4231; border-radius: 4px; }
+
 .retro-textarea:focus {
   outline: none;
   border-color: #1a6b50;
