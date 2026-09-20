@@ -419,12 +419,21 @@
         return article;
     }
 
+    function setEvMenuState(btn, open) {
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        const dd = btn.nextElementSibling;
+        if (dd) dd.classList.toggle('is-open', open);
+        const icon = btn.querySelector('i');
+        if (icon) {
+            icon.classList.toggle('fa-ellipsis', !open);
+            icon.classList.toggle('fa-arrow-left', open);
+        }
+    }
+
     function closeAllEntityDropdowns(exceptBtn) {
-        document.querySelectorAll('#gestionar-practicas .ev-menu-btn, #gestionar-instituciones .ev-menu-btn').forEach(btn => {
+        document.querySelectorAll('#gestionar-practicas .ev-menu-btn, #gestionar-instituciones .ev-menu-btn, #practica .ev-menu-btn').forEach(btn => {
             if (btn === exceptBtn) return;
-            btn.setAttribute('aria-expanded', 'false');
-            const dd = btn.nextElementSibling;
-            if (dd) dd.classList.remove('is-open');
+            setEvMenuState(btn, false);
         });
     }
 
@@ -436,20 +445,31 @@
                 e.stopPropagation();
                 const isOpen = menuBtn.getAttribute('aria-expanded') === 'true';
                 closeAllEntityDropdowns(menuBtn);
-                const dd = menuBtn.nextElementSibling;
-                if (!isOpen) {
-                    menuBtn.setAttribute('aria-expanded', 'true');
-                    if (dd) dd.classList.add('is-open');
-                } else {
-                    menuBtn.setAttribute('aria-expanded', 'false');
-                    if (dd) dd.classList.remove('is-open');
-                }
+                setEvMenuState(menuBtn, !isOpen);
+                return;
+            }
+
+            const verBtn = e.target.closest('.ev-item--ver');
+            if (verBtn && root.contains(verBtn)) {
+                const title = verBtn.closest('.ev-card')?.querySelector('.ev-card-title')?.textContent;
+                console.log('Ver:', title);
+                closeAllEntityDropdowns(null);
+                return;
+            }
+
+            const editBtn = e.target.closest('.ev-item--editar');
+            if (editBtn && root.contains(editBtn)) {
+                const title = editBtn.closest('.ev-card')?.querySelector('.ev-card-title')?.textContent;
+                console.log('Editar:', title);
+                closeAllEntityDropdowns(null);
                 return;
             }
 
             const elimBtn = e.target.closest('.ev-item--eliminar');
             if (elimBtn && root.contains(elimBtn)) {
                 const card = elimBtn.closest(cardSelector);
+                const title = card?.querySelector('.ev-card-title')?.textContent;
+                console.log('Eliminar:', title);
                 if (card) card.remove();
                 closeAllEntityDropdowns(null);
             }
@@ -560,6 +580,157 @@
             }
 
             clearInstForm();
+        });
+    }
+
+    // ── Panel de Práctica (misma navegación que estudiante) ───────────────
+    const btnEntrar = document.querySelector('#practica .practice-submit');
+    const practicePanel = document.querySelector('#practica .practice-panel');
+    const bitacoraPanel = document.getElementById('bitacora-panel');
+    const bitacoraBackBtn = document.getElementById('bitacoraBack');
+    const actividadesPanel = document.getElementById('actividades-panel');
+    const actividadesBackBtn = document.getElementById('actividadesBack');
+    const actividadesBtns = document.querySelectorAll('#practica .actividad-entrar-btn');
+    const preguntasPanel = document.getElementById('preguntas-panel');
+    const preguntasBackBtn = document.getElementById('preguntasBack');
+    const evidenciasPanel = document.getElementById('evidencias-panel');
+    const evidenciasBackBtn = document.getElementById('evidenciasBack');
+    const evidenciasTitleEl = document.getElementById('evidencias-title');
+    const practicaRoot = document.getElementById('practica');
+
+    const bitacoraActionBtns = bitacoraPanel
+        ? bitacoraPanel.querySelectorAll('.b-action-btn')
+        : [];
+    const actividadesEntrarBitacora = bitacoraActionBtns[0] || null;
+    const preguntasBtn = bitacoraActionBtns[1] || null;
+
+    const preguntasActionBtns = preguntasPanel
+        ? preguntasPanel.querySelectorAll('.b-action-btn')
+        : [];
+    const preguntasEntrarActividades = preguntasActionBtns[0] || null;
+    const preguntasEntrarPreguntas = preguntasActionBtns[1] || null;
+
+    function resetPracticeScroll() {
+        window.scrollTo(0, 0);
+        const wrapper = document.querySelector('#practica .practice-content-wrapper');
+        if (wrapper) wrapper.scrollTop = 0;
+        const appShell = document.querySelector('.app-shell');
+        if (appShell) appShell.scrollTop = 0;
+    }
+
+    if (btnEntrar && practicePanel && bitacoraPanel) {
+        btnEntrar.addEventListener('click', () => {
+            practicePanel.style.display = 'none';
+            bitacoraPanel.style.display = 'flex';
+            resetPracticeScroll();
+        });
+    }
+
+    if (bitacoraBackBtn && practicePanel && bitacoraPanel) {
+        bitacoraBackBtn.addEventListener('click', () => {
+            bitacoraPanel.style.display = 'none';
+            practicePanel.style.display = 'block';
+            resetPracticeScroll();
+        });
+    }
+
+    if (actividadesEntrarBitacora && bitacoraPanel && actividadesPanel) {
+        actividadesEntrarBitacora.addEventListener('click', () => {
+            bitacoraPanel.style.display = 'none';
+            actividadesPanel.style.display = 'flex';
+            resetPracticeScroll();
+        });
+    }
+
+    if (preguntasEntrarActividades) {
+        preguntasEntrarActividades.addEventListener('click', () => {
+            alert('Sección en construcción');
+        });
+    }
+
+    if (preguntasEntrarPreguntas) {
+        preguntasEntrarPreguntas.addEventListener('click', () => {
+            alert('Sección en construcción');
+        });
+    }
+
+    if (actividadesBackBtn && bitacoraPanel && actividadesPanel) {
+        actividadesBackBtn.addEventListener('click', () => {
+            actividadesPanel.style.display = 'none';
+            bitacoraPanel.style.display = 'flex';
+            resetPracticeScroll();
+        });
+    }
+
+    if (actividadesBtns.length > 0 && actividadesPanel && evidenciasPanel) {
+        actividadesBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const numActividad = btn.getAttribute('data-actividad');
+                if (evidenciasTitleEl) {
+                    evidenciasTitleEl.textContent = `Evidencias — Actividad #${numActividad}`;
+                }
+                actividadesPanel.style.display = 'none';
+                evidenciasPanel.style.display = 'flex';
+                resetPracticeScroll();
+            });
+        });
+    }
+
+    if (evidenciasBackBtn && actividadesPanel && evidenciasPanel) {
+        evidenciasBackBtn.addEventListener('click', () => {
+            evidenciasPanel.style.display = 'none';
+            actividadesPanel.style.display = 'flex';
+            resetPracticeScroll();
+        });
+    }
+
+    if (preguntasBtn && bitacoraPanel && preguntasPanel) {
+        preguntasBtn.addEventListener('click', () => {
+            bitacoraPanel.style.display = 'none';
+            preguntasPanel.style.display = 'flex';
+            resetPracticeScroll();
+        });
+    }
+
+    if (preguntasBackBtn && bitacoraPanel && preguntasPanel) {
+        preguntasBackBtn.addEventListener('click', () => {
+            preguntasPanel.style.display = 'none';
+            bitacoraPanel.style.display = 'flex';
+            resetPracticeScroll();
+        });
+    }
+
+    if (practicaRoot) {
+        practicaRoot.addEventListener('click', (e) => {
+            const menuBtn = e.target.closest('.ev-menu-btn');
+            if (menuBtn && practicaRoot.contains(menuBtn)) {
+                e.stopPropagation();
+                const isOpen = menuBtn.getAttribute('aria-expanded') === 'true';
+                closeAllEntityDropdowns(menuBtn);
+                setEvMenuState(menuBtn, !isOpen);
+                return;
+            }
+
+            const verBtn = e.target.closest('.ev-item--ver');
+            if (verBtn && practicaRoot.contains(verBtn)) {
+                console.log('Abrir evidencia (ver)');
+                closeAllEntityDropdowns(null);
+                return;
+            }
+
+            const editBtn = e.target.closest('.ev-item--editar');
+            if (editBtn && practicaRoot.contains(editBtn)) {
+                console.log('Abrir evidencia (editar)');
+                closeAllEntityDropdowns(null);
+                return;
+            }
+
+            const elimBtn = e.target.closest('.ev-item--eliminar');
+            if (elimBtn && practicaRoot.contains(elimBtn)) {
+                const title = elimBtn.closest('.ev-card')?.querySelector('.ev-card-title')?.textContent;
+                console.log('Eliminar evidencia:', title);
+                closeAllEntityDropdowns(null);
+            }
         });
     }
 });

@@ -193,6 +193,255 @@
 				</form>
 				<button class="practice-submit" type="button"><i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i><span>Entrar</span></button>
 			</section>
+
+				<!-- PANEL DE BITÁCORA (Se muestra después de Entrar) -->
+				<section class="bitacora-panel" id="bitacora-panel" aria-labelledby="bitacora-title" style="display: none;">
+					<div class="bitacora-header">
+						<button type="button" class="bitacora-back-btn" id="bitacoraBack" aria-label="Volver a Información de Práctica">
+							<i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+						</button>
+						<h2 id="bitacora-title" class="bitacora-title">Bitácora</h2>
+					</div>
+					<div class="bitacora-info-card">
+						<div class="bitacora-info-item">
+							<span class="b-info-label">Fecha de creación</span>
+							<span class="b-info-value">18/04/2026</span>
+						</div>
+						<div class="bitacora-info-item">
+							<span class="b-info-label">Nota Final</span>
+							<span class="b-info-value">Nota</span>
+						</div>
+						<div class="bitacora-info-item">
+							<span class="b-info-label">Observación General</span>
+							<span class="b-info-value">Observación</span>
+						</div>
+						<div class="bitacora-info-item">
+							<span class="b-info-label">Estado Bitácora</span>
+							<span class="b-info-value">Activa</span>
+						</div>
+					</div>
+
+					<div class="bitacora-action-card">
+						<div class="b-action-left">
+							<div class="stat-icon"><i class="fa-regular fa-file-lines"></i></div>
+							<span class="b-action-label">Actividades</span>
+						</div>
+						<button type="button" class="b-action-btn" id="actividades-btn">Entrar</button>
+					</div>
+
+					<div class="bitacora-action-card">
+						<div class="b-action-left">
+							<div class="stat-icon"><i class="fa-solid fa-circle-question"></i></div>
+							<span class="b-action-label">Sección de Preguntas</span>
+						</div>
+						<button type="button" class="b-action-btn" id="preguntas-btn">Entrar</button>
+					</div>
+				</section>
+
+				<!-- PANEL DE ACTIVIDADES (Se muestra después de Entrar) -->
+				<section class="actividades-panel" id="actividades-panel" aria-labelledby="actividades-title" style="display: none;">
+					<div class="actividades-header">
+						<button type="button" class="actividades-back-btn" id="actividadesBack" aria-label="Volver a Información de la bitacora">
+							<i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+						</button>
+						<h2 id="actividades-title" class="actividades-title">Actividades</h2>
+					</div>
+					<div class="bitacora-action-card">
+						<div class="b-action-left">
+							<div class="stat-icon"><i class="fa-solid fa-file-lines"></i></div>
+							<span class="b-action-label">Actividad #1</span>
+						</div>
+						<button type="button" class="b-action-btn actividad-entrar-btn" data-actividad="1">Entrar</button>
+					</div>
+
+					<div class="bitacora-action-card">
+						<div class="b-action-left">
+							<div class="stat-icon"><i class="fa-solid fa-file-lines"></i></div>
+							<span class="b-action-label">Actividad #2</span>
+						</div>
+						<button type="button" class="b-action-btn actividad-entrar-btn" data-actividad="2">Entrar</button>
+					</div>
+
+					<div class="bitacora-action-card">
+						<div class="b-action-left">
+							<div class="stat-icon"><i class="fa-solid fa-file-lines"></i></div>
+							<span class="b-action-label">Actividad #3</span>
+						</div>
+						<button type="button" class="b-action-btn actividad-entrar-btn" data-actividad="3">Entrar</button>
+					</div>
+
+					<div class="bitacora-action-card">
+						<div class="b-action-left">
+							<div class="stat-icon"><i class="fa-solid fa-file-lines"></i></div>
+							<span class="b-action-label">Actividad #4</span>
+						</div>
+						<button type="button" class="b-action-btn actividad-entrar-btn" data-actividad="4">Entrar</button>
+					</div>
+
+					<div class="bitacora-action-card">
+						<div class="b-action-left">
+							<div class="stat-icon"><i class="fa-solid fa-file-lines"></i></div>
+							<span class="b-action-label">Actividad #5</span>
+						</div>
+						<button type="button" class="b-action-btn actividad-entrar-btn" data-actividad="5">Entrar</button>
+					</div>
+
+					<div class="bitacora-action-card">
+						<div class="b-action-left">
+							<div class="stat-icon"><i class="fa-solid fa-file-lines"></i></div>
+							<span class="b-action-label">Actividad #6</span>
+						</div>
+						<button type="button" class="b-action-btn actividad-entrar-btn" data-actividad="6">Entrar</button>
+					</div>
+				</section>
+
+				<!-- PANEL DE PREGUNTAS (Se muestra después de Entrar) -->
+				<section class="preguntas-panel" id="preguntas-panel" aria-labelledby="preguntas-title" style="display: none;">
+					<div class="preguntas-header">
+						<button type="button" class="preguntas-back-btn" id="preguntasBack" aria-label="Volver a Información de la bitácora">
+							<i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+						</button>
+						<h2 id="preguntas-title" class="preguntas-title">Sección de Preguntas</h2>
+					</div>
+					<div class="bitacora-action-card">
+						<div class="b-action-left">
+							<div class="stat-icon"><i class="fa-regular fa-file-lines"></i></div>
+							<span class="b-action-label">Actividades</span>
+						</div>
+						<button type="button" class="b-action-btn" id="preguntas-actividades-btn">Entrar</button>
+					</div>
+
+					<div class="bitacora-action-card">
+						<div class="b-action-left">
+							<div class="stat-icon"><i class="fa-solid fa-circle-question"></i></div>
+							<span class="b-action-label">Sección de Preguntas</span>
+						</div>
+						<button type="button" class="b-action-btn" id="preguntas-preguntas-btn">Entrar</button>
+					</div>
+				</section>
+
+				<!-- PANEL DE EVIDENCIAS (Se muestra después de Entrar en Actividad) -->
+				<section class="evidencias-panel" id="evidencias-panel" aria-labelledby="evidencias-title" style="display: none;">
+					<div class="evidencias-header">
+						<button type="button" class="evidencias-back-btn" id="evidenciasBack" aria-label="Volver a Actividades">
+							<i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+						</button>
+						<h2 id="evidencias-title" class="evidencias-title">Evidencias</h2>
+					</div>
+
+					<div class="ev-card">
+						<div class="ev-card-body">
+							<p class="ev-card-title">Archivo: Operacion_consultas.txt</p>
+							<p class="ev-card-desc">Si le entregas al profesor el archivo de ejecutable .s...</p>
+						</div>
+						<div class="ev-menu-wrapper">
+							<button type="button" class="ev-menu-btn" aria-label="Opciones de evidencia" aria-expanded="false">
+								<i class="fa-solid fa-ellipsis" aria-hidden="true"></i>
+							</button>
+							<div class="ev-dropdown" role="menu">
+								<button type="button" class="ev-dropdown-item ev-item--ver" role="menuitem">
+									<i class="fa-solid fa-eye" aria-hidden="true"></i> Ver
+								</button>
+								<button type="button" class="ev-dropdown-item ev-item--editar" role="menuitem">
+									<i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Editar
+								</button>
+								<button type="button" class="ev-dropdown-item ev-item--eliminar" role="menuitem">
+									<i class="fa-solid fa-trash" aria-hidden="true"></i> Eliminar
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="ev-card">
+						<div class="ev-card-body">
+							<p class="ev-card-title">Archivo: Planificacion_clase.pdf</p>
+							<p class="ev-card-desc">Documento de planificación para la clase del día lune...</p>
+						</div>
+						<div class="ev-menu-wrapper">
+							<button type="button" class="ev-menu-btn" aria-label="Opciones de evidencia" aria-expanded="false">
+								<i class="fa-solid fa-ellipsis" aria-hidden="true"></i>
+							</button>
+							<div class="ev-dropdown" role="menu">
+								<button type="button" class="ev-dropdown-item ev-item--ver" role="menuitem">
+									<i class="fa-solid fa-eye" aria-hidden="true"></i> Ver
+								</button>
+								<button type="button" class="ev-dropdown-item ev-item--editar" role="menuitem">
+									<i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Editar
+								</button>
+								<button type="button" class="ev-dropdown-item ev-item--eliminar" role="menuitem">
+									<i class="fa-solid fa-trash" aria-hidden="true"></i> Eliminar
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="ev-card">
+						<div class="ev-card-body">
+							<p class="ev-card-title">Archivo: Evaluacion_formativa.docx</p>
+							<p class="ev-card-desc">Instrumento de evaluación formativa aplicado durante...</p>
+						</div>
+						<div class="ev-menu-wrapper">
+							<button type="button" class="ev-menu-btn" aria-label="Opciones de evidencia" aria-expanded="false">
+								<i class="fa-solid fa-ellipsis" aria-hidden="true"></i>
+							</button>
+							<div class="ev-dropdown" role="menu">
+								<button type="button" class="ev-dropdown-item ev-item--ver" role="menuitem">
+									<i class="fa-solid fa-eye" aria-hidden="true"></i> Ver
+								</button>
+								<button type="button" class="ev-dropdown-item ev-item--editar" role="menuitem">
+									<i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Editar
+								</button>
+								<button type="button" class="ev-dropdown-item ev-item--eliminar" role="menuitem">
+									<i class="fa-solid fa-trash" aria-hidden="true"></i> Eliminar
+								</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="retro-section">
+						<h3 class="retro-title">Retroalimentaciones</h3>
+
+						<div class="retro-card">
+							<div class="retro-card-body">
+								<div class="retro-header">
+									<span class="retro-role">Tutor</span>
+									<span class="retro-date">18/04/2026</span>
+								</div>
+								<p class="retro-content">"Aquí se verá la retroalimentación del docente"</p>
+							</div>
+							<div class="ev-menu-wrapper">
+								<button type="button" class="ev-menu-btn" aria-label="Opciones de retroalimentación" aria-expanded="false">
+									<i class="fa-solid fa-ellipsis" aria-hidden="true"></i>
+								</button>
+								<div class="ev-dropdown" role="menu">
+									<button type="button" class="ev-dropdown-item ev-item--ver" role="menuitem">
+										<i class="fa-solid fa-eye" aria-hidden="true"></i> Ver
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="retro-card">
+							<div class="retro-card-body">
+								<div class="retro-header">
+									<span class="retro-role">Asesor</span>
+									<span class="retro-date">18/04/2026</span>
+								</div>
+								<p class="retro-content">"Aquí se verá la retroalimentación del docente"</p>
+							</div>
+							<div class="ev-menu-wrapper">
+								<button type="button" class="ev-menu-btn" aria-label="Opciones de retroalimentación" aria-expanded="false">
+									<i class="fa-solid fa-ellipsis" aria-hidden="true"></i>
+								</button>
+								<div class="ev-dropdown" role="menu">
+									<button type="button" class="ev-dropdown-item ev-item--ver" role="menuitem">
+										<i class="fa-solid fa-eye" aria-hidden="true"></i> Ver
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
 		</div>
 	</section>
 

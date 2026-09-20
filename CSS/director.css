@@ -31,6 +31,310 @@
 .practice-submit { display: flex; align-items: center; justify-content: center; gap: 15px; width: fit-content; margin-left: auto; margin-top: 30px; height: 56px; padding: 0 30px; border: 0; border-radius: 12px; color: #fff; background: linear-gradient(90deg, #1f503c, #2a7253); box-shadow: 0 4px 6px rgba(0,0,0,.2); font-size: 21px; font-weight: 700; cursor: pointer; font-family: var(--font-serif); }
 .practice-submit i { font-size: 24px; color: #fff; }
 
+/* --- Bitacora Panel --- */
+.bitacora-panel, .actividades-panel, .preguntas-panel, .evidencias-panel {
+  display: flex;
+  flex-direction: column;
+}
+.bitacora-header, .actividades-header, .preguntas-header, .evidencias-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.bitacora-back-btn, .actividades-back-btn, .preguntas-back-btn, .evidencias-back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--clr-accent-gold);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 18px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.bitacora-back-btn:hover, .actividades-back-btn:hover, .preguntas-back-btn:hover, .evidencias-back-btn:hover { background: rgba(221,163,38,.14); transform: translateX(-3px); }
+.bitacora-back-btn:active, .actividades-back-btn:active, .preguntas-back-btn:active, .evidencias-back-btn:active { transform: translateX(-5px); }
+.bitacora-back-btn:focus-visible, .actividades-back-btn:focus-visible, .preguntas-back-btn:focus-visible, .evidencias-back-btn:focus-visible { outline: 2px solid var(--clr-accent-gold); outline-offset: 2px; }
+.bitacora-title, .actividades-title, .preguntas-title, .evidencias-title {
+  font-size: 24px;
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  font-weight: 700;
+  margin: 0;
+}
+.bitacora-info-card {
+  display: flex;
+  justify-content: space-around;
+  background: var(--panel-bg);
+  border-radius: 12px;
+  padding: 24px 30px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  margin-bottom: 24px;
+  transition: background 0.3s ease;
+}
+.bitacora-info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+.b-info-label {
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--font-serif);
+  color: black;
+}
+.b-info-value {
+  font-size: 15px;
+  color: #7b7b7b;
+  font-family: var(--font-serif);
+  font-weight: 600;
+}
+.bitacora-action-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--panel-bg);
+  border-radius: 12px;
+  padding: 16px 24px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  margin-bottom: 16px;
+  transition: background 0.3s ease;
+}
+.b-action-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: #b3cbbc;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.stat-icon i {
+  font-size: 20px;
+  color: #1a4231;
+}
+.b-action-label {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: var(--font-serif);
+  color: black;
+}
+.b-action-btn {
+  background: #264a38;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--font-serif);
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.b-action-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+.b-action-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+body.dark-theme .bitacora-info-card,
+body.dark-theme .bitacora-action-card {
+  background: #D1E5DE;
+}
+body.dark-theme .b-info-value {
+  color: #4a544d;
+}
+
+/* --- Evidencias y Retroalimentaciones (panel práctica) --- */
+#practica .ev-card,
+#practica .retro-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--panel-bg);
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: background 0.3s ease, box-shadow 0.2s ease;
+  overflow: visible;
+}
+#practica .ev-card:hover,
+#practica .retro-card:hover {
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+#practica .ev-card-body {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+#practica .ev-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  margin: 0 0 5px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#practica .ev-card-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-family: var(--font-serif);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#practica .ev-menu-wrapper {
+  position: relative;
+  flex-shrink: 0;
+  align-self: center;
+}
+#practica .ev-menu-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: #6b8f7e;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+  flex-shrink: 0;
+}
+#practica .ev-menu-btn:hover {
+  background: #4a7262;
+  transform: scale(1.08);
+}
+#practica .ev-menu-btn:active {
+  transform: scale(0.95);
+}
+#practica .ev-menu-btn i {
+  transition: transform 0.2s ease;
+}
+#practica .ev-dropdown {
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  min-width: 150px;
+  background: var(--panel-bg);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  padding: 6px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  opacity: 0;
+  transform: translateY(-50%) translateX(8px) scale(0.96);
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+#practica .ev-dropdown.is-open {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0) scale(1);
+  pointer-events: auto;
+}
+#practica .ev-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-serif);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.12s ease;
+}
+#practica .ev-dropdown-item i {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+#practica .ev-item--ver { color: #1a6b50; }
+#practica .ev-item--ver:hover { background: rgba(26,107,80,0.1); color: #14503b; transform: translateX(3px); }
+#practica .ev-item--editar { color: #a0620a; }
+#practica .ev-item--editar:hover { background: rgba(221,163,38,0.12); color: #7a4a08; transform: translateX(3px); }
+#practica .ev-item--eliminar { color: #b93232; }
+#practica .ev-item--eliminar:hover { background: rgba(185,50,50,0.1); color: #8b2424; transform: translateX(3px); }
+body.dark-theme #practica .ev-card,
+body.dark-theme #practica .retro-card { background: #D1E5DE; }
+body.dark-theme #practica .ev-card-title { color: #1a1a1a; }
+body.dark-theme #practica .ev-card-desc { color: #4a544d; }
+body.dark-theme #practica .ev-dropdown { background: #c4dbd3; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25); }
+
+#practica .retro-section {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+#practica .retro-title {
+  font-size: 24px;
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+#practica .retro-card-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+#practica .retro-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-serif);
+}
+#practica .retro-role {
+  font-weight: 700;
+  color: #1a4231;
+  font-size: 15px;
+}
+#practica .retro-date {
+  color: #7b9487;
+  font-size: 13px;
+  font-weight: 600;
+}
+#practica .retro-content {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-family: var(--font-serif);
+  font-weight: normal;
+  margin: 0;
+}
+body.dark-theme #practica .retro-content { color: #4a544d; }
+
 /* --- Perfil --- */
 .profile-title { font-size: 24px; color: var(--text-primary); font-family: var(--font-serif); margin-bottom: 20px; margin-top: 10px; }
 .profile-panel { padding: 35px 40px; border-radius: 20px; background: var(--panel-bg); box-shadow: 0 4px 10px rgba(0,0,0,.05); transition: background 0.3s ease; }
@@ -708,6 +1012,20 @@ body.dark-theme .cp-btn-cancel { background: #9ec0b4; border-color: #7b9f91; }
   .profile-panel { padding: 25px; }
   .profile-info-list { flex-direction: column; }
 
+  /* Bitacora responsive */
+  .bitacora-info-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  /* Evidencias responsive */
+  #practica .ev-card,
+  #practica .retro-card { padding: 14px 16px; gap: 12px; }
+  #gestionar-practicas .ev-card,
+  #gestionar-instituciones .ev-card { padding: 14px 16px; gap: 12px; }
+
   /* Informes — mismo tratamiento que practice-content-wrapper:
      overflow-y: visible + flex: none para que el scroll lo gestione
      .app-shell; padding-bottom con safe-area-inset-bottom evita que
@@ -745,6 +1063,29 @@ body.dark-theme .cp-btn-cancel { background: #9ec0b4; border-color: #7b9f91; }
   .practice-form { grid-template-columns: 1fr; gap: 18px; }
   /* El botón ocupa todo el ancho */
   .practice-submit { width: 100%; margin-left: 0; }
+
+  /* Bitacora responsive */
+  .bitacora-info-card {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+  }
+  .bitacora-action-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+  }
+  .b-action-btn { width: 100%; }
+
+  /* Evidencias responsive */
+  #practica .ev-card,
+  #practica .retro-card { padding: 14px 16px; gap: 10px; }
+  #practica .ev-card-title { font-size: 15px; }
+  #practica .ev-card-desc { font-size: 13px; }
+  #practica .ev-menu-btn,
+  #gestionar-practicas .ev-menu-btn,
+  #gestionar-instituciones .ev-menu-btn { width: 38px; height: 38px; font-size: 16px; }
   
   /* Pestanas de informes en dos filas */
   .informes-tabs { flex-wrap: wrap; justify-content: center; }
@@ -773,6 +1114,30 @@ body.dark-theme .cp-btn-cancel { background: #9ec0b4; border-color: #7b9f91; }
   .profile-info-item i { font-size: 18px; }
   .tipos-tabla-panel { padding: 16px; }
   .tipos-card { padding: 14px 16px; }
+
+  /* Bitacora responsive */
+  .bitacora-title, .actividades-title, .preguntas-title, .evidencias-title { font-size: 20px; margin-bottom: 15px; }
+  .b-info-label { font-size: 14px; }
+  .b-action-label { font-size: 16px; }
+
+  /* Evidencias responsive */
+  #practica .ev-card,
+  #practica .retro-card,
+  #gestionar-practicas .ev-card,
+  #gestionar-instituciones .ev-card { padding: 12px 14px; border-radius: 12px; }
+  #practica .ev-card-title,
+  #gestionar-practicas .ev-card-title,
+  #gestionar-instituciones .ev-card-title { font-size: 14px; }
+  #practica .ev-card-desc { font-size: 12px; }
+  #practica .ev-menu-btn,
+  #gestionar-practicas .ev-menu-btn,
+  #gestionar-instituciones .ev-menu-btn { width: 36px; height: 36px; font-size: 15px; }
+  #practica .ev-dropdown-item,
+  #gestionar-practicas .ev-dropdown-item,
+  #gestionar-instituciones .ev-dropdown-item { padding: 7px; }
+  #practica .ev-dropdown-item i,
+  #gestionar-practicas .ev-dropdown-item i,
+  #gestionar-instituciones .ev-dropdown-item i { font-size: 16px; }
 }
 
 /* Modal de Éxito para Crear Práctica */
@@ -911,7 +1276,7 @@ body.dark-theme .cp-btn-cancel { background: #9ec0b4; border-color: #7b9f91; }
     user-select: none;
 }
 #gestionar-practicas .ev-menu-wrapper,
-#gestionar-instituciones .ev-menu-wrapper { position: relative; flex-shrink: 0; }
+#gestionar-instituciones .ev-menu-wrapper { position: relative; flex-shrink: 0; align-self: center; }
 #gestionar-practicas .ev-menu-btn,
 #gestionar-instituciones .ev-menu-btn {
     display: inline-flex;
@@ -926,32 +1291,44 @@ body.dark-theme .cp-btn-cancel { background: #9ec0b4; border-color: #7b9f91; }
     font-size: 18px;
     cursor: pointer;
     transition: background 0.2s ease, transform 0.15s ease;
+    flex-shrink: 0;
 }
 #gestionar-practicas .ev-menu-btn:hover,
 #gestionar-instituciones .ev-menu-btn:hover {
     background: #4a7262;
     transform: scale(1.08);
 }
+#gestionar-practicas .ev-menu-btn:active,
+#gestionar-instituciones .ev-menu-btn:active {
+    transform: scale(0.95);
+}
+#gestionar-practicas .ev-menu-btn i,
+#gestionar-instituciones .ev-menu-btn i {
+    transition: transform 0.2s ease;
+}
 #gestionar-practicas .ev-dropdown,
 #gestionar-instituciones .ev-dropdown {
     position: absolute;
-    right: 0;
-    top: calc(100% + 8px);
+    right: calc(100% + 10px);
+    top: 50%;
     min-width: 150px;
     background: var(--panel-bg);
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.15);
     padding: 6px;
     z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
     opacity: 0;
-    transform: translateY(-8px) scale(0.96);
+    transform: translateY(-50%) translateX(8px) scale(0.96);
     pointer-events: none;
     transition: opacity 0.18s ease, transform 0.18s ease;
 }
 #gestionar-practicas .ev-dropdown.is-open,
 #gestionar-instituciones .ev-dropdown.is-open {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(-50%) translateX(0) scale(1);
     pointer-events: auto;
 }
 #gestionar-practicas .ev-dropdown-item,
@@ -968,7 +1345,13 @@ body.dark-theme .cp-btn-cancel { background: #9ec0b4; border-color: #7b9f91; }
     font-family: var(--font-serif);
     cursor: pointer;
     background: transparent;
+    text-align: left;
     transition: background 0.15s ease, color 0.15s ease, transform 0.12s ease;
+}
+#gestionar-practicas .ev-dropdown-item i,
+#gestionar-instituciones .ev-dropdown-item i {
+    font-size: 14px;
+    flex-shrink: 0;
 }
 #gestionar-practicas .ev-item--ver,
 #gestionar-instituciones .ev-item--ver { color: #1a6b50; }
