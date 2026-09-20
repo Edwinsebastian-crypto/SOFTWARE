@@ -1684,6 +1684,23 @@ body.dark-theme #gestionar-usuarios .gu-strength-bars span {
       padding: 9px 6px;
       font-size: 13px;
    }
+
+   .gu-header h1 {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+   }
+
+   .gu-toolbar {
+      flex-direction: column;
+      align-items: stretch;
+   }
+
+   .gu-toolbar .cp-input-wrap, .gu-toolbar .gu-search, .gu-toolbar button {
+      flex: 1 1 auto;
+      width: 100%;
+   }
 }
 
 @media (max-width: 600px) {

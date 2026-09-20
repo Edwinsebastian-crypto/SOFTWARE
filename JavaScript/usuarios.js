@@ -159,7 +159,7 @@
    function plantillaCredencial(u, verPass) {
       const rol = ROLES[u.rol] || ROLES.estudiante;
       const nombre = nombreCompleto(u) || 'Nombre del usuario';
-      const doc = (u.docTipo || 'CC') + '  •  ' + (u.docNumero || '—');
+      const doc = (u.docTipo || '-') + '  •  ' + (u.docNumero || '—');
       const estado = (u.estado || 'activo');
       const anio = new Date().getFullYear();
       const pass = u.pass || '';
@@ -181,7 +181,7 @@
          '    <span class="gu-cred-role"><i class="fa-solid ' + rol.icono + '" aria-hidden="true"></i>' + escapar(rol.nombre) + '</span>' +
          '    <dl class="gu-cred-meta">' +
          '      <div><dt>Programa académico</dt><dd>' + escapar(u.programa || 'Sin asignar') + '</dd></div>' +
-         '      <div><dt>Correo asignado</dt><dd class="is-mono">' + escapar(u.correo || 'usuario' + DOMINIO) + '</dd></div>' +
+         '      <div><dt>Correo</dt><dd class="is-mono">' + escapar(u.correo || 'usuario' + DOMINIO) + '</dd></div>' +
          '      <div><dt>Contraseña</dt>' +
          '        <dd class="gu-cred-pass">' +
          '          <output>' + escapar(passTexto) + '</output>' +
@@ -306,7 +306,7 @@
          ['Nombre completo', nombreCompleto(d)],
          ['Documento', d.docTipo + ' ' + d.docNumero],
          ['Rol institucional', rol.nombre],
-         ['Programa / dependencia', d.programa],
+         ['Programa', d.programa],
          ['Facultad', campos.facultad.value || '—'],
          ['Correo institucional', d.correo],
          ['Estado inicial', ESTADOS[d.estado]],
@@ -386,8 +386,10 @@
       barras.forEach((b, i) => {
          b.style.background = i < nivel ? colores[Math.max(nivel - 1, 0)] : '';
       });
-      textoClave.textContent = valor.length === 0 ? 'Sin definir' : textos[Math.max(nivel - 1, 0)];
-      textoClave.style.color = valor.length === 0 ? '' : colores[Math.max(nivel - 1, 0)];
+      if (textoClave) {
+         textoClave.textContent = valor.length === 0 ? 'Sin definir' : textos[Math.max(nivel - 1, 0)];
+         textoClave.style.color = valor.length === 0 ? '' : colores[Math.max(nivel - 1, 0)];
+      }
    }
 
    $('#gu-pass-toggle').addEventListener('click', function () {
@@ -417,7 +419,8 @@
       btn.addEventListener('click', () => {
          estadoCuenta = btn.getAttribute('data-estado');
          $$('.gu-switch button').forEach((b) => b.classList.toggle('is-on', b === btn));
-         $('#gu-estado-desc').textContent = {
+         const descEl = $('#gu-estado-desc');
+         if (descEl) descEl.textContent = {
             activo: 'El usuario entra al portal apenas reciba sus credenciales.',
             pendiente: 'El usuario debe activar la cuenta desde el correo antes de entrar.',
             inactivo: 'La cuenta queda creada pero sin acceso al portal.'
@@ -434,7 +437,8 @@
       correoEditadoAMano = false;
       estadoCuenta = 'activo';
       $$('.gu-switch button').forEach((b) => b.classList.toggle('is-on', b.getAttribute('data-estado') === 'activo'));
-      $('#gu-estado-desc').textContent = 'El usuario entra al portal apenas reciba sus credenciales.';
+      const descEl = $('#gu-estado-desc');
+      if (descEl) descEl.textContent = 'El usuario entra al portal apenas reciba sus credenciales.';
       $$('.gu-field').forEach((f) => f.classList.remove('has-error'));
       $('#gu-form-title').textContent = 'Registrar nuevo usuario';
       $('#gu-form-desc').textContent = 'Completa los cuatro pasos para dar de alta al usuario en el sistema institucional.';

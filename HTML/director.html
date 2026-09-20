@@ -569,7 +569,6 @@
 												<select id="gu-doc-tipo" name="doc-tipo">
 													<option value="" disabled selected>Selecciona T. Documento</option>
 													<option value="CC">Cédula de ciudadanía</option>
-													<option value="TI">Tarjeta de identidad</option>
 													<option value="CE">Cédula de extranjería</option>
 													<option value="PAS">Pasaporte</option>
 												</select>
@@ -647,14 +646,6 @@
 															en la institución.</span></span>
 												</span>
 											</label>
-											<label class="gu-role">
-												<input type="radio" name="gu-rol" value="director">
-												<span class="gu-role-box">
-													<i class="fa-solid fa-briefcase" aria-hidden="true"></i>
-													<span><strong>Director</strong><span>Crea prácticas, usuarios e
-															informes.</span></span>
-												</span>
-											</label>
 										</div>
 									</div>
 
@@ -706,12 +697,9 @@
 									<div class="gu-status-row">
 										<div class="gu-status-copy">
 											<strong>Estado de la cuenta</strong>
-											<span id="gu-estado-desc">El usuario entra al portal apenas reciba sus
-												credenciales.</span>
 										</div>
 										<div class="gu-switch" role="group" aria-label="Estado de la cuenta">
 											<button type="button" data-estado="activo" class="is-on">Activo</button>
-											<button type="button" data-estado="pendiente">Pendiente</button>
 											<button type="button" data-estado="inactivo">Inactivo</button>
 										</div>
 									</div>
@@ -759,13 +747,7 @@
 										</button>
 									</div>
 
-									<div class="gu-strength" id="gu-strength">
-										<div class="gu-strength-top">
-											<span>Seguridad de la clave</span>
-											<b id="gu-strength-text">Sin definir</b>
-										</div>
-										<div class="gu-strength-bars"><span></span><span></span><span></span></div>
-									</div>
+
 
 									<label class="gu-check">
 										<input type="checkbox" id="gu-notificar" checked>
@@ -800,8 +782,7 @@
 										style="display:none;">Anterior</button>
 									<button type="button" class="cp-btn cp-btn-save" id="gu-btn-next">Siguiente</button>
 									<button type="submit" class="cp-btn cp-btn-save" id="gu-btn-submit"
-										style="display:none;"><i class="fa-solid fa-user-check" aria-hidden="true"></i>
-										Registrar</button>
+										style="display:none;"><i class="fa-solid fa-user-check" aria-hidden="true"></i>Registrar</button>
 								</div>
 							</form>
 						</div>
@@ -876,7 +857,6 @@
 								<option value="estudiante">Estudiantes</option>
 								<option value="tutor">Tutores académicos</option>
 								<option value="asesor">Asesores pedagógicos</option>
-								<option value="director">Directores</option>
 							</select>
 							<i class="fa-solid fa-chevron-down right-icon" aria-hidden="true"></i>
 						</div>
@@ -887,7 +867,6 @@
 								<option value="" disabled selected>Seleccione un estado</option>
 								<option value="">Todos</option>
 								<option value="activo">Activo</option>
-								<option value="pendiente">Pendiente</option>
 								<option value="inactivo">Inactivo</option>
 							</select>
 							<i class="fa-solid fa-chevron-down right-icon" aria-hidden="true"></i>
@@ -927,7 +906,7 @@
 										<th scope="col">Usuario</th>
 										<th scope="col">Documento</th>
 										<th scope="col">Rol institucional</th>
-										<th scope="col">Programa / dependencia</th>
+										<th scope="col">Programa</th>
 										<th scope="col">Estado</th>
 										<th scope="col">Último acceso</th>
 										<th scope="col" class="gu-col-actions">Acciones</th>
