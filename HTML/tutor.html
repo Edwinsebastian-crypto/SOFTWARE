@@ -71,7 +71,7 @@
 						<button type="button" class="bitacora-back-btn" id="bitacoraBack" aria-label="Volver a Información de Práctica">
 							<i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
 						</button>
-						<h2 id="bitacora-title" class="bitacora-title">Bitácora</h2>
+						<h2 id="bitacora-title" class="bitacora-title">Bitácora <span class="b-student-name" aria-label="Ver credencial del estudiante">- Estudiante de Prueba</span></h2>
 					</div>
 					<div class="bitacora-info-card">
 						<div class="bitacora-info-item">
@@ -389,5 +389,11 @@
 	</main>
 	<script src="../JavaScript/shell.js?v=1"></script>
 	<script src="../JavaScript/tutor.js?v=3"></script>
+	<!-- Modal: credencial del estudiante (bitácora) -->
+	<div id="b-modal-credencial" class="modal-overlay" style="display: none;">
+		<div class="gu-modal-card">
+			<div id="b-modal-credencial-body"></div>
+		</div>
+	</div>
 </body>
 </html>

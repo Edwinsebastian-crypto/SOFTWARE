@@ -666,3 +666,184 @@ body.dark-theme .retro-textarea::placeholder {
   .ev-dropdown-item i { font-size: 16px; }
   .ev-dropdown-item { padding: 9px 12px; font-size: 13px; }
 }
+
+/* --- Tarjeta de credencial para Bitacora --- */
+.b-cred {
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   max-width: 420px;
+   background: #F8F9FA;
+   border-radius: 20px;
+   overflow: hidden;
+   box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+   font-family: var(--font-sans, 'Inter', sans-serif);
+   margin: 20px auto;
+}
+.b-cred-top {
+   position: relative;
+   display: flex;
+   justify-content: space-between;
+   align-items: flex-start;
+   padding: 24px 24px 48px;
+   background: #1a4231;
+   color: #fff;
+   border-radius: 0 0 24px 24px;
+   z-index: 1;
+}
+.b-cred-brand {
+   display: flex;
+   align-items: center;
+   gap: 12px;
+}
+.b-cred-brand i {
+   font-size: 26px;
+   color: var(--clr-accent-gold, #dda326);
+}
+.b-cred-brand p {
+   margin: 0;
+   font-family: var(--font-serif, 'Merriweather', serif);
+   font-size: 14px;
+   line-height: 1.2;
+   letter-spacing: .02em;
+}
+.b-cred-brand em {
+   font-style: italic;
+   color: #9ec0b4;
+   font-weight: 300;
+}
+.b-cred-state {
+   padding: 6px 14px;
+   border-radius: 20px;
+   font-size: 12px;
+   font-weight: 700;
+   text-transform: uppercase;
+   letter-spacing: .05em;
+   background: rgba(255, 255, 255, .15);
+   backdrop-filter: blur(4px);
+}
+.b-cred-state--activo { color: #83d9ab; }
+.b-cred-state--inactivo { color: #ff8a8a; }
+.b-cred-state--bloqueado { color: #f2c94c; }
+.b-cred-body {
+   position: relative;
+   padding: 16px 24px 24px;
+   background: #F8F9FA;
+   z-index: 2;
+   margin-top: -24px;
+   border-radius: 24px 24px 0 0;
+}
+.b-cred-name {
+   margin: 0 0 4px;
+   font-family: var(--font-serif, 'Merriweather', serif);
+   font-size: 22px;
+   font-weight: 700;
+   color: #1a4231;
+}
+.b-cred-doc {
+   margin: 0 0 16px;
+   font-size: 14px;
+   color: #66756e;
+}
+.b-cred-role {
+   display: inline-flex;
+   align-items: center;
+   gap: 8px;
+   padding: 8px 16px;
+   border-radius: 12px;
+   background: #e3ebe8;
+   color: #1a4231;
+   font-size: 14px;
+   font-weight: 600;
+   margin-bottom: 24px;
+}
+.b-cred-meta {
+   display: grid;
+   gap: 16px;
+   margin: 0;
+}
+.b-cred-meta dt {
+   font-size: 12px;
+   font-weight: 700;
+   letter-spacing: .06em;
+   text-transform: uppercase;
+   color: #4d5a53;
+   margin-bottom: 3px;
+}
+.b-cred-meta dd {
+   font-family: var(--font-serif, 'Merriweather', serif);
+   font-size: 15px;
+   color: #1d2b24;
+   word-break: break-word;
+   margin: 0;
+}
+.b-cred-meta dd.is-mono {
+   font-family: var(--gu-mono, monospace);
+   font-size: 13.5px;
+}
+.b-modal-close {
+   display: block;
+   margin: 16px auto 0;
+   padding: 10px 26px;
+   border: 0;
+   border-radius: 10px;
+   background: #fff;
+   color: #1a4231;
+   font-family: var(--font-serif, 'Merriweather', serif);
+   font-size: 15px;
+   font-weight: 700;
+   cursor: pointer;
+}
+body.dark-theme .b-cred, body.dark-theme .b-cred-body {
+   background: #23332a;
+}
+body.dark-theme .b-cred-name, body.dark-theme .b-cred-meta dd {
+   color: #fff;
+}
+body.dark-theme .b-cred-meta dt {
+   color: #9ec0b4;
+}
+body.dark-theme .b-cred-doc {
+   color: #9ec0b4;
+}
+body.dark-theme .b-cred-role {
+   background: #1a4231;
+   color: #D1E5DE;
+}
+
+/* --- Estilos del título de bitácora y nombre de estudiante --- */
+.bitacora-title {
+   display: flex;
+   flex-wrap: wrap;
+   align-items: baseline;
+   gap: 8px;
+}
+
+.b-student-name {
+   cursor: pointer;
+   text-decoration: underline;
+   color: var(--clr-accent-gold);
+   -webkit-tap-highlight-color: transparent;
+   font-size: 0.85em;
+}
+
+/* --- Estilos base del modal para la credencial en Bitácora --- */
+#b-modal-credencial.modal-overlay {
+   position: fixed; 
+   top: 0; left: 0; 
+   width: 100vw; height: 100vh; 
+   background: rgba(0,0,0,0.5); 
+   display: flex; 
+   justify-content: center; 
+   align-items: center; 
+   z-index: 9999;
+}
+
+#b-modal-credencial .gu-modal-card {
+   width: min(380px, 92vw);
+   background: transparent;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}

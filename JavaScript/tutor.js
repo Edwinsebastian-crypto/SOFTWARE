@@ -227,3 +227,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+/* --- Credencial Estudiante en Bitacora --- */
+function plantillaCredencialBitacora(u) {
+   const nombre = u.nombres + ' ' + u.apellidos;
+   const doc = (u.docTipo || '-') + '  •  ' + (u.docNumero || '—');
+   const estado = (u.estado || 'activo');
+   const anio = new Date().getFullYear();
+   return '' +
+      '<article class="b-cred">' +
+      '  <header class="b-cred-top">' +
+      '    <div class="b-cred-brand">' +
+      '      <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>' +
+      '      <p>Credencial<br>universitaria <em>' + anio + '</em></p>' +
+      '    </div>' +
+      '    <span class="b-cred-state b-cred-state--' + estado + '">' + (estado.toUpperCase()) + '</span>' +
+      '  </header>' +
+      '  <div class="b-cred-body">' +
+      '    <h3 class="b-cred-name">' + nombre + '</h3>' +
+      '    <p class="b-cred-doc">' + doc + '</p>' +
+      '    <span class="b-cred-role"><i class="fa-solid fa-user-graduate" aria-hidden="true"></i>Estudiante</span>' +
+      '    <dl class="b-cred-meta">' +
+      '      <div><dt>Programa académico</dt><dd>' + (u.programa || 'Sin asignar') + '</dd></div>' +
+      '      <div><dt>Correo</dt><dd class="is-mono">' + (u.correo || 'usuario@unicesar.edu.co') + '</dd></div>' +
+      '    </dl>' +
+      '  </div>' +
+      '</article>' +
+      '<button type="button" class="b-modal-close" onclick="document.getElementById(\'b-modal-credencial\').style.display=\'none\'">Cerrar</button>';
+}
+
+document.addEventListener('click', (e) => {
+   const studentNameEl = e.target.closest('.b-student-name');
+   if (studentNameEl) {
+      const mockStudent = {
+         nombres: 'Edwin',
+         apellidos: 'Pruebas',
+         docTipo: 'CC',
+         docNumero: '123456789',
+         estado: 'activo',
+         programa: 'Ingeniería de Sistemas',
+         correo: 'epruebas@unicesar.edu.co'
+      };
+      const modal = document.getElementById('b-modal-credencial');
+      const body = document.getElementById('b-modal-credencial-body');
+      if (modal && body) {
+         body.innerHTML = plantillaCredencialBitacora(mockStudent);
+         modal.style.display = 'flex';
+      }
+   }
+});
