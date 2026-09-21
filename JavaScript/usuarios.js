@@ -367,7 +367,7 @@
 
    function ajustarProgramaPorRol(rol) {
       const etiqueta = $('#gu-programa-label');
-      etiqueta.textContent = rol === 'estudiante' ? 'Programa académico' : 'Dependencia o adscripción';
+      etiqueta.textContent = rol === 'estudiante' ? 'Programa académico' : 'Programa académico';
    }
 
    /* --- Contraseña --- */
