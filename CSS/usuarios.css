@@ -1758,3 +1758,8 @@ body.dark-theme #gestionar-usuarios .gu-strength-bars span {
       transition: none !important;
    }
 }
+
+/* Eliminar cintillo azul en móviles para las opciones de rol */
+.gu-role, .gu-role * {
+    -webkit-tap-highlight-color: transparent !important;
+}
