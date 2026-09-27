@@ -148,6 +148,10 @@
 							<i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
 						</button>
 						<h2 id="actividades-title" class="actividades-title">Actividades</h2>
+						<button type="button" class="am-open-btn" id="amOpenBtn" style="margin-left: auto;">
+							<i class="fa-solid fa-circle-plus" aria-hidden="true"></i>
+							<span>Subir evidencias</span>
+						</button>
 					</div>
 					<div class="practica-action-card">
 						<div class="b-action-left">
@@ -241,6 +245,70 @@
 						</button>
 						<h2 id="evidencias-title" class="evidencias-title">Evidencias</h2>
 					</div>
+
+					<!-- Tarjeta de información de la Actividad (estudiante: solo horas) -->
+					<div class="act-details-card">
+						<div class="act-details-left">
+							<div class="act-details-header-row">
+								<h3 class="act-details-title">Información de la Actividad</h3>
+							</div>
+							<div class="act-field">
+								<span class="act-label">Nombre Actividad</span>
+								<div class="act-value-box">Nombre de la Actividad Asignada</div>
+							</div>
+							<div class="act-row">
+								<div class="act-field act-field--date">
+									<span class="act-label">Fecha Asignación</span>
+									<div class="act-value-box">
+										18/04/2026
+										<i class="fa-regular fa-calendar" aria-hidden="true"></i>
+									</div>
+								</div>
+								<div class="act-field act-field--date">
+									<span class="act-label">Fecha Límite Entrega</span>
+									<div class="act-value-box">
+										25/04/2026
+										<i class="fa-regular fa-calendar" aria-hidden="true"></i>
+									</div>
+								</div>
+								<div class="act-field">
+									<span class="act-label">Nota</span>
+									<div class="act-value-box">
+										5.0
+								    </div>
+								</div>
+								<div class="act-field">
+									<label class="act-label" for="est-horas">Horas Realizadas</label>
+									<input type="number" id="est-horas" class="act-value-box act-input" min="0"
+										placeholder="0">
+								</div>
+							</div>
+							<div class="act-field">
+								<span class="act-label">Descripción</span>
+								<div class="act-desc-box">
+									Aquí va la descripción detallada de la actividad asignada...
+								</div>
+							</div>
+						</div>
+						<div class="act-details-right">
+							<div class="am-file-list has-files">
+								<span class="am-file-chip">
+									<i class="fa-solid fa-paperclip" aria-hidden="true"></i>
+									<span class="am-file-chip-name">antena1g.jfif</span>
+								</span>
+								<span class="am-file-chip">
+									<i class="fa-solid fa-paperclip" aria-hidden="true"></i>
+									<span class="am-file-chip-name">colores.png</span>
+								</span>
+								<span class="am-file-chip">
+									<i class="fa-solid fa-paperclip" aria-hidden="true"></i>
+									<span class="am-file-chip-name">colores2.png</span>
+								</span>
+							</div>
+						</div>
+					</div>
+
+					<h3 class="retro-title" style="margin: 10px 0 20px 0;">Evidencias de la Actividad</h3>
 
 					<!-- Evidencia 1 -->
 					<div class="ev-card">
@@ -440,6 +508,59 @@
 				</section>
 			</div>
 		</section>
+		<!-- Modal: Asignar Nueva Actividad -->
+		<div id="am-modal" class="am-modal-overlay" style="display: none;">
+			<div class="am-modal" role="dialog" aria-modal="true" aria-labelledby="am-modal-title">
+				<button type="button" class="am-modal-close" id="amModalCloseX" aria-label="Cerrar">
+					<i class="fa-solid fa-xmark" aria-hidden="true"></i>
+				</button>
+				<h3 class="am-modal-title" id="am-modal-title">Asignar Nueva Actividad</h3>
+
+				<form id="am-form" class="am-form" novalidate>
+					<div class="am-field">
+						<label for="am-nombre">Nombre</label>
+						<input type="text" id="am-nombre" name="nombre" placeholder="Escribe el nombre de la actividad"
+							autocomplete="off" required>
+					</div>
+
+					<div class="am-field">
+						<label for="am-desc">Descripción</label>
+						<textarea id="am-desc" name="descripcion" rows="3"
+							placeholder="Escribe la descripción de la actividad"></textarea>
+					</div>
+
+					<div class="am-field-row">
+						<div class="am-field">
+							<label for="am-fecha-asig">Fecha de Asignación</label>
+							<div class="am-date-wrap">
+								<input type="date" id="am-fecha-asig" name="fecha-asignacion">
+							</div>
+						</div>
+						<div class="am-field">
+							<label for="am-fecha-limite">Fecha Límite</label>
+							<div class="am-date-wrap">
+								<input type="date" id="am-fecha-limite" name="fecha-limite">
+							</div>
+						</div>
+					</div>
+
+					<div class="am-dropzone" id="am-dropzone" tabindex="0" role="button"
+						aria-label="Adjuntar archivos de la actividad">
+						<input type="file" id="am-file-input" multiple hidden>
+						<i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
+						<strong>Adjuntar Archivos de la Actividad</strong>
+						<span>Arrastre archivos aquí o haga clic para cargar</span>
+						<div class="am-file-list" id="am-file-list"></div>
+					</div>
+
+					<div class="am-actions">
+						<button type="button" class="am-btn-cancel" id="amBtnCancel"> <i
+								class="fa-solid fa-trash-can"></i>Cancelar</button>
+						<button type="submit" class="am-btn-confirm">Confirmar Asignación</button>
+					</div>
+				</form>
+			</div>
+		</div>
 	</main>
 	<script src="../JavaScript/shell.js?v=1"></script>
 	<script src="../JavaScript/estudiante.js?v=1"></script>

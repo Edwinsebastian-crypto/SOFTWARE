@@ -10,8 +10,7 @@
 	<link rel="stylesheet" href="../CSS/tutor.css?v=1">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link
-		href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
 		rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -149,6 +148,10 @@
 							<i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
 						</button>
 						<h2 id="actividades-title" class="actividades-title">Actividades</h2>
+						<button type="button" class="am-open-btn" id="amOpenBtn">
+							<i class="fa-solid fa-circle-plus" aria-hidden="true"></i>
+							<span>Asignar Actividad</span>
+						</button>
 					</div>
 					<div class="practica-action-card">
 						<div class="b-action-left">
@@ -237,7 +240,85 @@
 							<i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
 						</button>
 						<h2 id="evidencias-title" class="evidencias-title">Evidencias</h2>
+						
+						<!-- Menú de la actividad -->
+						<div class="ev-menu-wrapper" style="margin-left: auto;">
+							<button type="button" class="ev-menu-btn" aria-label="Opciones de actividad" aria-expanded="false">
+								<i class="fa-solid fa-ellipsis" aria-hidden="true"></i>
+							</button>
+							<div class="ev-dropdown" role="menu">
+								<button type="button" class="ev-dropdown-item ev-item--editar act-edit-btn" role="menuitem">
+									<i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Editar
+								</button>
+								<button type="button" class="ev-dropdown-item ev-item--eliminar" role="menuitem">
+									<i class="fa-solid fa-trash" aria-hidden="true"></i> Eliminar
+								</button>
+							</div>
+						</div>
 					</div>
+
+					<!-- Activity Details Card -->
+					<div class="act-details-card">
+						<div class="act-details-left">
+							<div class="act-details-header-row">
+								<h3 class="act-details-title">Información de la Actividad</h3>
+							</div>
+							<div class="act-field">
+								<span class="act-label">Nombre Actividad</span>
+								<div class="act-value-box">Nombre de la Actividad Asignada</div>
+							</div>
+							<div class="act-row">
+								<div class="act-field act-field--date">
+									<span class="act-label">Fecha Asignación</span>
+									<div class="act-value-box">
+										18/04/2026
+										<i class="fa-regular fa-calendar" aria-hidden="true"></i>
+									</div>
+								</div>
+								<div class="act-field act-field--date">
+									<span class="act-label">Fecha Límite Entrega</span>
+									<div class="act-value-box">
+										25/04/2026
+										<i class="fa-regular fa-calendar" aria-hidden="true"></i>
+									</div>
+								</div>
+								<div class="act-field">
+									<label class="act-label" for="act-nota">Nota:</label>
+									<input type="number" id="act-nota" class="act-value-box act-input" min="0" max="5" step="0.1" placeholder="0.0" value="5">
+								</div>
+								<div class="act-field">
+									<span class="act-label">Horas Realizadas</span>
+									<div class ="act-value-box">
+										0
+									</div>
+								</div>
+							</div>
+							<div class="act-field">
+								<span class="act-label">Descripción</span>
+								<div class="act-desc-box">
+									Aquí va la descripción detallada de la actividad asignada...
+								</div>
+							</div>
+						</div>
+						<div class="act-details-right">
+							<div class="am-file-list has-files">
+								<span class="am-file-chip">
+									<i class="fa-solid fa-paperclip" aria-hidden="true"></i>
+									<span class="am-file-chip-name">antena1g.jfif</span>
+								</span>
+								<span class="am-file-chip">
+									<i class="fa-solid fa-paperclip" aria-hidden="true"></i>
+									<span class="am-file-chip-name">colores.png</span>
+								</span>
+								<span class="am-file-chip">
+									<i class="fa-solid fa-paperclip" aria-hidden="true"></i>
+									<span class="am-file-chip-name">colores2.png</span>
+								</span>
+							</div>
+						</div>
+					</div>
+
+					<h3 class="retro-title" style="margin: 10px 0 20px 0;">Evidencias de la Actividad</h3>
 
 					<!-- Evidencia 1 -->
 					<div class="ev-card">
@@ -440,14 +521,65 @@
 				</section>
 			</div>
 		</section>
+
+		<!-- Modal: credencial del estudiante (bitácora) -->
+		<div id="b-modal-credencial" class="modal-overlay" style="display: none;">
+			<div class="gu-modal-card">
+				<div id="b-modal-credencial-body"></div>
+			</div>
+		</div>
+		
+		<!-- Modal: Asignar Nueva Actividad -->
+		<div id="am-modal" class="am-modal-overlay" style="display: none;">
+			<div class="am-modal" role="dialog" aria-modal="true" aria-labelledby="am-modal-title">
+				<button type="button" class="am-modal-close" id="amModalCloseX" aria-label="Cerrar">
+					<i class="fa-solid fa-xmark" aria-hidden="true"></i>
+				</button>
+				<h3 class="am-modal-title" id="am-modal-title">Asignar Nueva Actividad</h3>
+
+				<form id="am-form" class="am-form" novalidate>
+					<div class="am-field">
+						<label for="am-nombre">Nombre</label>
+						<input type="text" id="am-nombre" name="nombre" placeholder="Escribe el nombre de la actividad" autocomplete="off" required>
+					</div>
+
+					<div class="am-field">
+						<label for="am-desc">Descripción</label>
+						<textarea id="am-desc" name="descripcion" rows="3" placeholder="Escribe la descripción de la actividad"></textarea>
+					</div>
+
+					<div class="am-field-row">
+						<div class="am-field">
+							<label for="am-fecha-asig">Fecha de Asignación</label>
+							<div class="am-date-wrap">
+								<input type="date" id="am-fecha-asig" name="fecha-asignacion">
+							</div>
+						</div>
+						<div class="am-field">
+							<label for="am-fecha-limite">Fecha Límite</label>
+							<div class="am-date-wrap">
+								<input type="date" id="am-fecha-limite" name="fecha-limite">
+							</div>
+						</div>
+					</div>
+
+					<div class="am-dropzone" id="am-dropzone" tabindex="0" role="button" aria-label="Adjuntar archivos de la actividad">
+						<input type="file" id="am-file-input" multiple hidden>
+						<i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
+						<strong>Adjuntar Archivos de la Actividad</strong>
+						<span>Arrastre archivos aquí o haga clic para cargar</span>
+						<div class="am-file-list" id="am-file-list"></div>
+					</div>
+
+					<div class="am-actions">
+						<button type="button" class="am-btn-cancel" id="amBtnCancel"> <i class="fa-solid fa-trash-can"></i>Cancelar</button>
+						<button type="submit" class="am-btn-confirm">Confirmar Asignación</button>
+					</div>
+				</form>
+			</div>
+		</div>
 	</main>
 	<script src="../JavaScript/shell.js?v=1"></script>
 	<script src="../JavaScript/tutor.js?v=3"></script>
-	<!-- Modal: credencial del estudiante (bitácora) -->
-	<div id="b-modal-credencial" class="modal-overlay" style="display: none;">
-		<div class="gu-modal-card">
-			<div id="b-modal-credencial-body"></div>
-		</div>
-	</div>
 </body>
 </html>
