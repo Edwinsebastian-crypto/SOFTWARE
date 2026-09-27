@@ -322,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initCustomSelects('#gestionar-instituciones');
     initCustomSelects('#gestionar-usuarios');
 
-    const informesTabIds = ['tab-general', 'tab-tipos', 'tab-bitacoras', 'tab-retro', 'tab-instituciones'];
+    const informesTabIds = ['tab-general', 'tab-tipos', 'tab-practicas', 'tab-retro', 'tab-instituciones'];
     const informesTabBtns = document.querySelectorAll('#informes .informes-tab-btn');
 
     informesTabBtns.forEach((btn, idx) => {
@@ -589,8 +589,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── Panel de Práctica (misma navegación que estudiante) ───────────────
     const btnEntrar = document.querySelector('#practica .practice-submit');
     const practicePanel = document.querySelector('#practica .practice-panel');
-    const bitacoraPanel = document.getElementById('bitacora-panel');
-    const bitacoraBackBtn = document.getElementById('bitacoraBack');
+    const practicaPanel = document.getElementById('practica-panel');
+    const practicaBackBtn = document.getElementById('practicaBack');
     const actividadesPanel = document.getElementById('actividades-panel');
     const actividadesBackBtn = document.getElementById('actividadesBack');
     const actividadesBtns = document.querySelectorAll('#practica .actividad-entrar-btn');
@@ -601,11 +601,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const evidenciasTitleEl = document.getElementById('evidencias-title');
     const practicaRoot = document.getElementById('practica');
 
-    const bitacoraActionBtns = bitacoraPanel
-        ? bitacoraPanel.querySelectorAll('.b-action-btn')
+    const practicaActionBtns = practicaPanel
+        ? practicaPanel.querySelectorAll('.b-action-btn')
         : [];
-    const actividadesEntrarBitacora = bitacoraActionBtns[0] || null;
-    const preguntasBtn = bitacoraActionBtns[1] || null;
+    const actividadesEntrarpractica = practicaActionBtns[0] || null;
+    const preguntasBtn = practicaActionBtns[1] || null;
 
     const preguntasActionBtns = preguntasPanel
         ? preguntasPanel.querySelectorAll('.b-action-btn')
@@ -621,25 +621,25 @@ document.addEventListener('DOMContentLoaded', () => {
         if (appShell) appShell.scrollTop = 0;
     }
 
-    if (btnEntrar && practicePanel && bitacoraPanel) {
+    if (btnEntrar && practicePanel && practicaPanel) {
         btnEntrar.addEventListener('click', () => {
             practicePanel.style.display = 'none';
-            bitacoraPanel.style.display = 'flex';
+            practicaPanel.style.display = 'flex';
             resetPracticeScroll();
         });
     }
 
-    if (bitacoraBackBtn && practicePanel && bitacoraPanel) {
-        bitacoraBackBtn.addEventListener('click', () => {
-            bitacoraPanel.style.display = 'none';
+    if (practicaBackBtn && practicePanel && practicaPanel) {
+        practicaBackBtn.addEventListener('click', () => {
+            practicaPanel.style.display = 'none';
             practicePanel.style.display = 'block';
             resetPracticeScroll();
         });
     }
 
-    if (actividadesEntrarBitacora && bitacoraPanel && actividadesPanel) {
-        actividadesEntrarBitacora.addEventListener('click', () => {
-            bitacoraPanel.style.display = 'none';
+    if (actividadesEntrarpractica && practicaPanel && actividadesPanel) {
+        actividadesEntrarpractica.addEventListener('click', () => {
+            practicaPanel.style.display = 'none';
             actividadesPanel.style.display = 'flex';
             resetPracticeScroll();
         });
@@ -657,10 +657,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (actividadesBackBtn && bitacoraPanel && actividadesPanel) {
+    if (actividadesBackBtn && practicaPanel && actividadesPanel) {
         actividadesBackBtn.addEventListener('click', () => {
             actividadesPanel.style.display = 'none';
-            bitacoraPanel.style.display = 'flex';
+            practicaPanel.style.display = 'flex';
             resetPracticeScroll();
         });
     }
@@ -687,18 +687,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (preguntasBtn && bitacoraPanel && preguntasPanel) {
+    if (preguntasBtn && practicaPanel && preguntasPanel) {
         preguntasBtn.addEventListener('click', () => {
-            bitacoraPanel.style.display = 'none';
+            practicaPanel.style.display = 'none';
             preguntasPanel.style.display = 'flex';
             resetPracticeScroll();
         });
     }
 
-    if (preguntasBackBtn && bitacoraPanel && preguntasPanel) {
+    if (preguntasBackBtn && practicaPanel && preguntasPanel) {
         preguntasBackBtn.addEventListener('click', () => {
             preguntasPanel.style.display = 'none';
-            bitacoraPanel.style.display = 'flex';
+            practicaPanel.style.display = 'flex';
             resetPracticeScroll();
         });
     }
@@ -738,51 +738,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-/* --- Credencial Estudiante en Bitacora --- */
-function plantillaCredencialBitacora(u) {
-   const nombre = u.nombres + ' ' + u.apellidos;
-   const doc = (u.docTipo || '-') + '  •  ' + (u.docNumero || '—');
-   const estado = (u.estado || 'activo');
-   const anio = new Date().getFullYear();
-   return '' +
-      '<article class="b-cred">' +
-      '  <header class="b-cred-top">' +
-      '    <div class="b-cred-brand">' +
-      '      <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>' +
-      '      <p>Credencial<br>universitaria <em>' + anio + '</em></p>' +
-      '    </div>' +
-      '    <span class="b-cred-state b-cred-state--' + estado + '">' + (estado.toUpperCase()) + '</span>' +
-      '  </header>' +
-      '  <div class="b-cred-body">' +
-      '    <h3 class="b-cred-name">' + nombre + '</h3>' +
-      '    <p class="b-cred-doc">' + doc + '</p>' +
-      '    <span class="b-cred-role"><i class="fa-solid fa-user-graduate" aria-hidden="true"></i>Estudiante</span>' +
-      '    <dl class="b-cred-meta">' +
-      '      <div><dt>Programa académico</dt><dd>' + (u.programa || 'Sin asignar') + '</dd></div>' +
-      '      <div><dt>Correo</dt><dd class="is-mono">' + (u.correo || 'usuario@unicesar.edu.co') + '</dd></div>' +
-      '    </dl>' +
-      '  </div>' +
-      '</article>' +
-      '<button type="button" class="b-modal-close" onclick="document.getElementById(\'b-modal-credencial\').style.display=\'none\'">Cerrar</button>';
+/* --- Credencial Estudiante en practica --- */
+function plantillaCredencialpractica(u) {
+    const nombre = u.nombres + ' ' + u.apellidos;
+    const doc = (u.docTipo || '-') + '  •  ' + (u.docNumero || '—');
+    const estado = (u.estado || 'activo');
+    const anio = new Date().getFullYear();
+    return '' +
+        '<article class="b-cred">' +
+        '  <header class="b-cred-top">' +
+        '    <div class="b-cred-brand">' +
+        '      <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>' +
+        '      <p>Credencial<br>universitaria <em>' + anio + '</em></p>' +
+        '    </div>' +
+        '    <span class="b-cred-state b-cred-state--' + estado + '">' + (estado.toUpperCase()) + '</span>' +
+        '  </header>' +
+        '  <div class="b-cred-body">' +
+        '    <h3 class="b-cred-name">' + nombre + '</h3>' +
+        '    <p class="b-cred-doc">' + doc + '</p>' +
+        '    <span class="b-cred-role"><i class="fa-solid fa-user-graduate" aria-hidden="true"></i>Estudiante</span>' +
+        '    <dl class="b-cred-meta">' +
+        '      <div><dt>Programa académico</dt><dd>' + (u.programa || 'Sin asignar') + '</dd></div>' +
+        '      <div><dt>Correo</dt><dd class="is-mono">' + (u.correo || 'usuario@unicesar.edu.co') + '</dd></div>' +
+        '    </dl>' +
+        '  </div>' +
+        '</article>' +
+        '<button type="button" class="b-modal-close" onclick="document.getElementById(\'b-modal-credencial\').style.display=\'none\'">Cerrar</button>';
 }
 
 document.addEventListener('click', (e) => {
-   const studentNameEl = e.target.closest('.b-student-name');
-   if (studentNameEl) {
-      const mockStudent = {
-         nombres: 'Edwin',
-         apellidos: 'Pruebas',
-         docTipo: 'CC',
-         docNumero: '123456789',
-         estado: 'activo',
-         programa: 'Ingeniería de Sistemas',
-         correo: 'epruebas@unicesar.edu.co'
-      };
-      const modal = document.getElementById('b-modal-credencial');
-      const body = document.getElementById('b-modal-credencial-body');
-      if (modal && body) {
-         body.innerHTML = plantillaCredencialBitacora(mockStudent);
-         modal.style.display = 'flex';
-      }
-   }
+    const studentNameEl = e.target.closest('.b-student-name');
+    if (studentNameEl) {
+        const mockStudent = {
+            nombres: 'Edwin',
+            apellidos: 'Pruebas',
+            docTipo: 'CC',
+            docNumero: '123456789',
+            estado: 'activo',
+            programa: 'Ingeniería de Sistemas',
+            correo: 'epruebas@unicesar.edu.co'
+        };
+        const modal = document.getElementById('b-modal-credencial');
+        const body = document.getElementById('b-modal-credencial-body');
+        if (modal && body) {
+            body.innerHTML = plantillaCredencialpractica(mockStudent);
+            modal.style.display = 'flex';
+        }
+    }
 });

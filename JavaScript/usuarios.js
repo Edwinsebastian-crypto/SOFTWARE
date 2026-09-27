@@ -174,7 +174,7 @@
          '    </div>' +
          '    <span class="gu-cred-state gu-cred-state--' + estado + '">' + escapar(ESTADOS[estado] || 'Activo').toUpperCase() + '</span>' +
          '  </header>' +
-         '  <button type="button" class="gu-cred-cta" data-gu-bitacora>Ver bitácora <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>' +
+         '  <button type="button" class="gu-cred-cta" data-gu-practica>Ver bitácora <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>' +
          '  <div class="gu-cred-body">' +
          '    <h3 class="gu-cred-name">' + escapar(nombre) + '</h3>' +
          '    <p class="gu-cred-doc">' + escapar(doc) + '</p>' +
@@ -705,8 +705,8 @@
          return;
       }
 
-      const bitacora = e.target.closest('[data-gu-bitacora]');
-      if (bitacora) {
+      const practica = e.target.closest('[data-gu-practica]');
+      if (practica) {
          cerrarModales();
          const enlace = document.querySelector('.app-nav-link[href="#practica"]');
          if (enlace) enlace.click();

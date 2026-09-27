@@ -2,8 +2,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const btnEntrar = document.querySelector('.practice-submit');
     const practicePanel = document.querySelector('.practice-panel');
-    const bitacoraPanel = document.getElementById('bitacora-panel');
-    const bitacoraBackBtn = document.getElementById('bitacoraBack');
+    const practicaPanel = document.getElementById('practica-panel');
+    const practicaBackBtn = document.getElementById('practicaBack');
 
     const actividadesPanel = document.getElementById('actividades-panel');
     const actividadesBackBtn = document.getElementById('actividadesBack');
@@ -18,11 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const evidenciasTitleEl = document.getElementById('evidencias-title');
 
     // Botones de acción de la bitácora identificados por contexto
-    const bitacoraActionBtns = bitacoraPanel
-        ? bitacoraPanel.querySelectorAll('.b-action-btn')
+    const practicaActionBtns = practicaPanel
+        ? practicaPanel.querySelectorAll('.b-action-btn')
         : [];
-    const actividadesEntrarBitacora = bitacoraActionBtns[0] || null;
-    const preguntasBtn = bitacoraActionBtns[1] || null;
+    const actividadesEntrarpractica = practicaActionBtns[0] || null;
+    const preguntasBtn = practicaActionBtns[1] || null;
 
     // Botones de acción del panel de preguntas
     const preguntasActionBtns = preguntasPanel
@@ -40,27 +40,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ── Entrar a Bitácora desde Práctica ──────────────────────────────────
-    if (btnEntrar && practicePanel && bitacoraPanel) {
+    if (btnEntrar && practicePanel && practicaPanel) {
         btnEntrar.addEventListener('click', () => {
             practicePanel.style.display = 'none';
-            bitacoraPanel.style.display = 'flex';
+            practicaPanel.style.display = 'flex';
             resetScroll();
         });
     }
 
     // ── Volver a Práctica desde Bitácora ──────────────────────────────────
-    if (bitacoraBackBtn && practicePanel && bitacoraPanel) {
-        bitacoraBackBtn.addEventListener('click', () => {
-            bitacoraPanel.style.display = 'none';
+    if (practicaBackBtn && practicePanel && practicaPanel) {
+        practicaBackBtn.addEventListener('click', () => {
+            practicaPanel.style.display = 'none';
             practicePanel.style.display = 'block';
             resetScroll();
         });
     }
 
     // ── Entrar a Actividades desde Bitácora o Preguntas ───────────────────────────────
-    if (actividadesEntrarBitacora && bitacoraPanel && actividadesPanel) {
-        actividadesEntrarBitacora.addEventListener('click', () => {
-            bitacoraPanel.style.display = 'none';
+    if (actividadesEntrarpractica && practicaPanel && actividadesPanel) {
+        actividadesEntrarpractica.addEventListener('click', () => {
+            practicaPanel.style.display = 'none';
             actividadesPanel.style.display = 'flex';
             resetScroll();
         });
@@ -77,10 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ── Volver a Bitácora desde Actividades ───────────────────────────────
-    if (actividadesBackBtn && bitacoraPanel && actividadesPanel) {
+    if (actividadesBackBtn && practicaPanel && actividadesPanel) {
         actividadesBackBtn.addEventListener('click', () => {
             actividadesPanel.style.display = 'none';
-            bitacoraPanel.style.display = 'flex';
+            practicaPanel.style.display = 'flex';
             resetScroll();
         });
     }
@@ -111,19 +111,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ── Entrar a Preguntas desde Bitácora ─────────────────────────────────
-    if (preguntasBtn && bitacoraPanel && preguntasPanel) {
+    if (preguntasBtn && practicaPanel && preguntasPanel) {
         preguntasBtn.addEventListener('click', () => {
-            bitacoraPanel.style.display = 'none';
+            practicaPanel.style.display = 'none';
             preguntasPanel.style.display = 'flex';
             resetScroll();
         });
     }
 
     // ── Volver a Bitácora desde Preguntas ─────────────────────────────────
-    if (preguntasBackBtn && bitacoraPanel && preguntasPanel) {
+    if (preguntasBackBtn && practicaPanel && preguntasPanel) {
         preguntasBackBtn.addEventListener('click', () => {
             preguntasPanel.style.display = 'none';
-            bitacoraPanel.style.display = 'flex';
+            practicaPanel.style.display = 'flex';
             resetScroll();
         });
     }
