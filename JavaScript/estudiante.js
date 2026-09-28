@@ -84,29 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Menus de evidencias (ev-menu-btn)
-    document.querySelectorAll('.ev-menu-btn').forEach((btn) => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const dropdown = btn.nextElementSibling;
-            const isOpen = btn.getAttribute('aria-expanded') === 'true';
-            // Cerrar todos
-            document.querySelectorAll('.ev-menu-btn').forEach((b) => {
-                b.setAttribute('aria-expanded', 'false');
-                if (b.nextElementSibling) b.nextElementSibling.style.display = 'none';
-            });
-            if (!isOpen && dropdown) {
-                dropdown.style.display = 'block';
-                btn.setAttribute('aria-expanded', 'true');
-            }
-        });
-    });
-    document.addEventListener('click', () => {
-        document.querySelectorAll('.ev-menu-btn').forEach((b) => {
-            b.setAttribute('aria-expanded', 'false');
-            if (b.nextElementSibling) b.nextElementSibling.style.display = 'none';
-        });
-    });
+    // Lógica de menús de evidencias fue movida al final del archivo
 
     // Abrir modal de "Ver evidencia"
     document.querySelectorAll('.ev-item--ver').forEach((btn) => {

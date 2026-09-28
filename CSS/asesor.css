@@ -1660,6 +1660,7 @@ body.dark-theme .act-details-right .am-file-chip { background: #9ec0b4; }
   background: rgba(26,66,49,.03);
   text-align: center;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
   transition: background .2s ease, border-color .2s ease;
 }
 .am-dropzone:hover, .am-dropzone:focus-visible, .am-dropzone:focus, .am-dropzone.is-dragover {
