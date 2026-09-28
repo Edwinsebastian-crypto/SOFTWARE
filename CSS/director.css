@@ -3189,30 +3189,34 @@ body.dark-theme .act-details-right .am-file-chip { background: #9ec0b4; }
 .am-actions {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 16px;
   margin-top: 4px;
 }
 .am-btn-cancel {
+  flex: 1;
+  max-width: 280px;
   background: linear-gradient(90deg, #59866e, #6c8d7c);
   color: white;
   border: none;
-  border-radius: 8px;
-  padding: 8px 16px;
+  border-radius: 12px;
+  padding: 14px 20px;
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,.15);
   transition: opacity 0.2s, transform 0.2s;
 }
-.am-btn-cancel:hover { opacity: .85; }
+.am-btn-cancel:hover { opacity: .85; transform: translateY(-1px); }
+.am-btn-cancel:active { transform: translateY(0); }
 .am-btn-confirm {
   flex: 1;
   max-width: 280px;
-  margin-left: auto;
   padding: 14px 20px;
   border: 0;
   border-radius: 12px;
@@ -3255,5 +3259,5 @@ body.dark-theme .am-btn-cancel { color: #cdd9d4; }
   .am-field-row { grid-template-columns: 1fr; }
   .am-actions { flex-direction: column-reverse; }
   .am-btn-confirm { max-width: 100%; margin-left: 0; }
-  .am-btn-cancel { width: 100%; text-align: center; }
+  .am-btn-cancel { width: 100%; max-width: 100%; text-align: center; }
 }

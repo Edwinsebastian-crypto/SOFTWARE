@@ -303,4 +303,38 @@ document.addEventListener('DOMContentLoaded', () => {
             cerrarModal();
         });
     }
+
+    // ── Lógica para botones de opciones (Ver/Editar/Eliminar) en Evidencias ──
+    function setEvMenuState(btn, open) {
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        
+        const dd = btn.nextElementSibling;
+        if (dd && dd.classList.contains('ev-dropdown')) {
+            dd.classList.toggle('is-open', open);
+        }
+
+        const icon = btn.querySelector('i');
+        if (icon) {
+            icon.classList.toggle('fa-ellipsis', !open);
+            icon.classList.toggle('fa-arrow-left', open);
+        }
+    }
+
+    function closeAllEvDropdowns(exceptBtn = null) {
+        document.querySelectorAll('.ev-menu-btn').forEach(btn => {
+            if (btn === exceptBtn) return;
+            setEvMenuState(btn, false);
+        });
+    }
+
+    document.querySelectorAll('.ev-menu-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = btn.getAttribute('aria-expanded') === 'true';
+            closeAllEvDropdowns(btn);
+            setEvMenuState(btn, !isOpen);
+        });
+    });
+
+    document.addEventListener('click', () => closeAllEvDropdowns(null));
 });

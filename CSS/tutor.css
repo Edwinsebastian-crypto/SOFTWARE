@@ -1515,10 +1515,14 @@ body.dark-theme .b-cred-role {
   box-shadow: 0 0 0 2px rgba(221, 163, 38, .25);
 }
 .am-date-wrap input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
   position: absolute;
-  right: 12px;
-  opacity: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   cursor: pointer;
+  z-index: 2;
 }
 
 /* --- Zona de "Adjuntar Evidencias" (drag & drop) --- */
@@ -1537,6 +1541,7 @@ body.dark-theme .b-cred-role {
 }
 .am-dropzone:hover,
 .am-dropzone:focus-visible,
+.am-dropzone:focus,
 .am-dropzone.is-dragover {
   border-color: var(--clr-accent-gold);
   background: rgba(221, 163, 38, .08);
@@ -1606,31 +1611,35 @@ body.dark-theme .b-cred-role {
 .am-actions {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 16px;
   margin-top: 4px;
 }
 .am-btn-cancel {
+  flex: 1;
+  max-width: 280px;
   background: linear-gradient(90deg, #59866e, #6c8d7c);
   color: white;
   border: none;
-  border-radius: 8px;
-  padding: 8px 16px;
+  border-radius: 12px;
+  padding: 14px 20px;
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .15);
   transition: opacity 0.2s, transform 0.2s;
 }
-.am-btn-cancel:hover { color: #b93232; }
+.am-btn-cancel:hover { opacity: .85; transform: translateY(-1px); }
+.am-btn-cancel:active { transform: translateY(0); }
 
 .am-btn-confirm {
   flex: 1;
   max-width: 280px;
-  margin-left: auto;
   padding: 14px 20px;
   border: 0;
   border-radius: 12px;
@@ -1672,9 +1681,45 @@ body.dark-theme .am-btn-cancel { color: #cdd9d4; }
   .am-open-btn { margin-left: 0; width: 100%; justify-content: center; order: 3; }
   .am-modal { padding: 24px 20px 22px; border-radius: 18px; }
   .am-field-row { grid-template-columns: 1fr; }
-  .am-actions { flex-direction: column-reverse; }
-  .am-btn-confirm { max-width: 100%; margin-left: 0; }
-  .am-btn-cancel { width: 100%; text-align: center; }
+  .am-actions { flex-direction: column-reverse; gap: 12px; /* Añade un espacio uniforme entre los dos botones */
+  }  /* Aplica las mismas reglas de tamaño a ambos botones */
+  .am-btn-confirm,
+  .am-btn-cancel {width: 100%;max-width: 100%;margin-left: 0; box-sizing: border-box; /* Asegura que el padding no altere el ancho final */
+  }
+}
+
+/* ── Placeholder "dd/mm/aaaa" en móvil para input[type=date] vacío ── */
+.am-date-wrap .right-icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #1a4231;
+  opacity: 0.6;
+  pointer-events: none;
+  font-size: 16px;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .am-date-wrap:has(input[type="date"]:not(:valid)) input[type="date"],
+  .am-date-wrap:has(input[type="date"][value=""]) input[type="date"] {
+    color: transparent;
+  }
+  .am-date-wrap:has(input[type="date"]:not(:valid))::before,
+  .am-date-wrap:has(input[type="date"][value=""])::before {
+    content: 'dd/mm/aaaa';
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #1a4231;
+    opacity: 0.8;
+    font-family: var(--font-serif);
+    font-size: 16px;
+    pointer-events: none;
+    z-index: 1;
+  }
 }
 
 /* --- Detalles de Actividad en Panel de Evidencias --- */
