@@ -105,10 +105,6 @@
 					</div>
 					<div class="practica-info-card">
 						<div class="practica-info-item">
-							<span class="b-info-label">Fecha de creación</span>
-							<span class="b-info-value">18/04/2026</span>
-						</div>
-						<div class="practica-info-item">
 							<span class="b-info-label">Nota Final</span>
 							<span class="b-info-value">Nota</span>
 						</div>
@@ -278,9 +274,10 @@
 								    </div>
 								</div>
 								<div class="act-field">
-									<label class="act-label" for="est-horas">Horas Realizadas</label>
-									<input type="number" id="est-horas" class="act-value-box act-input" min="0"
-										placeholder="0">
+									<span class="act-label">Horas Realizadas</span>
+									<div class="act-value-box">
+										0
+								    </div>
 								</div>
 							</div>
 							<div class="act-field">
@@ -514,43 +511,24 @@
 				<button type="button" class="am-modal-close" id="amModalCloseX" aria-label="Cerrar">
 					<i class="fa-solid fa-xmark" aria-hidden="true"></i>
 				</button>
-				<h3 class="am-modal-title" id="am-modal-title">Asignar Nueva Actividad</h3>
+				<h3 class="am-modal-title" id="am-modal-title">Agregar Nueva Evidencia</h3>
 
 				<form id="am-form" class="am-form" novalidate>
 					<div class="am-field">
-						<label for="am-nombre">Nombre</label>
-						<input type="text" id="am-nombre" name="nombre" placeholder="Escribe el nombre de la actividad"
-							autocomplete="off" required>
+						<label class="est-horas" for="est-horas">Horas Realizadas</label>
+						<input type="number" id="est-horas" class="act-value-box act-input" min="0"
+						placeholder="0">
 					</div>
-
 					<div class="am-field">
-						<label for="am-desc">Descripción</label>
-						<textarea id="am-desc" name="descripcion" rows="3"
-							placeholder="Escribe la descripción de la actividad"></textarea>
-					</div>
-
-					<div class="am-field-row">
-						<div class="am-field">
-							<label for="am-fecha-asig">Fecha de Asignación</label>
-							<div class="am-date-wrap">
-								<input type="date" id="am-fecha-asig" name="fecha-asignacion" required>
-								<i class="fa-regular fa-calendar right-icon"></i>
-							</div>
-						</div>
-						<div class="am-field">
-							<label for="am-fecha-limite">Fecha Límite</label>
-							<div class="am-date-wrap">
-								<input type="date" id="am-fecha-limite" name="fecha-limite" required>
-								<i class="fa-regular fa-calendar right-icon"></i>
-							</div>
-						</div>
+    					<label class="am-desc" for="am-desc">Descripción</label>
+    					<textarea id="am-desc" name="descripcion" rows="5" placeholder="Escribe la descripción de la actividad"></textarea>
 					</div>
 
 					<div class="am-dropzone" id="am-dropzone" tabindex="0" role="button"
 						aria-label="Adjuntar archivos de la actividad">
 						<input type="file" id="am-file-input" multiple hidden>
 						<i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
-						<strong>Adjuntar Archivos de la Actividad</strong>
+						<strong>Adjuntar Archivos de la Evidencia</strong>
 						<span>Arrastre archivos aquí o haga clic para cargar</span>
 						<div class="am-file-list" id="am-file-list"></div>
 					</div>
@@ -558,7 +536,7 @@
 					<div class="am-actions">
 						<button type="button" class="am-btn-cancel" id="amBtnCancel"> <i
 								class="fa-solid fa-trash-can"></i>Cancelar</button>
-						<button type="submit" class="am-btn-confirm">Confirmar Asignación</button>
+						<button type="submit" class="am-btn-confirm">Agregar Evidencia</button>
 					</div>
 				</form>
 			</div>
@@ -567,5 +545,4 @@
 	<script src="../JavaScript/shell.js?v=1"></script>
 	<script src="../JavaScript/estudiante.js?v=1"></script>
 </body>
-
 </html>

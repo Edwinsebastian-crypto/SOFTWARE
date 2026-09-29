@@ -1,5 +1,5 @@
 /* =========================================================================
-   estudiante.css — Solo lo propio del panel de Estudiante (formulario de
+   tutor.css — Solo lo propio del panel de Estudiante (formulario de
    práctica, perfil). El sidebar/topbar/menú móvil vive en shell.css y se
    comparte con los demás roles; no lo dupliques aquí.
    Debe cargarse DESPUÉS de variables.css y shell.css.
@@ -872,6 +872,17 @@ body.dark-theme .retro-content {
   border-color: #1a6b50;
 }
 
+/* Borde dorado permanente en el textarea del modal "Asignar Actividad" (modo claro) */
+.am-form .retro-textarea {
+  border: 2px solid var(--clr-accent-gold);
+  box-shadow: 0 0 0 1px rgba(221, 163, 38, 0.25);
+}
+.am-form .retro-textarea:focus {
+  border-color: var(--clr-accent-gold);
+  box-shadow: 0 0 0 3px rgba(221, 163, 38, 0.3);
+  outline: none;
+}
+
 body.dark-theme .retro-textarea {
   background: #9ec0b4;
   border-color: #78a38c;
@@ -880,6 +891,16 @@ body.dark-theme .retro-textarea {
 
 body.dark-theme .retro-textarea::placeholder {
   color: rgba(26, 66, 49, 0.7);
+}
+
+/* Borde dorado en modo oscuro para el modal "Asignar Actividad" */
+body.dark-theme .am-form .retro-textarea {
+  border: 2px solid var(--clr-accent-gold);
+  box-shadow: 0 0 0 1px rgba(221, 163, 38, 0.3);
+}
+body.dark-theme .am-form .retro-textarea:focus {
+  border-color: var(--clr-accent-gold);
+  box-shadow: 0 0 0 3px rgba(221, 163, 38, 0.35);
 }
 
 .retro-actions {
@@ -1470,10 +1491,11 @@ body.dark-theme .b-cred-role {
 .am-field input[type="text"],
 .am-field textarea {
   width: 100%;
-  padding: 14px 16px;
-  border: 1px solid rgba(0, 0, 0, .08);
+  padding: 12px 16px;
+  border: 0;
   border-radius: 12px;
-  background: #fff;
+  background: var(--input-bg);          /* Fondo copiado de act-value-box */
+  box-shadow: var(--input-shadow);
   color: #1a4231;
   font-family: var(--font-serif);
   font-size: 15px;
@@ -1482,12 +1504,11 @@ body.dark-theme .b-cred-role {
   transition: box-shadow .2s ease, border-color .2s ease;
 }
 .am-field textarea { min-height: 90px; }
-.am-field input::placeholder,
-.am-field textarea::placeholder { color: #9aa79f; }
-.am-field input:focus,
+/* 2. Anillo dorado al hacer foco/clic (igual a Horas) */
+.am-field input[type="text"]:focus,
 .am-field textarea:focus {
-  border-color: var(--clr-accent-gold);
-  box-shadow: 0 0 0 2px rgba(221, 163, 38, .25);
+  border-color: transparent;
+  box-shadow: 0 0 0 2px var(--clr-accent-gold), var(--input-shadow);
 }
 .am-field input.am-input-error {
   border-color: #b93232;
@@ -1500,9 +1521,10 @@ body.dark-theme .b-cred-role {
 .am-date-wrap input[type="date"] {
   width: 100%;
   padding: 13px 40px 13px 16px;
-  border: 1px solid rgba(0, 0, 0, .08);
+  border: 0;
   border-radius: 12px;
-  background: #fff;
+  background: var(--input-bg);
+  box-shadow: var(--input-shadow);
   color: #1a4231;
   font-family: var(--font-serif);
   font-size: 14px;
@@ -1511,8 +1533,8 @@ body.dark-theme .b-cred-role {
   transition: box-shadow .2s ease, border-color .2s ease;
 }
 .am-date-wrap input[type="date"]:focus {
-  border-color: var(--clr-accent-gold);
-  box-shadow: 0 0 0 2px rgba(221, 163, 38, .25);
+  border-color: transparent;
+  box-shadow: 0 0 0 2px var(--clr-accent-gold), var(--input-shadow);
 }
 .am-date-wrap input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0;
