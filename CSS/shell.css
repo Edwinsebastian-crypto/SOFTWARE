@@ -58,12 +58,52 @@ body.dark-theme {
    animación del sidebar). scrollbar-gutter:stable cumple exactamente esa función. */
 html {
    overflow-x: hidden;
-   scrollbar-width: none;
-   -ms-overflow-style: none;
+   scrollbar-gutter: stable;
 }
 
-html::-webkit-scrollbar {
-   display: none;
+/* =========================================================================
+   SCROLLBAR GLOBAL
+   ========================================================================= */
+* {
+   scrollbar-width: thin;
+   scrollbar-color: var(--clr-primary-dark, #103323) #e6edea;
+}
+
+::-webkit-scrollbar {
+   width: 14px;
+   height: 14px;
+}
+
+::-webkit-scrollbar-track {
+   background: #e6edea;
+   border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+   background-color: var(--clr-primary-dark, #103323);
+   border-radius: 8px;
+   border: 3px solid #e6edea;
+}
+
+::-webkit-scrollbar-button:single-button {
+   background-color: #e6edea;
+   display: block;
+   background-size: 10px;
+   background-repeat: no-repeat;
+}
+
+::-webkit-scrollbar-button:single-button:vertical:decrement {
+   height: 14px;
+   width: 14px;
+   background-position: center 4px;
+   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='rgb(16, 51, 35)'><polygon points='50,0 0,50 100,50'/></svg>");
+}
+
+::-webkit-scrollbar-button:single-button:vertical:increment {
+   height: 14px;
+   width: 14px;
+   background-position: center 2px;
+   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='rgb(16, 51, 35)'><polygon points='0,0 100,0 50,50'/></svg>");
 }
 
 body {

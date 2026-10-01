@@ -796,6 +796,48 @@
    cursor: pointer;
    padding: 4px;
 }
+/* --- Dark Theme Credencial --- */
+body.dark-theme .gu-cred {
+   background: #294235;
+}
+body.dark-theme .gu-cred-top {
+   background: #0d1a13;
+}
+body.dark-theme .gu-cred-brand > i {
+   color: var(--clr-accent-gold, #dda326);
+}
+body.dark-theme .gu-cred-state {
+   background: #335c4a;
+   color: #b0c2b8;
+}
+body.dark-theme .gu-cred-name {
+   color: #fff;
+}
+body.dark-theme .gu-cred-doc {
+   color: #b0c2b8;
+}
+body.dark-theme .gu-cred-role {
+   background: #1b3a2a;
+   color: #fff;
+}
+body.dark-theme .gu-cred-meta {
+   background: transparent;
+}
+body.dark-theme .gu-cred-meta dt {
+   color: #7bc28b;
+}
+body.dark-theme .gu-cred-meta dd {
+   color: #fff;
+}
+body.dark-theme .gu-cred-pass output {
+   background: #172c24;
+   color: #fff;
+}
+body.dark-theme .gu-cred-cta {
+   background: #538562;
+   color: #103323;
+   border-color: #1a311d;
+}
 
 /* --- Checklist lateral --- */
 .gu-checklist {

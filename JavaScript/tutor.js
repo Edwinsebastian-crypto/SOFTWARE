@@ -346,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
     openBtn.addEventListener('click', abrirModal);
     if (closeX) closeX.addEventListener('click', cerrarModal);
     if (btnCancel) btnCancel.addEventListener('click', cerrarModal);
-    modal.addEventListener('click', (e) => { if (e.target === modal) cerrarModal(); });
+    // modal.addEventListener('click', (e) => { if (e.target === modal) cerrarModal(); }); // Desactivado por petición del usuario
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal.style.display === 'flex') cerrarModal();
     });

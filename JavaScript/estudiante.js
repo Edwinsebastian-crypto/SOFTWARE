@@ -109,9 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
    creacion dinamica de tarjeta de actividad (igual que tutor.js).
    ========================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-    const openBtn   = document.getElementById('amOpenBtn');
+    const openBtns  = document.querySelectorAll('.am-open-btn, #amOpenBtn');
     const modal     = document.getElementById('am-modal');
-    if (!openBtn || !modal) return;
+    if (openBtns.length === 0 || !modal) return;
 
     const closeX        = document.getElementById('amModalCloseX');
     const btnCancel     = document.getElementById('amBtnCancel');
@@ -158,10 +158,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (ultimoFoco && typeof ultimoFoco.focus === 'function') ultimoFoco.focus();
     }
 
-    openBtn.addEventListener('click', abrirModal);
+    openBtns.forEach(btn => btn.addEventListener('click', abrirModal));
     if (closeX)    closeX.addEventListener('click', cerrarModal);
     if (btnCancel) btnCancel.addEventListener('click', cerrarModal);
-    modal.addEventListener('click', (e) => { if (e.target === modal) cerrarModal(); });
+    // modal.addEventListener('click', (e) => { if (e.target === modal) cerrarModal(); }); // Desactivado por petición del usuario
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal.style.display === 'flex') cerrarModal();
     });
