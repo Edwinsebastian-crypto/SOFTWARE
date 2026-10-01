@@ -1703,6 +1703,7 @@ body.dark-theme .am-btn-cancel { color: #cdd9d4; }
 
 /* --- Responsive (mismos breakpoints que el resto del proyecto) --- */
 @media (max-width: 600px) {
+  .actividades-header, .evidencias-header { flex-wrap: wrap; }
   .am-open-btn { margin-left: 0; width: 100%; justify-content: center; order: 3; }
   .am-modal { padding: 24px 20px 22px; border-radius: 18px; }
   .am-field-row { grid-template-columns: 1fr; }
