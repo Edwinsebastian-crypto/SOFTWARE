@@ -1939,3 +1939,72 @@ body.dark-theme .act-details-right .am-file-chip {
   font-size: 12px; 
   flex-shrink: 0; 
 }
+
+/* Custom Tooltip para Observaciones largas */
+.b-info-value[data-tooltip] {
+  position: relative;
+  display: inline-block;
+}
+.b-info-value[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #112a20;
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: normal;
+  font-family: var(--font-sans);
+  white-space: normal;
+  width: max-content;
+  max-width: 250px;
+  text-align: center;
+  z-index: 100;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  margin-top: 8px;
+  pointer-events: none;
+}
+.b-info-value[data-tooltip]:hover::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-bottom-color: #112a20;
+  z-index: 100;
+  margin-top: -4px;
+  pointer-events: none;
+}
+
+/* Fading edit hint */
+#practica-info-card {
+  position: relative;
+}
+#practica-info-card::before {
+  content: "Haz clic para editar";
+  position: absolute;
+  top: -25px;
+  right: 15px;
+  background: rgba(17, 42, 32, 0.9);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  font-family: var(--font-sans);
+}
+#practica-info-card:hover::before {
+  animation: fadeOutTooltip 3s forwards;
+}
+@keyframes fadeOutTooltip {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}

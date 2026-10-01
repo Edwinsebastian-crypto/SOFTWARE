@@ -96,19 +96,21 @@
 						<h2 id="practica-title" class="practica-title">Práctica <span class="b-student-name"
 								aria-label="Ver credencial del estudiante">- Estudiante de Prueba</span></h2>
 					</div>
-					<div class="practica-info-card">
+					<div class="practica-info-card" id="practica-info-card" style="cursor: pointer;">
 						<div class="practica-info-item">
 							<span class="b-info-label">Nota Final</span>
-							<span class="b-info-value">Nota</span>
+							<span class="b-info-value" id="nota-display">Nota</span>
+							<input type="number" id="nota-input" value="Nota" style="display: none; width: 100%; height: 40px; padding: 0 12px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: var(--font-sans); font-size: 15px; box-sizing: border-box; text-align: center;">
 						</div>
 						<div class="practica-info-item">
 							<span class="b-info-label">Observación General</span>
-							<span class="b-info-value">Observación</span>
+							<span class="b-info-value" id="obs-display">Observación</span>
+							<input type="text" id="obs-input" value="Observación" style="display: none; width: 100%; height: 40px; padding: 0 12px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: var(--font-sans); font-size: 15px; box-sizing: border-box; text-align: center;">
 						</div>
-						<div class="practica-info-item">
-							<span class="b-info-label">Estado Práctica</span>
-							<span class="b-info-value">Activa</span>
-						</div>
+					</div>
+					<div class="am-actions" id="edit-actions" style="display: none; justify-content: flex-end; margin-top: 15px; margin-bottom: 24px; gap: 12px;">
+						<button type="button" class="am-btn-cancel" id="cancel-edit-btn">Cancelar</button>
+						<button type="button" class="am-btn-confirm" id="save-edit-btn">Guardar</button>
 					</div>
 
 					<div class="practica-action-card">

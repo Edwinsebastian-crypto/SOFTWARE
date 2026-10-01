@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
             (nombre ? ' - ' + escapeHtml(nombre) : '') + '</span>' +
             '</div>' +
             '<button type="button" class="b-action-btn actividad-entrar-btn" data-actividad="' +
-            numero + '">Entrar</button>';
+            numero + '"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>';
         return card;
     }
 

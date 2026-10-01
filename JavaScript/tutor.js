@@ -59,6 +59,79 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ── Edición de Nota y Observación en Bitácora ─────────────────────────
+    const practicaInfoCard = document.getElementById('practica-info-card');
+    const notaDisplay = document.getElementById('nota-display');
+    const notaInput = document.getElementById('nota-input');
+    const obsDisplay = document.getElementById('obs-display');
+    const obsInput = document.getElementById('obs-input');
+    const editActions = document.getElementById('edit-actions');
+    const cancelEditBtn = document.getElementById('cancel-edit-btn');
+    const saveEditBtn = document.getElementById('save-edit-btn');
+
+    if (practicaInfoCard && notaDisplay && notaInput && obsDisplay && obsInput && editActions) {
+        practicaInfoCard.addEventListener('click', () => {
+            // Solo habilitar si no están ya en modo edición
+            if (notaInput.style.display === 'none') {
+                notaInput.value = notaDisplay.textContent === 'Nota' ? '' : notaDisplay.textContent;
+                const currentObs = obsDisplay.dataset.fullObs || obsDisplay.textContent;
+                obsInput.value = currentObs === 'Observación' ? '' : currentObs;
+                
+                notaDisplay.style.display = 'none';
+                obsDisplay.style.display = 'none';
+                notaInput.style.display = 'block';
+                obsInput.style.display = 'block';
+                editActions.style.display = 'flex';
+                
+                notaInput.focus();
+            }
+        });
+
+        cancelEditBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            notaDisplay.style.display = 'block';
+            obsDisplay.style.display = 'block';
+            notaInput.style.display = 'none';
+            obsInput.style.display = 'none';
+            editActions.style.display = 'none';
+        });
+
+        saveEditBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const nuevaNota = notaInput.value.trim();
+            const nuevaObs = obsInput.value.trim();
+            
+            notaDisplay.textContent = nuevaNota || 'Nota';
+            
+            if (nuevaObs) {
+                obsDisplay.dataset.fullObs = nuevaObs;
+                obsDisplay.removeAttribute('title'); // Remove native tooltip
+                const words = nuevaObs.split(/\s+/);
+                if (words.length > 10) {
+                    obsDisplay.textContent = words.slice(0, 10).join(' ') + '...';
+                    obsDisplay.setAttribute('data-tooltip', nuevaObs); // Custom tooltip
+                } else {
+                    obsDisplay.textContent = nuevaObs;
+                    obsDisplay.removeAttribute('data-tooltip');
+                }
+            } else {
+                obsDisplay.textContent = 'Observación';
+                obsDisplay.dataset.fullObs = '';
+                obsDisplay.removeAttribute('title');
+                obsDisplay.removeAttribute('data-tooltip');
+            }
+            
+            notaDisplay.style.display = 'block';
+            obsDisplay.style.display = 'block';
+            notaInput.style.display = 'none';
+            obsInput.style.display = 'none';
+            editActions.style.display = 'none';
+        });
+        
+        notaInput.addEventListener('click', (e) => e.stopPropagation());
+        obsInput.addEventListener('click', (e) => e.stopPropagation());
+    }
+
     // ── Entrar a Actividades desde Bitácora o Preguntas ───────────────────────────────
     if (actividadesEntrarpractica && practicaPanel && actividadesPanel) {
         actividadesEntrarpractica.addEventListener('click', () => {
@@ -443,7 +516,7 @@ document.addEventListener('DOMContentLoaded', () => {
             '<div class="stat-icon"><i class="fa-solid fa-file-lines" aria-hidden="true"></i></div>' +
             '<span class="b-action-label">Actividad #' + numero + (nombre ? ' — ' + escapeHtml(nombre) : '') + '</span>' +
             '</div>' +
-            '<button type="button" class="b-action-btn actividad-entrar-btn" data-actividad="' + numero + '">Entrar</button>';
+            '<button type="button" class="b-action-btn actividad-entrar-btn" data-actividad="' + numero + '"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>';
         return card;
     }
 
