@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
             const num = btn.getAttribute('data-actividad');
             if (evidenciasTitleEl) {
-                evidenciasTitleEl.textContent = 'Evidencias - Actividad #' + num;
+                evidenciasTitleEl.textContent = 'Actividad #' + num;
             }
             if (actividadesPanel) actividadesPanel.style.display = 'none';
             if (evidenciasPanel) evidenciasPanel.style.display = 'flex';
@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (btnEntrar && actividadesPanel && evidenciasPanel) {
                 btnEntrar.addEventListener('click', () => {
                     if (evidenciasTitleEl) {
-                        evidenciasTitleEl.textContent = 'Evidencias - Actividad #' + numero;
+                        evidenciasTitleEl.textContent = 'Actividad #' + numero;
                     }
                     actividadesPanel.style.display = 'none';
                     evidenciasPanel.style.display = 'flex';

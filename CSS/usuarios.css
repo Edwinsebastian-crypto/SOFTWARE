@@ -8,7 +8,9 @@
      variables.css → shell.css → director.css → usuarios.css
    ========================================================================= */
 
-#gestionar-usuarios {
+#gestionar-usuarios,
+#gestionar-practicas,
+#gestionar-instituciones {
    --gu-green-dark: #103322;
    --gu-green: #1a6b50;
    --gu-green-soft: #e3efe5;
@@ -1333,7 +1335,7 @@
 }
 
 .gu-pagination-info b {
-   color: var(--text-primary);
+   color: black;
 }
 
 .gu-rows {
@@ -1464,7 +1466,9 @@ body.dark-theme #gestionar-usuarios .gu-header p {
    color: #cdd9d4;
 }
 
-body.dark-theme #gestionar-usuarios .gu-count-pill {
+body.dark-theme #gestionar-usuarios .gu-count-pill,
+body.dark-theme #gestionar-practicas .gu-count-pill,
+body.dark-theme #gestionar-instituciones .gu-count-pill {
    background: #D1E5DE;
    color: #1a2e24;
 }

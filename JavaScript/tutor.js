@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const numActividad = btn.getAttribute('data-actividad') || (index + 1);
 
                 if (evidenciasTitleEl) {
-                    evidenciasTitleEl.textContent = `Evidencias â€” Actividad #${numActividad}`;
+                    evidenciasTitleEl.textContent = `Actividad #${numActividad}`;
                 }
                 actividadesPanel.style.display = 'none';
                 evidenciasPanel.style.display = 'flex';
@@ -467,7 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (btnEntrar && actividadesPanel && evidenciasPanel) {
                 btnEntrar.addEventListener('click', () => {
                     if (evidenciasTitleEl) {
-                        evidenciasTitleEl.textContent = `Evidencias â€” Actividad #${numero}`;
+                        evidenciasTitleEl.textContent = `Actividad #${numero}`;
                     }
                     actividadesPanel.style.display = 'none';
                     evidenciasPanel.style.display = 'flex';
@@ -480,7 +480,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Lógica para abrir el modal al Editar la actividad
+// Lï¿½gica para abrir el modal al Editar la actividad
 document.addEventListener("DOMContentLoaded", () => {
     const editBtn = document.querySelector(".act-edit-btn");
     const modal = document.getElementById("am-modal");
@@ -490,7 +490,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (amTitle) amTitle.textContent = "Editar Actividad";
             modal.style.display = "flex";
             document.body.style.overflow = "hidden";
-            // Cierra el menú desplegable si está abierto
+            // Cierra el menï¿½ desplegable si estï¿½ abierto
             const dd = editBtn.closest(".ev-dropdown");
             if (dd) dd.classList.remove("is-open");
             const btnMenu = document.querySelector(".ev-menu-wrapper .ev-menu-btn");

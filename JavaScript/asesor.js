@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const numActividad = btn.getAttribute('data-actividad') || (index + 1);
 
                 if (evidenciasTitleEl) {
-                    evidenciasTitleEl.textContent = `Evidencias — Actividad #${numActividad}`;
+                    evidenciasTitleEl.textContent = `Actividad #${numActividad}`;
                 }
                 actividadesPanel.style.display = 'none';
                 evidenciasPanel.style.display = 'flex';
