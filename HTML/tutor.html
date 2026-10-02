@@ -273,9 +273,10 @@
 										<i class="fa-regular fa-calendar" aria-hidden="true"></i>
 									</div>
 								</div>
-								<div class="act-field">
-									<label class="act-label" for="act-nota">Nota:</label>
-									<input type="number" id="act-nota" class="act-value-box act-input" min="0" max="5" step="0.1" placeholder="0.0" value="5">
+								<div class="act-field" id="act-nota-container" style="cursor: pointer; -webkit-tap-highlight-color: transparent;">
+									<span class="act-label">Nota:</span>
+									<div class="act-value-box" id="act-nota-display">5</div>
+									<input type="number" id="act-nota-input" class="act-value-box act-input" min="0" max="5" step="0.1" placeholder="0.0" value="5" style="display: none;">
 								</div>
 								<div class="act-field">
 									<span class="act-label">Horas Realizadas</span>
@@ -283,6 +284,10 @@
 										0
 									</div>
 								</div>
+							</div>
+							<div class="am-actions" id="act-nota-actions" style="display: none; justify-content: flex-end; margin-top: 5px; margin-bottom: 15px; gap: 10px;">
+								<button type="button" class="am-btn-cancel" id="act-nota-cancel-btn">Cancelar</button>
+								<button type="button" class="am-btn-confirm" id="act-nota-save-btn">Guardar</button>
 							</div>
 							<div class="act-field">
 								<span class="act-label">Descripción</span>

@@ -1703,6 +1703,12 @@ body.dark-theme .am-btn-cancel { color: #cdd9d4; }
 
 /* --- Responsive (mismos breakpoints que el resto del proyecto) --- */
 @media (max-width: 600px) {
+
+  .b-info-value[data-tooltip]:hover::after,
+  .b-info-value[data-tooltip]:hover::before {
+    display: none !important;
+  }
+  
   .actividades-header, .evidencias-header { flex-wrap: wrap; }
   .am-open-btn { margin-left: 0; width: 100%; justify-content: center; order: 3; }
   .am-modal { padding: 24px 20px 22px; border-radius: 18px; }
@@ -1983,6 +1989,7 @@ body.dark-theme .act-details-right .am-file-chip {
 /* Fading edit hint */
 #practica-info-card {
   position: relative;
+  -webkit-tap-highlight-color: transparent;
 }
 #practica-info-card::before {
   content: "Haz clic para editar";

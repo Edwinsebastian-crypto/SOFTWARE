@@ -105,21 +105,12 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (nuevaObs) {
                 obsDisplay.dataset.fullObs = nuevaObs;
-                obsDisplay.removeAttribute('title'); // Remove native tooltip
-                const words = nuevaObs.split(/\s+/);
-                if (words.length > 10) {
-                    obsDisplay.textContent = words.slice(0, 10).join(' ') + '...';
-                    obsDisplay.setAttribute('data-tooltip', nuevaObs); // Custom tooltip
-                } else {
-                    obsDisplay.textContent = nuevaObs;
-                    obsDisplay.removeAttribute('data-tooltip');
-                }
+                obsDisplay.removeAttribute('title'); 
             } else {
-                obsDisplay.textContent = 'Observación';
                 obsDisplay.dataset.fullObs = '';
                 obsDisplay.removeAttribute('title');
-                obsDisplay.removeAttribute('data-tooltip');
             }
+            updateObsDisplay();
             
             notaDisplay.style.display = 'block';
             obsDisplay.style.display = 'block';
@@ -127,6 +118,34 @@ document.addEventListener('DOMContentLoaded', () => {
             obsInput.style.display = 'none';
             editActions.style.display = 'none';
         });
+        
+        function updateObsDisplay() {
+            const isMobile = window.matchMedia("(max-width: 600px)").matches;
+            const obsText = obsDisplay.dataset.fullObs || '';
+            if (!obsText) {
+                obsDisplay.textContent = 'Observación';
+                obsDisplay.removeAttribute('data-tooltip');
+                return;
+            }
+            
+            if (isMobile) {
+                obsDisplay.textContent = obsText;
+                obsDisplay.removeAttribute('data-tooltip');
+            } else {
+                const words = obsText.split(/\s+/);
+                if (words.length > 10) {
+                    obsDisplay.textContent = words.slice(0, 10).join(' ') + '...';
+                    obsDisplay.setAttribute('data-tooltip', obsText);
+                } else {
+                    obsDisplay.textContent = obsText;
+                    obsDisplay.removeAttribute('data-tooltip');
+                }
+            }
+        }
+        
+        window.addEventListener('resize', updateObsDisplay);
+        // Llamado inicial
+        updateObsDisplay();
         
         notaInput.addEventListener('click', (e) => e.stopPropagation());
         obsInput.addEventListener('click', (e) => e.stopPropagation());
@@ -576,5 +595,45 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
         });
+    }
+});
+
+// Lógica para editar la nota en la Actividad (Tutor)
+document.addEventListener("DOMContentLoaded", () => {
+    const actNotaContainer = document.getElementById("act-nota-container");
+    const actNotaDisplay = document.getElementById("act-nota-display");
+    const actNotaInput = document.getElementById("act-nota-input");
+    const actNotaActions = document.getElementById("act-nota-actions");
+    const actNotaCancelBtn = document.getElementById("act-nota-cancel-btn");
+    const actNotaSaveBtn = document.getElementById("act-nota-save-btn");
+
+    if (actNotaContainer && actNotaDisplay && actNotaInput && actNotaActions) {
+        actNotaContainer.addEventListener("click", () => {
+            if (actNotaInput.style.display === "none") {
+                actNotaInput.value = actNotaDisplay.textContent.trim();
+                actNotaDisplay.style.display = "none";
+                actNotaInput.style.display = "block";
+                actNotaActions.style.display = "flex";
+                actNotaInput.focus();
+            }
+        });
+
+        actNotaCancelBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            actNotaDisplay.style.display = ""; // Reverts to CSS default (flex)
+            actNotaInput.style.display = "none";
+            actNotaActions.style.display = "none";
+        });
+
+        actNotaSaveBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const nuevaNota = actNotaInput.value.trim();
+            actNotaDisplay.textContent = nuevaNota || "0.0";
+            actNotaDisplay.style.display = ""; // Reverts to CSS default (flex)
+            actNotaInput.style.display = "none";
+            actNotaActions.style.display = "none";
+        });
+
+        actNotaInput.addEventListener("click", (e) => e.stopPropagation());
     }
 });
